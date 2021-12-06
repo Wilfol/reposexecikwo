@@ -1,6 +1,2073 @@
-print("popkazalupka")
-
-
-
-------------------------------------------------
------------------------------------------------------------
+    local gay={}
+    local hacka={}
+    local fa
+    local aa
+    local fdfbp = {}
+    local fdfh = shgf_handler
+    _G.shgf_handler = nil
+    fdfbp["DetourFuncs"] = {}
+    fdfbp["DetourNames"] = {}
+    fdfbp["Hooks"] = {}
+    function fdfbp.Detour( old, new, name )
+      name = name or ""
+      fdfbp.DetourFuncs[new] = old
+      fdfbp.DetourNames[new] = name
+      return new
+    end 
+    local isstr,isfunc = isstring,isfunction
+    local tstring = tostring
+    local cgarbage = collectgarbage
+    local dbginfo = debug.getinfo
+    local ja = jit.attach
+    local gtuv = debug.getupvalue
+    local stringfind = string.find
+    local dbghook = debug.sethook
+    debug.getinfo = fdfbp.Detour( debug.getinfo, function( func, ... )
+      local n_func = func
+      
+      if fdfbp.DetourFuncs[func] then n_func = fdfbp.DetourFuncs[func] end
+      
+      return dbginfo( n_func, ... )
+    end, "debug.getinfo")
+    
+    local dsmeta = debug.setmetatable
+    local metatab = {}
+    
+    debug.setmetatable = fdfbp.Detour( debug.setmetatable, function( tab, meta )
+      if tab == fdfbp.DetourFuncs then tab = metatab end
+      
+      return dsmeta( tab, meta )
+    end, "debug.setmetatable")
+    
+    
+    local hk_dtr = {}
+    
+    
+    local uvj = debug.upvaluejoin
+    
+    debug.upvaluejoin = fdfbp.Detour( debug.upvaluejoin, function( f1, n1, f2, n2 )
+      local n_func = f1
+      local n_func2 = f2
+      
+      if fdfbp.DetourFuncs[f1] then n_func = fdfbp.DetourFuncs[f1] end
+      if fdfbp.DetourFuncs[f2] then n_func2 = fdfbp.DetourFuncs[f2] end
+      
+      return uvj(n_func, n1, n_func2, n2)
+    end,"debug.upvaluejoin")
+    
+    local sfenv = debug.setfenv
+    
+    debug.setfenv = fdfbp.Detour( debug.setfenv, function( obj, env )
+      if fdfbp.DetourFuncs[obj] then obj = function() end end
+      
+      return sfenv( obj, env )
+    end,"debug.setfenv")
+    
+    local stump = string.dump
+    
+    string.dump = fdfbp.Detour( string.dump, function( func, ... )
+      local n_func = func
+      
+      if fdfbp.DetourFuncs[func] then n_func = fdfbp.DetourFuncs[func] end
+      
+      return stump(n_func, ... )
+    end,"string.dump")
+    
+    local dbggetlocal = debug.getlocal
+    
+    debug.getlocal = fdfbp.Detour( debug.getlocal, function( thread, level, index )
+      local n_thread = thread
+      
+      if isfunc(n_thread) and fdfbp.DetourFuncs[n_thread] then n_thread = fdfbp.DetourFuncs[n_thread] end 
+      
+      return dbggetlocal(n_thread or thread, level, index)
+    end,"debug.getlocal")
+    
+    
+    local renderview = render.RenderView
+    local renderclear = render.Clear
+    local vgetworldpanel = vgui.GetWorldPanel
+    local panic = false
+    local oRCC = RunConsoleCommand
+    local eyeangles = _G.EyeAngles
+    local function translate(number)
+      for _,v in pairs(game.GetWorld():GetMaterials())do
+        Material(v):SetFloat("$alpha",number)
+      end
+    end
+	
+	
+	local function renderpanic( delay )
+	if !vvcheck then
+hook.Remove("Think","ScreenCapture::ProcessQueue")
+hook.Remove("PostRender","ScreenCapture::PostRender")
+	end
+	rp.Notify(NOTIFY_RED, "Вас заскринграбили")
+	rp.Notify(NOTIFY_RED, "Вас заскринграбили")
+	end
+	
+	
+    local function renderpanic1( delay )
+    if panic then return end
+    panic = true
+    if hacka.tnl then
+      translate(1)
+      hacka.tnl=false
+    end
+    gui.HideGameUI()
+    local worldpanel = vgetworldpanel()
+    if gay["LUALOADER_ANTISG"]then
+      ]] .. b.antiscreengrab .. [[=true
+      if IsValid(worldpanel) then
+        worldpanel:SetPaintedManually( true )
+      end
+    else
+      if gay["MISC_SPECTATORLIST"]and IsValid(hacka.specb) then
+        hacka.specb:Hide()
+      end
+      if gay["WH_MIRROR"]and IsValid(hacka.mirror) then
+        hacka.mirror:Hide()
+      end
+      if gay["WH_RADAR"]and IsValid(hacka.ac) then
+        hacka.ac:Hide()
+      end
+      if gay["WH_INFO"]and IsValid(hacka.info) then
+        hacka.info:Hide()
+      end
+      if gay["MISC_ADMINLIST"]and IsValid(hacka.adminlist) then
+        hacka.adminlist:Hide()
+      end
+      if IsValid(hacka.rt)then
+        hacka.rt:Hide()
+      end
+    end
+    for k, v in pairs( ents.GetAll() ) do
+      if v:GetColor() and v:GetColor().a == 100 and v:GetRenderMode() and v:GetRenderMode() == 4 then 
+        v:SetColor(Color(255, 255, 255)) 
+      end
+    end
+    renderclear(0, 0, 0, 255, true, true)
+    renderview(
+    {
+      origin = LocalPlayer():EyePos(),
+      angles = eyeangles(),
+      x = 0,
+      y = 0,
+      w = ScrW(),
+      h = ScrH(),
+      dopostprocess = true,
+      drawhud = true,
+      drawmonitors = true,
+      drawviewmodel = true,
+      viewmodelfov = 54,
+      fov = 75
+    })
+    timer.Simple(delay, function()
+      local worldpanel = vgetworldpanel()
+      if gay["LUALOADER_ANTISG"]then
+        ]] .. b.antiscreengrab .. [[=false
+        if IsValid(worldpanel) then
+          worldpanel:SetPaintedManually(false)
+        end
+      else
+        if gay["MISC_SPECTATORLIST"]and IsValid(hacka.specb) then
+          hacka.specb:Show()
+        end
+        if gay["WH_MIRROR"]and IsValid(hacka.mirror) then
+          hacka.mirror:Show()
+        end
+        if gay["WH_RADAR"]and IsValid(hacka.ac) then
+          hacka.ac:Show()
+        end
+        if gay["WH_INFO"]and IsValid(hacka.info) then
+          hacka.info:Show()
+        end
+        if gay["MISC_ADMINLIST"]and IsValid(hacka.adminlist) then
+          hacka.adminlist:Show()
+        end
+        if IsValid(hacka.rt)then
+          hacka.rt:Show()
+        end
+      end
+      if gay["NOIFICATION_SCREENGRAB"]then
+        hacka.onitify("You screengraben")
+      end
+      panic = false
+    end)
+  end
+  
+  local oRC = render.Capture
+  local oRCP = render.CapturePixels
+  local oRRP = render.ReadPixel
+  
+  local findmeta = FindMetaTable
+  local ply = findmeta( "Player" )
+  local oconcommand = ply.ConCommand
+  
+  render.Capture = fdfbp.Detour(render.Capture, function(a)
+    
+    if a["quality"] != "1"then
+      renderpanic(0.05)
+    end
+    
+    local output = oRC(a)
+    return output
+  end, "render.Capture")
+  
+  render.CapturePixels = fdfbp.Detour(render.CapturePixels, function(...)
+    
+    renderpanic(0.05)
+    
+    local output = oRCP(...)
+    return output
+  end, "render.CapturePixels")
+  
+  render.ReadPixel = fdfbp.Detour(render.ReadPixel, function(a,b)
+    if  !  a==1 and  !  b==1 then
+      renderpanic(0.05)
+    end
+    local output = oRRP(a,b)
+    return output
+  end, "render.ReadPixel")
+  
+  ply.ConCommand = fdfbp.Detour(ply.ConCommand, function(pl, cmd, ...)
+    if string.lower(cmd) == "jpeg" then
+      renderpanic( 0.2 )
+      oconcommand( pl, cmd, ... )
+      return
+    end
+    
+    if string.lower(cmd) == "__screenshot_internal" then
+      renderpanic( 0.3 )
+      oconcommand( pl, cmd, ... )
+      return
+    end
+    
+    if string.lower(cmd) == "screenshot" then
+      renderpanic( 0.3 )
+      oconcommand( pl, cmd, ... )
+      return
+    end
+    
+    if string.lower(cmd) == "startmovie" then
+      renderpanic( 0.3 )
+      oRCC( cmd, ... )
+      return
+    end
+    
+    return oconcommand( pl, cmd, ... )
+  end, "player:ConCommand")
+  
+  _G.RunConsoleCommand = fdfbp.Detour(_G.RunConsoleCommand, function(cmd, ...)
+    if string.lower(cmd) == "jpeg" then
+      renderpanic( 0.2 )
+      oRCC( cmd, ... )
+      return
+    end
+    
+    if string.lower(cmd) == "__screenshot_internal" then
+      renderpanic( 0.3 )
+      oRCC( cmd, ... )
+      return
+    end
+    
+    if string.lower(cmd) == "screenshot" then
+      renderpanic( 0.3 )
+      oRCC( cmd, ... )
+      return
+    end
+    
+    if string.lower(cmd) == "startmovie" then
+      renderpanic( 0.3 )
+      oRCC( cmd, ... )
+      return
+    end
+    
+    return oRCC( cmd, ... )
+  end, "RunConsoleCommand")
+  
+  timer.Simple(10,function()
+    
+    
+    local a={}a.ct={0xd76aa478,0xe8c7b756,0x242070db,0xc1bdceee,0xf57c0faf,0x4787c62a,0xa8304613,0xfd469501,0x698098d8,0x8b44f7af,0xffff5bb1,0x895cd7be,0x6b901122,0xfd987193,0xa679438e,0x49b40821,0xf61e2562,0xc040b340,0x265e5a51,0xe9b6c7aa,0xd62f105d,0x02441453,0xd8a1e681,0xe7d3fbc8,0x21e1cde6,0xc33707d6,0xf4d50d87,0x455a14ed,0xa9e3e905,0xfcefa3f8,0x676f02d9,0x8d2a4c8a,0xfffa3942,0x8771f681,0x6d9d6122,0xfde5380c,0xa4beea44,0x4bdecfa9,0xf6bb4b60,0xbebfbc70,0x289b7ec6,0xeaa127fa,0xd4ef3085,0x04881d05,0xd9d4d039,0xe6db99e5,0x1fa27cf8,0xc4ac5665,0xf4292244,0x432aff97,0xab9423a7,0xfc93a039,0x655b59c3,0x8f0ccc92,0xffeff47d,0x85845dd1,0x6fa87e4f,0xfe2ce6e0,0xa3014314,0x4e0811a1,0xf7537e82,0xbd3af235,0x2ad7d2bb,0xeb86d391,0x67452301,0xefcdab89,0x98badcfe,0x10325476}local b=function(c,d,e)return bit.bor(bit.band(c,d),bit.band(-c-1,e))end;local f=function(c,d,e)return bit.bor(bit.band(c,e),bit.band(d,-e-1))end;local g=function(c,d,e)return bit.bxor(c,bit.bxor(d,e))end;local h=function(c,d,e)return bit.bxor(d,bit.bor(c,-e-1))end;local e=function(b,i,j,k,l,c,m,n)i=bit.band(i+b(j,k,l)+c+n,0xffffffff)return bit.bor(bit.lshift(bit.band(i,bit.rshift(0xffffffff,m)),m),bit.rshift(i,32-m))+j end;local o=2^31;local p=2^32;function a.fix(i)if i>o then return i-p end;return i end;function a.trm(q,r,s,t,u)local i,j,k,l=q,r,s,t;i=e(b,i,j,k,l,u[0],7,a.ct[1])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(b,l,i,j,k,u[1],12,a.ct[2])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(b,k,l,i,j,u[2],17,a.ct[3])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(b,j,k,l,i,u[3],22,a.ct[4])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(b,i,j,k,l,u[4],7,a.ct[5])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(b,l,i,j,k,u[5],12,a.ct[6])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(b,k,l,i,j,u[6],17,a.ct[7])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(b,j,k,l,i,u[7],22,a.ct[8])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(b,i,j,k,l,u[8],7,a.ct[9])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(b,l,i,j,k,u[9],12,a.ct[10])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(b,k,l,i,j,u[10],17,a.ct[11])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(b,j,k,l,i,u[11],22,a.ct[12])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(b,i,j,k,l,u[12],7,a.ct[13])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(b,l,i,j,k,u[13],12,a.ct[14])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(b,k,l,i,j,u[14],17,a.ct[15])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(b,j,k,l,i,u[15],22,a.ct[16])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(f,i,j,k,l,u[1],5,a.ct[17])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(f,l,i,j,k,u[6],9,a.ct[18])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(f,k,l,i,j,u[11],14,a.ct[19])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(f,j,k,l,i,u[0],20,a.ct[20])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(f,i,j,k,l,u[5],5,a.ct[21])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(f,l,i,j,k,u[10],9,a.ct[22])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(f,k,l,i,j,u[15],14,a.ct[23])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(f,j,k,l,i,u[4],20,a.ct[24])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(f,i,j,k,l,u[9],5,a.ct[25])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(f,l,i,j,k,u[14],9,a.ct[26])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(f,k,l,i,j,u[3],14,a.ct[27])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(f,j,k,l,i,u[8],20,a.ct[28])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(f,i,j,k,l,u[13],5,a.ct[29])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(f,l,i,j,k,u[2],9,a.ct[30])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(f,k,l,i,j,u[7],14,a.ct[31])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(f,j,k,l,i,u[12],20,a.ct[32])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(g,i,j,k,l,u[5],4,a.ct[33])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(g,l,i,j,k,u[8],11,a.ct[34])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(g,k,l,i,j,u[11],16,a.ct[35])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(g,j,k,l,i,u[14],23,a.ct[36])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(g,i,j,k,l,u[1],4,a.ct[37])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(g,l,i,j,k,u[4],11,a.ct[38])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(g,k,l,i,j,u[7],16,a.ct[39])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(g,j,k,l,i,u[10],23,a.ct[40])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(g,i,j,k,l,u[13],4,a.ct[41])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(g,l,i,j,k,u[0],11,a.ct[42])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(g,k,l,i,j,u[3],16,a.ct[43])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(g,j,k,l,i,u[6],23,a.ct[44])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(g,i,j,k,l,u[9],4,a.ct[45])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(g,l,i,j,k,u[12],11,a.ct[46])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(g,k,l,i,j,u[15],16,a.ct[47])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(g,j,k,l,i,u[2],23,a.ct[48])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(h,i,j,k,l,u[0],6,a.ct[49])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(h,l,i,j,k,u[7],10,a.ct[50])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(h,k,l,i,j,u[14],15,a.ct[51])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(h,j,k,l,i,u[5],21,a.ct[52])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(h,i,j,k,l,u[12],6,a.ct[53])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(h,l,i,j,k,u[3],10,a.ct[54])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(h,k,l,i,j,u[10],15,a.ct[55])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(h,j,k,l,i,u[1],21,a.ct[56])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(h,i,j,k,l,u[8],6,a.ct[57])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(h,l,i,j,k,u[15],10,a.ct[58])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(h,k,l,i,j,u[6],15,a.ct[59])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(h,j,k,l,i,u[13],21,a.ct[60])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)i=e(h,i,j,k,l,u[4],6,a.ct[61])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)l=e(h,l,i,j,k,u[11],10,a.ct[62])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)k=e(h,k,l,i,j,u[2],15,a.ct[63])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)j=e(h,j,k,l,i,u[9],21,a.ct[64])i=a.fix(i)j=a.fix(j)k=a.fix(k)l=a.fix(l)return q+i,r+j,s+k,t+l end;function a.Psm(v)local i,j,k,l=a.fix(a.ct[65]),a.fix(a.ct[66]),a.fix(a.ct[67]),a.fix(a.ct[68])local w={}for h=0,15 do w[h]=0 end;w[0]=v;w[1]=128;w[14]=32;local i,j,k,l=a.trm(i,j,k,l,w)return bit.rshift(a.fix(j),16)%256 end;local x={[0]={-0.492036,0.286111},[1]={-0.492036,0.286111},[2]={-0.255320,0.128480},[3]={0.456165,0.356030},[4]={-0.361731,0.406344},[5]={-0.146730,0.834589},[6]={-0.253288,-0.421936},[7]={-0.448694,0.111650},[8]={-0.880700,0.904610},[9]={-0.379932,0.138833},[10]={0.502579,-0.494285},[11]={-0.263847,-0.594805},[12]={0.818612,0.090368},[13]={-0.063552,0.044356},[14]={0.490455,0.304820},[15]={-0.192024,0.195162},[16]={-0.139421,0.857106},[17]={0.715745,0.336956},[18]={-0.150103,-0.044842},[19]={-0.176531,0.275787},[20]={0.155707,-0.152178},[21]={-0.136486,-0.591896},[22]={-0.021022,-0.761979},[23]={-0.166004,-0.733964},[24]={-0.102439,-0.132059},[25]={-0.607531,-0.249979},[26]={-0.500855,-0.185902},[27]={-0.080884,0.516556},[28]={-0.003334,0.138612},[29]={-0.546388,-0.000115},[30]={-0.228092,-0.018492},[31]={0.542539,0.543196},[32]={-0.355162,0.197473},[33]={-0.041726,-0.015735},[34]={-0.713230,-0.551701},[35]={-0.045056,0.090208},[36]={0.061028,0.417744},[37]={-0.171149,-0.048811},[38]={0.241499,0.164562},[39]={-0.129817,-0.111200},[40]={0.007366,0.091429},[41]={-0.079268,-0.008285},[42]={0.010982,-0.074707},[43]={-0.517782,-0.682470},[44]={-0.663822,-0.024972},[45]={0.058213,-0.078307},[46]={-0.302041,-0.132280},[47]={0.217689,-0.209309},[48]={-0.143615,0.830349},[49]={0.270912,0.071245},[50]={-0.258170,-0.598358},[51]={0.099164,-0.257525},[52]={-0.214676,-0.595918},[53]={-0.427053,-0.523764},[54]={-0.585472,0.088522},[55]={0.564305,-0.533822},[56]={-0.387545,-0.422206},[57]={0.690505,-0.299197},[58]={0.475553,0.169785},[59]={0.347436,0.575364},[60]={-0.069555,-0.103340},[61]={0.286197,-0.618916},[62]={-0.505259,0.106581},[63]={-0.420214,-0.714843},[64]={0.032596,-0.401891},[65]={-0.238702,-0.087387},[66]={0.714358,0.197811},[67]={0.208960,0.319015},[68]={-0.361140,0.222130},[69]={-0.133284,-0.492274},[70]={0.022824,-0.133955},[71]={-0.100850,0.271962},[72]={-0.050582,-0.319538},[73]={0.577980,0.095507},[74]={0.224871,0.242213},[75]={-0.628274,0.097248},[76]={0.184266,0.091959},[77]={-0.036716,0.474259},[78]={-0.502566,-0.279520},[79]={-0.073201,-0.036658},[80]={0.339952,-0.293667},[81]={0.042811,0.130387},[82]={0.125881,0.007040},[83]={0.138374,-0.418355},[84]={0.261396,-0.392697},[85]={-0.453318,-0.039618},[86]={0.890159,-0.335165},[87]={0.466437,-0.207762},[88]={0.593253,0.418018},[89]={0.566934,-0.643837},[90]={0.150918,0.639588},[91]={0.150112,0.215963},[92]={-0.130520,0.324801},[93]={-0.369819,-0.019127},[94]={-0.038889,-0.650789},[95]={0.490519,-0.065375},[96]={-0.305940,0.454759},[97]={-0.521967,-0.550004},[98]={-0.040366,0.683259},[99]={0.137676,-0.376445},[100]={0.839301,0.085979},[101]={-0.319140,0.481838},[102]={0.201437,-0.033135},[103]={0.384637,-0.036685},[104]={0.598419,0.144371},[105]={-0.061424,-0.608645},[106]={-0.065337,0.308992},[107]={-0.029356,-0.634337},[108]={0.326532,0.047639},[109]={0.505681,-0.067187},[110]={0.691612,0.629364},[111]={-0.038588,-0.635947},[112]={0.637837,-0.011815},[113]={0.765338,0.563945},[114]={0.213416,0.068664},[115]={-0.576581,0.554824},[116]={0.246580,0.132726},[117]={0.385548,-0.070054},[118]={0.538735,-0.291010},[119]={0.609944,0.590973},[120]={-0.463240,0.010302},[121]={-0.047718,0.741086},[122]={0.308590,-0.322179},[123]={-0.291173,0.256367},[124]={0.287413,-0.510402},[125]={0.864716,0.158126},[126]={0.572344,0.561319},[127]={-0.090544,0.332633},[128]={0.644714,0.196736},[129]={-0.204198,0.603049},[130]={-0.504277,-0.641931},[131]={0.218554,0.343778},[132]={0.466971,0.217517},[133]={-0.400880,-0.299746},[134]={-0.582451,0.591832},[135]={0.421843,0.118453},[136]={-0.215617,-0.037630},[137]={0.341048,-0.283902},[138]={-0.246495,-0.138214},[139]={0.214287,-0.196102},[140]={0.809797,-0.498168},[141]={-0.115958,-0.260677},[142]={-0.025448,0.043173},[143]={-0.416803,-0.180813},[144]={-0.782066,0.335273},[145]={0.192178,-0.151171},[146]={0.109733,0.165085},[147]={-0.617935,-0.274392},[148]={0.283301,0.171837},[149]={-0.150202,0.048709},[150]={-0.179954,-0.288559},[151]={-0.288267,-0.134894},[152]={-0.049203,0.231717},[153]={-0.065761,0.495457},[154]={0.082018,-0.457869},[155]={-0.159553,0.032173},[156]={0.508305,-0.090690},[157]={0.232269,-0.338245},[158]={-0.374490,-0.480945},[159]={-0.541244,0.194144},[160]={-0.040063,-0.073532},[161]={0.136516,-0.167617},[162]={-0.237350,0.456912},[163]={-0.446604,-0.494381},[164]={0.078626,-0.020068},[165]={0.163208,0.600330},[166]={-0.886186,-0.345326},[167]={-0.732948,-0.689349},[168]={0.460564,-0.719006},[169]={-0.033688,-0.333340},[170]={-0.325414,-0.111704},[171]={0.010928,0.723791},[172]={0.713581,-0.077733},[173]={-0.050912,-0.444684},[174]={-0.268509,0.381144},[175]={-0.175387,0.147070},[176]={-0.429779,0.144737},[177]={-0.054564,0.821354},[178]={0.003205,0.178130},[179]={-0.552814,0.199046},[180]={0.225919,-0.195013},[181]={0.056040,-0.393974},[182]={-0.505988,0.075184},[183]={-0.510223,0.156271},[184]={-0.209616,0.111174},[185]={-0.605132,-0.117104},[186]={0.412433,-0.035510},[187]={-0.573947,-0.691295},[188]={-0.712686,0.021719},[189]={-0.643297,0.145307},[190]={0.245038,0.343062},[191]={-0.235623,-0.159307},[192]={-0.834004,0.088725},[193]={0.121377,0.671713},[194]={0.528614,0.607035},[195]={-0.285699,-0.111312},[196]={0.603385,0.401094},[197]={0.632098,-0.439659},[198]={0.681016,-0.242436},[199]={-0.261709,0.304265},[200]={-0.653737,-0.199245},[201]={-0.435512,-0.762978},[202]={0.701105,0.389527},[203]={0.093495,-0.148484},[204]={0.715218,0.638291},[205]={-0.055431,-0.085173},[206]={-0.727438,0.889783},[207]={-0.007230,-0.519183},[208]={-0.359615,0.058657},[209]={0.294681,0.601155},[210]={0.226879,-0.255430},[211]={-0.307847,-0.617373},[212]={0.340916,-0.780086},[213]={-0.028277,0.610455},[214]={-0.365067,0.323311},[215]={0.001059,-0.270451},[216]={0.304025,0.047478},[217]={0.297389,0.383859},[218]={0.288059,0.262816},[219]={-0.889315,0.533731},[220]={0.215887,0.678889},[221]={0.287135,0.343899},[222]={0.423951,0.672285},[223]={0.411912,-0.812886},[224]={0.081615,-0.497358},[225]={-0.051963,-0.117891},[226]={-0.062387,0.331698},[227]={0.020458,-0.734125},[228]={-0.160176,0.196321},[229]={0.044898,-0.024032},[230]={-0.153162,0.930951},[231]={-0.015084,0.233476},[232]={0.395043,0.645227},[233]={-0.232095,0.283834},[234]={-0.507699,0.317122},[235]={-0.606604,-0.227259},[236]={0.526430,-0.408765},[237]={0.304079,0.135680},[238]={-0.134042,0.508741},[239]={-0.276770,0.383958},[240]={-0.298963,-0.233668},[241]={0.171889,0.697367},[242]={-0.292571,-0.317604},[243]={0.587806,0.115584},[244]={-0.346690,-0.098320},[245]={0.956701,-0.040982},[246]={0.040838,0.595304},[247]={0.365201,-0.519547},[248]={-0.397271,-0.090567},[249]={-0.124873,-0.356800},[250]={-0.122144,0.617725},[251]={0.191266,-0.197764},[252]={-0.178092,0.503667},[253]={0.103221,0.547538},[254]={0.019524,0.621226},[255]={0.663918,-0.573476}}
+    function hacka.dickfack(b,c,d)
+      local e=b:CommandNumber()
+      local f=a.Psm(e)
+      local g=x[f][1]
+      local h=x[f][2]
+      local i=c:Forward()
+      local j=c:Right()
+      local k=c:Up()
+      return i+g*d.x*j*-1+h*d.y*k*-1
+    end
+    
+    local pm = FindMetaTable("Player")
+    local vm = FindMetaTable("Vector")
+    local em = FindMetaTable("Entity")
+    local cm = FindMetaTable("CUserCmd")
+    local wm = FindMetaTable("Weapon")
+    local am = FindMetaTable("Angle")
+    
+    hacka.keypadlogger = {}
+    hacka.vieworigin = Vector(0, 0, 0)
+    hacka.viewangle = Angle(0, 0, 0)
+    hacka.viewvelocity = Vector(0, 0, 0)
+    local panickey=false
+    local chamsmaterial =
+    CreateMaterial(
+    "a",
+    "VertexLitGeneric",
+    {["$ignorez"] = 1, ["$model"] = 1, ["$basetexture"] = "models/debug/debugwhite"}
+    )
+    local chamsweaponmaterial =
+    CreateMaterial(
+    "ViewModel_1",
+    "VertexLitGeneric",
+    {["$basetexture"] = "models/debug/debugwhite", ["$model"] = 1, ["$ignorez"] = 0, ["vertexcolor"] = 1}
+    )
+    local chamsweaponmaterial2 =
+    CreateMaterial(
+    "ViewModel_2",
+    "VertexLitGeneric",
+    {["$basetexture"] = "models/debug/debugwhite", ["$model"] = 1, ["$ignorez"] = 1, ["vertexcolor"] = 1}
+    )
+    local cones = {}
+    local nullvec = Vector() * -1
+    local dists = {}
+    local aimtarget
+    local trace_walls = bit.bor(CONTENTS_TESTFOGVOLUME, CONTENTS_EMPTY, CONTENTS_MONSTER, CONTENTS_HITBOX)
+    local NoPenetration = {[MAT_SLOSH] = true}
+    local PenMod = {[MAT_SAND] = 0.5, [MAT_DIRT] = 0.8, [MAT_METAL] = 1.1, [MAT_TILE] = 0.9, [MAT_WOOD] = 1.2}
+    local trace_normal =
+    bit.bor(
+    CONTENTS_SOLID,
+    CONTENTS_OPAQUE,
+    CONTENTS_MOVEABLE,
+    CONTENTS_DEBRIS,
+    CONTENTS_MONSTER,
+    CONTENTS_HITBOX,
+    402653442,
+    CONTENTS_WATER
+    )
+    gameevent.Listen("player_changename")
+    gameevent.Listen("player_connect")
+    gameevent.Listen("player_disconnect")
+    gameevent.Listen("player_say")
+    gameevent.Listen("player_hurt")
+    gameevent.Listen("entity_killed")
+    surface.CreateFont("]] .. b.font18 .. [[",{font="Trebuchet24",size=20})
+    surface.CreateFont("]] .. b.font22 .. [[",{font="Roboto",size=26})
+    surface.CreateFont("]] .. b.menufont .. [[",{font="Roboto",size=18})
+    local function zapic(func,value)
+      local ad=util.JSONToTable(file.Read("]] .. b.maincfg .. [[","DATA"))
+      ad[func]=value
+      file.Write("]] .. b.maincfg .. [[",util.TableToJSON(ad))
+    end
+    local function zapiclogs(type, log)
+      local da = util.JSONToTable(file.Read("]] .. b.logs .. [[", "DATA"))
+      da[type] = {"[" .. os.date("%H:%M:%S") .. "] " .. log .. "HLS" .. da[type][1]}
+      file.Write("]] .. b.logs .. [[", util.TableToJSON(da))
+    end
+    timer.Simple(1,function()
+      local function timercheck()
+        gay=util.JSONToTable(file.Read("]] .. b.maincfg .. [[","DATA"))
+        
+        hacka.windowbg=gay["MENU_STYLE_WINDOWBG"]
+        hacka.titlebar=gay["MENU_STYLE_TITLEBAR"]
+        hacka.colortext=gay["MENU_STYLE_TEXT"]
+        hacka.border=gay["MENU_STYLE_BORDER"]
+        
+        if file.Exists("]] .. b.runlua .. [[","DATA")then 
+          local s=string.Explode("tt~l*T",file.Read("]] .. b.runlua .. [[","DATA"))
+          RunString(s[1].."--]] .. b.savemodes .. [[",s[2])
+          file.Delete("]] .. b.runlua .. [[")
+        end 
+        
+        
+        
+        
+        
+        local ply=LocalPlayer()
+        if gay["MISC_ADMINLIST"] and  !  IsValid(hacka.adminlist) then
+          hacka.adminlist = vgui.Create("DFrame")
+          hacka.adminlist:SetSize(gay["MISC_ADMINLIST_S_X"], gay["MISC_ADMINLIST_S_Y"])
+          hacka.adminlist:SetPos(gay["MISC_ADMINLIST_X"], gay["MISC_ADMINLIST_Y"])
+          hacka.adminlist:SetTitle("")
+          hacka.adminlist:SetSizable(true)
+          hacka.adminlist:ShowCloseButton(false)
+          hacka.adminlist.PerformLayout = function(self, c, d)
+            zapic("MISC_ADMINLIST_S_X", c)
+            zapic("MISC_ADMINLIST_S_Y", d)
+          end
+          hacka.adminlist.Paint = function(_, w, h)
+            draw.RoundedBox(0,0,0,w,h,hacka.windowbg)
+            draw.RoundedBox(0,0,0,w,22,hacka.titlebar)
+            draw.SimpleText("Admins list","]] .. b.menufont .. [[",5,2.5,hacka.colortext)
+            surface.SetDrawColor(hacka.border)
+            surface.DrawOutlinedRect(0,0,w,h)
+            
+            local allspectators = 25
+            for k, v in ipairs(player.GetAll()) do
+              if v:GetUserGroup() != "user" then
+                if v:GetUserGroup() != "User" then
+                  draw.SimpleText(v:Name() .. " " .. v:GetUserGroup(),"]] .. b.font18 .. [[",5,allspectators,Color(255, 255, 255))
+                  allspectators = allspectators + 20
+                end
+              end
+            end
+          end
+        end
+        if IsValid(hacka.adminlist) and  !  gay["MISC_ADMINLIST"] or panickey and IsValid(hacka.adminlist) then
+          hacka.adminlist:Remove()
+        end
+        
+        if gay["MISC_SPECTATORLIST"] and  !  IsValid(hacka.specb) then
+          hacka.specb = vgui.Create("DFrame")
+          hacka.specb:SetSize(gay["MISC_SPECTATORLIST_S_X"], gay["MISC_SPECTATORLIST_S_Y"])
+          hacka.specb:SetPos(gay["MISC_SPECTATORLIST_X"], gay["MISC_SPECTATORLIST_Y"])
+          hacka.specb:SetTitle("")
+          hacka.specb:SetSizable(true)
+          hacka.specb:ShowCloseButton(false)
+          hacka.specb.PerformLayout = function(self, c, d)
+            zapic("MISC_SPECTATORLIST_S_X", c)
+            zapic("MISC_SPECTATORLIST_S_Y", d)
+          end
+          hacka.specb.Paint = function(_, w, h)
+            draw.RoundedBox(0,0,0,w,h,hacka.windowbg)
+            draw.RoundedBox(0,0,0,w,22,hacka.titlebar)
+            draw.SimpleText("Spectators list","]] .. b.menufont .. [[",5,2.5,hacka.colortext)
+            surface.SetDrawColor(hacka.border)
+            surface.DrawOutlinedRect(0,0,w,h)
+            
+            local allspectators = 25
+            for k, v in ipairs(player.GetAll()) do
+              if v != ply and v:GetObserverTarget() == ply then
+                draw.SimpleText(v:Name() .. " " .. v:GetUserGroup(),"]] .. b.font18 .. [[",5,allspectators,hacka.colortext)
+                allspectators = allspectators + 20
+              end
+            end
+          end
+        end
+        if IsValid(hacka.specb) and  !  gay["MISC_SPECTATORLIST"] or panickey and IsValid(hacka.specb) then
+          hacka.specb:Remove()
+        end
+        
+        
+        if gay["WH_MIRROR"] and  !  IsValid(hacka.mirror) then
+          hacka.mirror = vgui.Create("DFrame")
+          hacka.mirror:SetSize(gay["WH_MIRROR_S_X"], gay["WH_MIRROR_S_Y"])
+          hacka.mirror:SetPos(gay["WH_MIRROR_X"], gay["WH_MIRROR_Y"])
+          hacka.mirror:SetTitle("")
+          hacka.mirror:SetSizable(true)
+          hacka.mirror:ShowCloseButton(false)
+          hacka.mirror.PerformLayout = function(self, c, d)
+            zapic("WH_MIRROR_S_X", c)
+            zapic("WH_MIRROR_S_Y", d)
+          end
+          function hacka.mirror:Paint(w, h)
+            draw.RoundedBox(0,0,0,w,h,hacka.windowbg)
+            draw.RoundedBox(0,0,0,w,22,hacka.titlebar)
+            draw.SimpleText("Mirror","]] .. b.menufont .. [[",5,2.5,hacka.colortext)
+            surface.SetDrawColor(hacka.border)
+            surface.DrawOutlinedRect(0,0,w,h)
+            local cw = {}
+            local x, y = self:GetPos()
+            if gay["WH_MIRROR_TYPE"] == "Type 1" then
+              cw.angles = Angle(180, ply:EyeAngles().y, 180)
+              cw.origin = ply:GetPos() + Vector(0, 0, 50)
+            else
+              cw.angles = Angle(90, ply:EyeAngles().y, 0)
+              cw.origin = ply:GetPos() + Vector(0, 0, 500)
+            end
+            cw.x = x + 5
+            cw.y = y + 30
+            cw.w = w - 10
+            cw.h = h - 35
+            render.RenderView(cw)
+          end
+        end
+        if IsValid(hacka.mirror) and  !  gay["WH_MIRROR"] or panickey and IsValid(hacka.mirror) then
+          hacka.mirror:Remove()
+        end
+        
+        if gay["WH_RADAR"] and  !  IsValid(hacka.ac) then
+          hacka.ac = vgui.Create("DFrame")
+          hacka.ac:SetSize(gay["WH_RADAR_S_X"], gay["WH_RADAR_S_Y"])
+          hacka.ac:SetPos(gay["WH_RADAR_X"], gay["WH_RADAR_Y"])
+          hacka.ac:SetSizable(true)
+          hacka.ac:SetTitle("")
+          hacka.ac:SetVisible(true)
+          hacka.ac:SetDraggable(true)
+          hacka.ac:ShowCloseButton(false)
+          hacka.ac.PerformLayout = function(self, c, d)
+            zapic("WH_RADAR_S_X", c)
+            zapic("WH_RADAR_S_Y", d)
+          end
+          hacka.ac.PaintOver = function(self, t, u)
+            draw.RoundedBox(0,0,0,t,u,hacka.windowbg)
+            function hacka.ac:OnMousePressed()
+              if
+              self.m_bSizable and gui.MouseX() > self.x + self:GetWide() - 20 and
+              gui.MouseY() > self.y + self:GetTall() - 20
+              then
+                self.Sizing = {gui.MouseX() - self:GetWide(), gui.MouseY() - self:GetTall()}
+                self:MouseCapture(true)
+                return
+              end
+              if self:GetDraggable() then
+                self.Dragging = {gui.MouseX() - self.x, gui.MouseY() - self.y}
+                self:MouseCapture(true)
+                return
+              end
+            end
+            surface.SetDrawColor(100, 100, 100)
+            surface.DrawLine(hacka.ac:GetWide() / 1.94, 25, hacka.ac:GetWide() / 1.94, hacka.ac:GetTall() / 2 + 260)
+            surface.DrawLine(hacka.ac:GetWide() / 2 - 250,hacka.ac:GetTall() / 1.94,hacka.ac:GetWide() / 2 + 260,hacka.ac:GetTall() / 1.94)
+            for x, p in ipairs(player.GetAll()) do
+              if gay["WH_DORMANT"] and p:IsDormant()then continue end
+              local bz = p:GetPos()
+              local bA = ply:GetPos()
+              local bB = ply:EyeAngles()
+              local bC = hacka.ac:GetWide() / 2 + (bz.x - bA.x) / gay["WH_RADAR_DISTANCE"]
+              local bD = hacka.ac:GetTall() / 2 + (bA.y - bz.y) / gay["WH_RADAR_DISTANCE"]
+              local bE = bB.y - 90
+              bE = math.rad(bE)
+              bC = bC - hacka.ac:GetWide() / 2
+              bD = bD - hacka.ac:GetTall() / 2
+              local bF = bC * math.cos(bE) - bD * math.sin(bE)
+              local bG = bC * math.sin(bE) + bD * math.cos(bE)
+              bF = bF + hacka.ac:GetWide() / 2
+              bG = bG + hacka.ac:GetTall() / 2
+              if p == ply then
+                draw.RoundedBox(1, bF, bG, gay["WH_RADAR_SIZE"], gay["WH_RADAR_SIZE"], Color(0, 255, 0))
+              else
+                draw.RoundedBox(1, bF, bG, gay["WH_RADAR_SIZE"], gay["WH_RADAR_SIZE"], team.GetColor(p:Team()))
+              end
+            end
+            for _, p in ipairs(ents.FindByClass("*")) do
+              if gay["ENTITYLIST"][p:GetClass()] then
+                if gay["WH_ENTITY_DORMANT"] and p:IsDormant()then continue end
+                if p:GetPos():Distance(ply:GetPos()) < gay["WH_ENTITY_DISTANCE"] then
+                  local bz = p:GetPos()
+                  local bA = ply:GetPos()
+                  local bB = ply:EyeAngles()
+                  local bC = hacka.ac:GetWide() / 2 + (bz.x - bA.x) / 20
+                  local bD = hacka.ac:GetTall() / 2 + (bA.y - bz.y) / 20
+                  local bE = bB.y - 90
+                  bE = math.rad(bE)
+                  bC = bC - hacka.ac:GetWide() / 2
+                  bD = bD - hacka.ac:GetTall() / 2
+                  local bF = bC * math.cos(bE) - bD * math.sin(bE)
+                  local bG = bC * math.sin(bE) + bD * math.cos(bE)
+                  bF = bF + hacka.ac:GetWide() / 2
+                  bG = bG + hacka.ac:GetTall() / 2
+                  draw.RoundedBox(1, bF, bG, gay["WH_RADAR_SIZE"], gay["WH_RADAR_SIZE"], Color(255, 0, 0))
+                end
+              end
+            end
+            
+            draw.RoundedBox(0,0,0,t,22,hacka.titlebar)
+            draw.SimpleText("Radar","]] .. b.menufont .. [[",5,2.5,hacka.colortext)
+            surface.SetDrawColor(hacka.border)
+            surface.DrawOutlinedRect(0,0,t,u)
+            
+          end
+        end
+        if IsValid(hacka.ac) and  !  gay["WH_RADAR"] or panickey and IsValid(hacka.ac) then
+          hacka.ac:Remove()
+        end
+        
+        if gay["WH_INFO"] and  !  IsValid(hacka.info) then
+          hacka.info = vgui.Create("DFrame")
+          hacka.info:SetSize(gay["WH_INFO_S_X"], gay["WH_INFO_S_Y"])
+          hacka.info:SetPos(gay["WH_INFO_X"], gay["WH_INFO_Y"])
+          hacka.info:SetTitle("")
+          hacka.info:SetSizable(true)
+          hacka.info:ShowCloseButton(false)
+          hacka.info.PerformLayout = function(self, c, d)
+            zapic("WH_INFO_S_X", c)
+            zapic("WH_INFO_S_Y", d)
+          end
+          function hacka.info:Paint(w, h)
+            draw.RoundedBox(0,0,0,w,h,hacka.windowbg)
+            draw.RoundedBox(0,0,0,w,22,hacka.titlebar)
+            draw.SimpleText("Info","]] .. b.menufont .. [[",5,2.5,hacka.colortext)
+            surface.SetDrawColor(hacka.border)
+            surface.DrawOutlinedRect(0,0,w,h)
+            
+            draw.SimpleText("Health: " .. ply:Health(),"]] .. b.menufont .. [[",2.5,25,Color(255, 255, 255))
+            draw.SimpleText("Armor: " .. ply:Armor(),"]] .. b.menufont .. [[",2.5,25 + 15,Color(255, 255, 255))
+            draw.SimpleText("Velocity: " .. math.Round(ply:GetVelocity():Length()),"]] .. b.menufont .. [[",2.5,25 + 15 + 15,Color(255, 255, 255))
+            draw.SimpleText("Server: " .. GetHostName(),"]] .. b.menufont .. [[",2.5,70,Color(255, 255, 255))
+            draw.SimpleText("Online: " .. #player.GetAll(),"]] .. b.menufont .. [[",2.5,85,Color(255, 255, 255))
+            draw.SimpleText("Map: " .. game.GetMap(),"]] .. b.menufont .. [[",2.5,100,Color(255, 255, 255))
+            draw.SimpleText("Entities: " .. math.Round(ents.GetCount() - player.GetCount() * 12),"]] .. b.menufont .. [[",2.5,115,Color(255, 255, 255))
+            draw.SimpleText("Frames: " .. math.Round(1 / FrameTime()),"]] .. b.menufont .. [[",2.5,130,Color(255, 255, 255))
+            draw.SimpleText("Ping: " .. ply:Ping(),"]] .. b.menufont .. [[",2.5,145,Color(255, 255, 255))
+            draw.SimpleText("Date: " .. os.date("%d %b %Y"),"]] .. b.menufont .. [[",2.5,160,Color(255, 255, 255))
+            draw.SimpleText("Time: " .. os.date("%H:%M:%S"),"]] .. b.menufont .. [[",2.5,175,Color(255, 255, 255))
+            draw.SimpleText("Tickrate: " .. math.Round(1 / engine.TickInterval()),"]] .. b.menufont .. [[",2.5,190,Color(255, 255, 255))
+            draw.SimpleText("Gamemode: " .. engine.ActiveGamemode(),"]] .. b.menufont .. [[",2.5,190 + 15,Color(255, 255, 255))
+            if aimtarget and IsValid(aimtarget) and aimtarget:IsPlayer() then
+              draw.SimpleText("Target Aim: "..aimtarget:Name(),"]] .. b.menufont .. [[",2.5,190 + 15 + 15,Color(255, 255, 255))
+            else
+              draw.SimpleText("Target Aim: None","]] .. b.menufont .. [[",2.5,190 + 15 + 15,Color(255, 255, 255))
+            end
+            if IsValid(ply:GetActiveWeapon()) then
+              draw.SimpleText("Clip: " ..ply:GetActiveWeapon():Clip1() .."/" .. ply:GetAmmoCount(ply:GetActiveWeapon():GetPrimaryAmmoType()),"]] .. b.menufont .. [[",2.5,190 + 15 + 15 + 15,Color(255, 255, 255))
+            end
+            
+          end
+        end
+        if IsValid(hacka.info) and  !  gay["WH_INFO"] or panickey and IsValid(hacka.info) then
+          hacka.info:Remove()
+        end
+        if gay["OBSBYPASS"] and  !  IsValid(hacka.obs) then
+          hacka.obs = vgui.Create("DFrame")
+          hacka.obs:SetSize(ScrW(),ScrH())
+          hacka.obs:SetPos(0,0)
+          hacka.obs:SetTitle("")
+          hacka.obs:SetDraggable(false)
+          hacka.obs:ShowCloseButton(false)
+          hacka.obs.Paint=hacka.esp
+        end
+        if IsValid(hacka.obs) and  !  gay["OBSBYPASS"] or panickey and IsValid(hacka.obs) then
+          hacka.obs:Remove()
+        end
+      end
+      timercheck()
+      timer.Create("]] .. b.timer .. [[",2,0,timercheck)
+    end)
+    
+    local a=GetRenderTarget("AntiSG"..os.time(),ScrW(),ScrH())
+    hook.Add("ShutDown","]] .. b.hooks["ShutDown"] .. [[",function()
+      if gay["MISC_SPECTATORLIST"]and IsValid(hacka.specb) then
+        local pos,otsos=hacka.specb:GetPos()
+        if IsValid(hacka.specb)then
+          zapic("MISC_SPECTATORLIST_X",pos)
+          zapic("MISC_SPECTATORLIST_Y",otsos)
+        end
+      end
+      if gay["WH_MIRROR"]and IsValid(hacka.mirror) then
+        local pos,otsos=hacka.mirror:GetPos()
+        zapic("WH_MIRROR_X",pos)
+        zapic("WH_MIRROR_Y",otsos)
+      end
+      if gay["WH_RADAR"]and IsValid(hacka.ac) then
+        local pos,otsos=hacka.ac:GetPos()
+        zapic("WH_RADAR_X",pos)
+        zapic("WH_RADAR_Y",otsos)
+      end
+      if gay["WH_INFO"]and IsValid(hacka.info) then
+        local pos,otsos=hacka.info:GetPos()
+        zapic("WH_INFO_X",pos)
+        zapic("WH_INFO_Y",otsos)
+      end
+      if gay["MISC_ADMINLIST"]and IsValid(hacka.adminlist) then
+        local pos,otsos=hacka.adminlist:GetPos()
+        zapic("MISC_ADMINLIST_X",pos)
+        zapic("MISC_ADMINLIST_Y",otsos)
+      end
+      if  !  gay["OBSBYPASS"]then return end
+      render.SetRenderTarget()
+    end)
+    
+    local function buttoncheckbind(a)
+      local ply=LocalPlayer()
+      if a==0 then return end
+      if ply:IsTyping() then
+        return false
+      end
+      if input.IsKeyDown(a or 87) or input.IsMouseDown(a or 87) then
+        return true
+      end
+      return false
+    end
+    local function UtilityCheck(v)
+      local ply=LocalPlayer()
+      if v != ply and v:Alive() and v:IsValid() then
+        return true
+      else
+        return false
+      end
+    end
+    local function box2d(b)
+      local c, d = b:OBBMins(), b:OBBMaxs()
+      local e = {
+        Vector(c.x, c.y, c.z),
+        Vector(c.x, c.y, d.z),
+        Vector(c.x, d.y, c.z),
+        Vector(c.x, d.y, d.z),
+        Vector(d.x, c.y, c.z),
+        Vector(d.x, c.y, d.z),
+        Vector(d.x, d.y, c.z),
+        Vector(d.x, d.y, d.z)
+      }
+      local f, g, h, i = ScrW() * 2, ScrH() * 2, 0, 0
+      for j, k in ipairs(e) do
+        local l = b:LocalToWorld(k):ToScreen()
+        f, g = math.min(f, l.x), math.min(g, l.y)
+        h, i = math.max(h, l.x), math.max(i, l.y)
+      end
+      return f, g, h, i
+    end
+    
+    function hacka.onitify(a)
+      if panickey then return end
+      if IsValid(hacka.rt)or hacka.rt then hacka.rt:Hide()hacka.rt=nil end
+      surface.SetFont("]] .. b.font22 .. [[")
+      local b=select(1,surface.GetTextSize(a))+10
+      hacka.rt=vgui.Create("DPanel")
+      hacka.rt:SetSize(b,38-6)
+      hacka.rt:SetPos(-b,10)
+      hacka.rt.Paint=function(self,c,d)
+        draw.RoundedBox(0,0,0,c,d,hacka.windowbg)
+        draw.SimpleText(a,"]] .. b.font22 .. [[",5,3,hacka.colortext)
+        surface.SetDrawColor(hacka.border)
+        surface.DrawOutlinedRect(0,0,c,d)
+      end
+      hacka.rt:MoveTo(10,10,.2,0,-1,function()
+        timer.Simple(gay["NOIFICATION_SPEED"],function()
+          hacka.rt:MoveTo(-b,10,.2,0,-1)
+        end)
+      end)
+    end
+    
+    
+    hook.Add("PreDrawViewModel","]] .. b.hooks["PreDrawViewModel"] .. [[",function(vm)
+      if panickey then return end
+      if panic then return end
+      if gay["WH_VMCHAMS"] then
+        if  !  vm then return end
+        render.SetLightingMode(2)
+        for k, v in ipairs(vm:GetMaterials()) do
+          if v:find("v_hands") then
+            render.MaterialOverrideByIndex(k - 1, chamsweaponmaterial2)
+            render.SetColorModulation(gay["WH_VMCHAMS_COLOR"]["r"] / 255,gay["WH_VMCHAMS_COLOR"]["g"] / 255,gay["WH_VMCHAMS_COLOR"]["b"] / 255)
+          else
+            render.MaterialOverrideByIndex(k - 1, chamsweaponmaterial)
+            render.SetColorModulation(gay["WH_VMCHAMS_COLOR"]["r"] / 255,gay["WH_VMCHAMS_COLOR"]["g"] / 255,gay["WH_VMCHAMS_COLOR"]["b"] / 255)
+          end
+        end
+      end
+    end)
+    
+    
+    hook.Add("PostDrawViewModel","]] .. b.hooks["PostDrawViewModel"] .. [[",function(vm)
+      if panickey then return end
+      if panic then return end
+      if gay["WH_FULLBRIGHT"] then
+        render.SetLightingMode(0)
+      end
+      if gay["WH_VMCHAMS"] then
+        if  !  vm then return end
+        render.SetLightingMode(0)
+        for k, v in ipairs(vm:GetMaterials()) do
+          render.MaterialOverrideByIndex(k - 1, nil)
+        end
+      end
+    end)
+    
+    function hacka.esp()
+      
+      if panickey then return end
+      if panic then return end
+      local ply=LocalPlayer()
+      xpcall(function()
+        
+        if gay["AIM_DRAWFOV"] and gay["AIM_ENABLED"] then
+          surface.DrawCircle(ScrW() / 2, ScrH() / 2, gay["AIM_FOV"] * 4, gay["WH_FOV_COLOR"])
+        end
+        
+        
+        if gay["WH_CURSORENTITYNAME"]then
+          local ent=ply:GetEyeTrace().Entity:GetClass()
+          local ents=ply:GetEyeTrace().Entity
+          if ent!="worldspawn"then
+            local tw, th = surface.GetTextSize(ent)
+            draw.SimpleText(ent, "ChatFont", ents:LocalToWorld(ents:OBBCenter()):ToScreen().x - tw / 2,ents:LocalToWorld(ents:OBBCenter()):ToScreen().y - th / 2 , gay["WH_CURSORENTITYNAME_COLOR"] )
+          end
+        end
+        
+        if gay["WH_SNAPLINE"] then
+          if aimtarget and IsValid(aimtarget) then
+            local pos = vm.ToScreen(em.LocalToWorld(aimtarget, em.OBBCenter(aimtarget)))
+            surface.SetDrawColor(gay["WH_SNAPLINE_COLOR"])
+            surface.DrawLine(ScrW() / 2, ScrH() / 2, pos.x, pos.y)
+          end
+        end
+        
+        if gay["CROSSHAIR_ENABLED"]then
+          local A=ScrH()/2
+          local z=ScrW()/2
+          local Z=gay["CROSSHAIR_SIZE"]
+          if gay["CROSSHAIR_FOV"]then
+            surface.DrawCircle(z,A,Z,gay["CROSSHAIR_COLOR"])
+          end
+          if gay["CROSSHAIR_CROSSHAIR"]then
+            surface.SetDrawColor(gay["CROSSHAIR_COLOR"])
+            surface.DrawLine(z+Z,A,z-Z,A)
+            surface.DrawLine(z,A+Z,z,A-Z)
+          end
+          if gay["CROSSHAIR_BOX"]then
+            surface.SetDrawColor(gay["CROSSHAIR_COLOR"])
+            surface.DrawOutlinedRect(z-Z-2,A-Z-2,(Z+2)*2+1,(Z+2)*2+1)
+          end
+        end
+        
+        if gay["MISC_KEYPADLOGGER"] then
+          for b, q in ipairs(ents.FindByClass("Keypad")) do
+            if q:GetStatus() == 1 then
+              if gay["KEYPADTYPE"] == 1 then
+                local kl = q:GetText()
+                if kl=="****" or kl=="***" or kl=="**" or kl=="*" then continue end
+                hacka.keypadlogger[q] = kl
+              else
+                local kl = q:GetDisplayText()
+                if kl=="****" or kl=="***" or kl=="**" or kl=="*" then continue end
+                hacka.keypadlogger[q] = kl
+              end
+            end
+            if hacka.keypadlogger[q] then
+              if q:GetPos():Distance(ply:GetPos()) < gay["MISC_KEYPADLOGGER_DISTANCE"] then
+                local tw, th = surface.GetTextSize(hacka.keypadlogger[q])
+                draw.SimpleText(hacka.keypadlogger[q], "ChatFont", q:LocalToWorld(q:OBBCenter()):ToScreen().x - tw / 2,q:LocalToWorld(q:OBBCenter()):ToScreen().y - th / 2  , gay["MISC_KEYPADLOGGER_COLOR"] )
+              end
+            end
+          end
+        end
+        
+        for k, v in ipairs(player.GetAll()) do
+          if UtilityCheck(v) and v:GetPos():Distance(ply:GetPos()) < gay["WH_DISTANCE"] then
+            if gay["WH_DORMANT"] and v:IsDormant()then continue end
+            if true then
+              local pos = v:GetPos()
+              local pos, pos2 = vm.ToScreen(pos - Vector(0, 0, 5)), vm.ToScreen(pos + Vector(0, 0, 70))
+              local h = pos.y - pos2.y
+              local w = h / 2.2
+              local esp_up = 0
+              local esp_down = 0
+              local esp_right = 0
+              local esp_left = 0
+              
+              surface.SetFont("ChatFont")
+              
+              if gay["WH_HEALTH"] then
+                if gay["WH_HEALTH_TYPETYPE"] == "Text + Bar" then
+                  local text = v:Health()
+                  local color=Color((100 - v:Health()) * 2.55, v:Health() * 2.55, 0)
+                  local tw, th = surface.GetTextSize(text)
+                  if gay["WH_HEALTH_POSITION"] == 1 then
+                    draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-h+2-th-esp_up ,color)
+                    esp_up = esp_up  + 15
+                  elseif gay["WH_HEALTH_POSITION"] == 2 then
+                    draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-th/2+5+esp_down ,color)
+                    esp_down = esp_down  + 15
+                  elseif gay["WH_HEALTH_POSITION"] == 3 then
+                    draw.SimpleText(text, "ChatFont", pos.x+w/2+10,pos.y-h+esp_right ,color)
+                    esp_right = esp_right  + 15
+                  elseif gay["WH_HEALTH_POSITION"] == 4 then
+                    draw.SimpleText(text, "ChatFont", pos.x-w/2-tw-10,pos.y-h+esp_left ,color)
+                    esp_left = esp_left  + 15
+                  end
+                  
+                  if gay["WH_HEALTH_POSITION"] == 4 then
+                    local hp = v:Health() * h / 100
+                    if hp > h then
+                      hp = h
+                    end
+                    local diff = h - hp
+                    surface.SetDrawColor(0, 0, 0)
+                    surface.DrawRect(pos.x - w / 2 - 5, pos.y - h - 1, 3, h + 2)
+                    surface.SetDrawColor((100 - v:Health()) * 2.55, v:Health() * 2.55, 0, 255)
+                    surface.DrawRect(pos.x - w / 2 - 4, pos.y - h + diff, 1, hp)
+                  else
+                    local hp = v:Health() * h / 100
+                    if hp > h then
+                      hp = h
+                    end
+                    local diff = h - hp
+                    surface.SetDrawColor(0, 0, 0)
+                    surface.DrawRect(pos.x + w / 2 - 5 + 5, pos.y - h - 1, 3, h + 2)
+                    surface.SetDrawColor((100 - v:Health()) * 2.55, v:Health() * 2.55, 0, 255)
+                    surface.DrawRect(pos.x + w / 2 - 4 + 5, pos.y - h + diff, 1, hp)
+                  end
+                elseif gay["WH_HEALTH_TYPETYPE"] == "Text" then
+                  
+                  local text = v:Health()
+                  local color=Color((100 - v:Health()) * 2.55, v:Health() * 2.55, 0)
+                  local tw, th = surface.GetTextSize(text)
+                  if gay["WH_HEALTH_POSITION"] == 1 then
+                    draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-h+2-th-esp_up ,color )
+                    esp_up = esp_up  + 15
+                  elseif gay["WH_HEALTH_POSITION"] == 2 then
+                    draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-th/2+5+esp_down ,color)
+                    esp_down = esp_down  + 15
+                  elseif gay["WH_HEALTH_POSITION"] == 3 then
+                    draw.SimpleText(text, "ChatFont", pos.x+w/2+10,pos.y-h+esp_right ,color)
+                    esp_right = esp_right  + 15
+                  elseif gay["WH_HEALTH_POSITION"] == 4 then
+                    draw.SimpleText(text, "ChatFont", pos.x-w/2-tw-10,pos.y-h+esp_left ,color)
+                    esp_left = esp_left  + 15
+                  end
+                  
+                else
+                  if gay["WH_HEALTH_POSITION"] == 4 then
+                    local hp = v:Health() * h / 100
+                    if hp > h then
+                      hp = h
+                    end
+                    local diff = h - hp
+                    surface.SetDrawColor(0, 0, 0, 255)
+                    surface.DrawRect(pos.x - w / 2 - 5, pos.y - h - 1, 3, h + 2)
+                    surface.SetDrawColor((100 - v:Health()) * 2.55, v:Health() * 2.55, 0, 255)
+                    surface.DrawRect(pos.x - w / 2 - 4, pos.y - h + diff, 1, hp)
+                  else
+                    local hp = v:Health() * h / 100
+                    if hp > h then
+                      hp = h
+                    end
+                    local diff = h - hp
+                    surface.SetDrawColor(0, 0, 0, 255)
+                    surface.DrawRect(pos.x + w / 2 - 5 + 5, pos.y - h - 1, 3, h + 2)
+                    surface.SetDrawColor((100 - v:Health()) * 2.55, v:Health() * 2.55, 0, 255)
+                    surface.DrawRect(pos.x + w / 2 - 4 + 5, pos.y - h + diff, 1, hp)
+                  end
+                end
+              end
+              
+              if gay["WH_ARMOR"] then
+                if gay["WH_ARMOR_TYPETYPE"] == "Text + Bar" then
+                  
+                  local text = v:Armor()
+                  local tw, th = surface.GetTextSize(text)
+                  if gay["WH_ARMOR_POSITION"] == 1 then
+                    draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-h+2-th-esp_up ,Color(0,0,255))
+                    esp_up = esp_up  + 15
+                  elseif gay["WH_ARMOR_POSITION"] == 2 then
+                    draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-th/2+5+esp_down ,Color(0,0,255))
+                    esp_down = esp_down  + 15
+                  elseif gay["WH_ARMOR_POSITION"] == 3 then
+                    draw.SimpleText(text, "ChatFont", pos.x+w/2+10,pos.y-h+esp_right ,Color(0,0,255))
+                    esp_right = esp_right  + 15
+                  elseif gay["WH_ARMOR_POSITION"] == 4 then
+                    draw.SimpleText(text, "ChatFont", pos.x-w/2-tw-10,pos.y-h+esp_left ,Color(0,0,255))
+                    esp_left = esp_left  + 15
+                  end
+                  
+                  if gay["WH_ARMOR_POSITION"] == 4 then
+                    local hp = v:Armor() * h / 100
+                    if hp > h then
+                      hp = h
+                    end
+                    local diff = h - hp
+                    surface.SetDrawColor(0, 0, 0, 255)
+                    surface.DrawRect(pos.x - w / 2 - 1, pos.y - h - 1, 3, h + 2)
+                    surface.SetDrawColor(Color(0,0,255))
+                    surface.DrawRect(pos.x - w / 2, pos.y - h + diff, 1, hp)
+                  else
+                    local hp = v:Armor() * h / 100
+                    if hp > h then
+                      hp = h
+                    end
+                    local diff = h - hp
+                    surface.SetDrawColor(0, 0, 0, 255)
+                    surface.DrawRect(pos.x + w / 2 - 1 + 10, pos.y - h - 1, 3, h + 2)
+                    surface.SetDrawColor(Color(0,0,255))
+                    surface.DrawRect(pos.x + w / 2 + 10, pos.y - h + diff, 1, hp)
+                  end
+                elseif gay["WH_ARMOR_TYPETYPE"] == "Text" then
+                  
+                  local text = v:Armor()
+                  local tw, th = surface.GetTextSize(text)
+                  if gay["WH_ARMOR_POSITION"] == 1 then
+                    draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-h+2-th-esp_up ,Color(0,0,255))
+                    esp_up = esp_up  + 15
+                  elseif gay["WH_ARMOR_POSITION"] == 2 then
+                    draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-th/2+5+esp_down ,Color(0,0,255))
+                    esp_down = esp_down  + 15
+                  elseif gay["WH_ARMOR_POSITION"] == 3 then
+                    draw.SimpleText(text, "ChatFont", pos.x+w/2+10,pos.y-h+esp_right ,Color(0,0,255))
+                    esp_right = esp_right  + 15
+                  elseif gay["WH_ARMOR_POSITION"] == 4 then
+                    draw.SimpleText(text, "ChatFont", pos.x-w/2-tw-10,pos.y-h+esp_left ,Color(0,0,255))
+                    esp_left = esp_left  + 15
+                  end
+                  
+                else
+                  if gay["WH_ARMOR_POSITION"] == 4 then
+                    local hp = v:Armor() * h / 100
+                    if hp > h then
+                      hp = h
+                    end
+                    local diff = h - hp
+                    surface.SetDrawColor(0, 0, 0, 255)
+                    surface.DrawRect(pos.x - w / 2 - 1, pos.y - h - 1, 3, h + 2)
+                    surface.SetDrawColor(Color(0,0,255))
+                    surface.DrawRect(pos.x - w / 2, pos.y - h + diff, 1, hp)
+                  else
+                    local hp = v:Armor() * h / 100
+                    if hp > h then
+                      hp = h
+                    end
+                    local diff = h - hp
+                    surface.SetDrawColor(0, 0, 0, 255)
+                    surface.DrawRect(pos.x + w / 2 - 5 + 10, pos.y - h - 1, 3, h + 2)
+                    surface.SetDrawColor(Color(0,0,255))
+                    surface.DrawRect(pos.x + w / 2 - 4 + 10, pos.y - h + diff, 1, hp)
+                  end
+                end
+              end
+              
+              if gay["WH_JOB"] then
+                local text = team.GetName(v:Team())
+                local tw, th = surface.GetTextSize(text)
+                if gay["WH_JOB_POSITION"] == 1 then
+                  draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-h+2-th-esp_up ,team.GetColor(v:Team()))
+                  esp_up = esp_up  + 15
+                elseif gay["WH_JOB_POSITION"] == 2 then
+                  draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-th/2+5+esp_down ,team.GetColor(v:Team()))
+                  esp_down = esp_down  + 15
+                elseif gay["WH_JOB_POSITION"] == 3 then
+                  draw.SimpleText(text, "ChatFont", pos.x+w/2+10,pos.y-h+esp_right ,team.GetColor(v:Team()))
+                  esp_right = esp_right  + 15
+                elseif gay["WH_JOB_POSITION"] == 4 then
+                  draw.SimpleText(text, "ChatFont", pos.x-w/2-tw-10,pos.y-h+esp_left ,team.GetColor(v:Team()))
+                  esp_left = esp_left  + 15
+                end
+              end
+              
+              if gay["WH_MONEY"] and DarkRP then
+                local text = DarkRP.formatMoney(v:getDarkRPVar("money"))
+                local tw, th = surface.GetTextSize(text)
+                if gay["WH_MONEY_POSITION"] == 1 then
+                  draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-h+2-th-esp_up ,gay["WH_MONEY_COLOR"])
+                  esp_up = esp_up  + 15
+                elseif gay["WH_MONEY_POSITION"] == 2 then
+                  draw.SimpleText(text, "ChatFont", pos.x-tw/2,pos.y-th/2+5+esp_down ,gay["WH_MONEY_COLOR"])
+                  esp_down = esp_down  + 15
+                elseif gay["WH_MONEY_POSITION"] == 3 then
+                  draw.SimpleText(text, "ChatFont", pos.x+w/2+10,pos.y-h+esp_right ,gay["WH_MONEY_COLOR"])
+                  esp_right = esp_right  + 15
+                elseif gay["WH_MONEY_POSITION"] == 4 then
+                  draw.SimpleText(text, "ChatFont", pos.x-w/2-tw-10,pos.y-h+esp_left ,gay["WH_MONEY_COLOR"])
+                  esp_left = esp_left  + 15
+                end
+                
+              end
+              
+              if gay["WH_WEAPON"] then
+                if gay["WH_WEAPON_TYPETYPE"] == "All" then
+                  for _, v in ipairs(v:GetWeapons()) do
+                    
+                    local tw, th = surface.GetTextSize(v:GetPrintName())
+                    if gay["WH_WEAPON_POSITION"] == 1 then
+                      draw.SimpleText(v:GetPrintName(), "ChatFont", pos.x-tw/2,pos.y-h+2-th-esp_up ,gay["WH_WEAPON_COLOR"])
+                      esp_up = esp_up  + 15
+                    elseif gay["WH_WEAPON_POSITION"] == 2 then
+                      draw.SimpleText(v:GetPrintName(), "ChatFont", pos.x-tw/2,pos.y-th/2+5+esp_down ,gay["WH_WEAPON_COLOR"])
+                      esp_down = esp_down  + 15
+                    elseif gay["WH_WEAPON_POSITION"] == 3 then
+                      draw.SimpleText(v:GetPrintName(), "ChatFont", pos.x+w/2+10,pos.y-h+esp_right ,gay["WH_WEAPON_COLOR"])
+                      esp_right = esp_right  + 15
+                    elseif gay["WH_WEAPON_POSITION"] == 4 then
+                      draw.SimpleText(v:GetPrintName(), "ChatFont", pos.x-w/2-tw-10,pos.y-h+esp_left ,gay["WH_WEAPON_COLOR"])
+                      esp_left = esp_left  + 15
+                    end
+                    
+                  end
+                elseif IsValid(v:GetActiveWeapon()) then
+                  local tw, th = surface.GetTextSize(v:GetActiveWeapon():GetPrintName())
+                  if gay["WH_WEAPON_POSITION"] == 1 then
+                    draw.SimpleText(v:GetActiveWeapon():GetPrintName(), "ChatFont", pos.x-tw/2,pos.y-h+2-th-esp_up ,gay["WH_WEAPON_COLOR"])
+                    esp_up = esp_up  + 15
+                  elseif gay["WH_WEAPON_POSITION"] == 2 then
+                    draw.SimpleText(v:GetActiveWeapon():GetPrintName(), "ChatFont", pos.x-tw/2,pos.y-th/2+5+esp_down ,gay["WH_WEAPON_COLOR"])
+                    esp_down = esp_down  + 15
+                  elseif gay["WH_WEAPON_POSITION"] == 3 then
+                    draw.SimpleText(v:GetActiveWeapon():GetPrintName(), "ChatFont", pos.x+w/2+10,pos.y-h+esp_right ,gay["WH_WEAPON_COLOR"])
+                    esp_right = esp_right  + 15
+                  elseif gay["WH_WEAPON_POSITION"] == 4 then
+                    draw.SimpleText(v:GetActiveWeapon():GetPrintName(), "ChatFont", pos.x-w/2-tw-10,pos.y-h+esp_left ,gay["WH_WEAPON_COLOR"])
+                    esp_left = esp_left  + 15
+                  end
+                end
+              end
+              
+              if gay["WH_USERGROUP"] then           
+                local tw, th = surface.GetTextSize(v:GetUserGroup())
+                if gay["WH_USERGROUP_POSITION"] == 1 then
+                  draw.SimpleText(v:GetUserGroup(), "ChatFont", pos.x-tw/2,pos.y-h+2-th-esp_up ,gay["WH_USERGROUP_COLOR"])
+                  esp_up = esp_up  + 15
+                elseif gay["WH_USERGROUP_POSITION"] == 2 then
+                  draw.SimpleText(v:GetUserGroup(), "ChatFont", pos.x-tw/2,pos.y-th/2+5+esp_down ,gay["WH_USERGROUP_COLOR"])
+                  esp_down = esp_down  + 15
+                elseif gay["WH_USERGROUP_POSITION"] == 3 then
+                  draw.SimpleText(v:GetUserGroup(), "ChatFont", pos.x+w/2+10,pos.y-h+esp_right ,gay["WH_USERGROUP_COLOR"])
+                  esp_right = esp_right  + 15
+                elseif gay["WH_USERGROUP_POSITION"] == 4 then
+                  draw.SimpleText(v:GetUserGroup(), "ChatFont", pos.x-w/2-tw-10,pos.y-h+esp_left ,gay["WH_USERGROUP_COLOR"])
+                  esp_left = esp_left  + 15
+                end
+              end
+              
+              
+              
+              if gay["WH_NAME"] then
+                
+                local tw, th = surface.GetTextSize(v:Nick())
+                if gay["WH_NAME_POSITION"] == 1 then
+                  draw.SimpleText(v:Nick(), "ChatFont", pos.x-tw/2,pos.y-h+2-th-esp_up , (gay["WH_NAME_FRIENDCOLOR"] and gay["FRIENDLIST"][v:SteamID()])and gay["WH_FRIENDCOLOR"] or gay["WH_NAME_COLOR"] )
+                  esp_up = esp_up  + 15
+                elseif gay["WH_NAME_POSITION"] == 2 then
+                  draw.SimpleText(v:Nick(), "ChatFont", pos.x-tw/2,pos.y-th/2+5+esp_down , (gay["WH_NAME_FRIENDCOLOR"] and gay["FRIENDLIST"][v:SteamID()])and gay["WH_FRIENDCOLOR"] or gay["WH_NAME_COLOR"] )
+                  esp_down = esp_down  + 15
+                elseif gay["WH_NAME_POSITION"] == 3 then
+                  draw.SimpleText(v:Nick(), "ChatFont", pos.x+w/2+10,pos.y-h+esp_right , (gay["WH_NAME_FRIENDCOLOR"] and gay["FRIENDLIST"][v:SteamID()])and gay["WH_FRIENDCOLOR"] or gay["WH_NAME_COLOR"] )
+                  esp_right = esp_right  + 15
+                elseif gay["WH_NAME_POSITION"] == 4 then
+                  draw.SimpleText(v:Nick(), "ChatFont", pos.x-w/2-tw-10,pos.y-h+esp_left , (gay["WH_NAME_FRIENDCOLOR"] and gay["FRIENDLIST"][v:SteamID()])and gay["WH_FRIENDCOLOR"] or gay["WH_NAME_COLOR"] )
+                  esp_left = esp_left  + 15
+                end
+                
+              end
+              
+              if gay["WH_SKELETON"] then
+                local origin = v:GetPos()
+                for i = 1, v:GetBoneCount() do
+                  local parent = v:GetBoneParent(i)
+                  if  !  parent then continue end
+                  local bonepos, parentpos = v:GetBonePosition(i), v:GetBonePosition(parent)
+                  if !bonepos || !parentpos || bonepos == origin then continue end
+                  local bs, ps = bonepos:ToScreen(), parentpos:ToScreen()
+                  if gay["WH_SKELETON_COLORTYPE"] == "Team" then
+                    surface.SetDrawColor(team.GetColor(v:Team()))
+                  else
+                    surface.SetDrawColor(gay["WH_SKELETON_COLOR"])
+                  end
+                  surface.DrawLine(bs.x, bs.y, ps.x, ps.y)
+                end
+              end
+              
+              if gay["WH_CHAMS"]and  !  gay["OBSBYPASS"] then
+                if gay["WH_CHAMS_TYPE"] == "Type 1" then
+                  cam.Start3D(EyePos(), EyeAngles())
+                  cam.IgnoreZ(true)
+                  render.SuppressEngineLighting(true)
+                  v:DrawModel()
+                  cam.IgnoreZ(false)
+                  render.SuppressEngineLighting(false)
+                  cam.End3D()
+                else
+                  cam.Start3D()
+                  render.MaterialOverride(chamsmaterial)
+                  if gay["WH_CHAMS_COLORTYPE"] == "Custom" then
+                    render.SetColorModulation(gay["WH_CHAMS_COLOR"]["r"] / 255,gay["WH_CHAMS_COLOR"]["g"] / 255,gay["WH_CHAMS_COLOR"]["b"] / 255)
+                  else
+                    render.SetColorModulation(team.GetColor(v:Team())["r"] / 255,team.GetColor(v:Team())["g"] / 255,team.GetColor(v:Team())["b"] / 255)
+                  end
+                  em.DrawModel(v)
+                  cam.End3D()
+                end
+              end
+              
+              if gay["WH_BOX"] then
+                if gay["WH_BOX_TYPETYPE"] == "2d" then
+                  local pos = em.GetPos(v)
+                  local pos, aj = vm.ToScreen(pos - Vector(0, 0, 5)), vm.ToScreen(pos + Vector(0, 0, 70))
+                  local u = pos.y - aj.y
+                  local t = u / 2.2
+                  if gay["WH_BOX_FRIENDCOLOR"] and gay["FRIENDLIST"][v:SteamID()] then
+                    surface.SetDrawColor(gay["WH_FRIENDCOLOR"])
+                  elseif gay["WH_BOX_TYPECOLOR"] == "Custom" then
+                    surface.SetDrawColor(gay["WH_BOX_COLOR"])
+                  else
+                    surface.SetDrawColor(team.GetColor(v:Team()))
+                  end
+                  surface.DrawOutlinedRect(pos.x - t / 2, pos.y - u, t, u,gay["WH_BOX_SIZE"])
+                else
+                  cam.Start3D()
+                  if gay["WH_BOX_FRIENDCOLOR"] and gay["FRIENDLIST"][v:SteamID()] then
+                    render.DrawWireframeBox(v:GetPos(),Angle(0, v:EyeAngles().y, 0),v:OBBMins(),v:OBBMaxs(),gay["WH_FRIENDCOLOR"])
+                  elseif gay["WH_BOX_TYPECOLOR"] == "Custom" then
+                    render.DrawWireframeBox(v:GetPos(),Angle(0, v:EyeAngles().y, 0),v:OBBMins(),v:OBBMaxs(),gay["WH_BOX_COLOR"])
+                  else
+                    render.DrawWireframeBox(v:GetPos(),Angle(0, v:EyeAngles().y, 0),v:OBBMins(),v:OBBMaxs(),team.GetColor(v:Team()))
+                  end
+                  cam.End3D()
+                end
+              end
+            end
+          end
+        end
+        
+        for _, p in ipairs(ents.FindByClass("*")) do
+          local nameent = p:GetClass()
+          if gay["WH_ENTITY_DORMANT"] and p:IsDormant()then continue end
+          if gay["ENTITYLIST"][nameent] then
+            if p:GetPos():Distance(ply:GetPos()) < gay["WH_ENTITY_DISTANCE"] then
+              
+              if gay["WH_ENTITY_CHAMS"] and nameent != "worldspawn"and  !  gay["OBSBYPASS"] then
+                if gay["WH_ENTITY_CHAMS_TYPE"] == "Type 1" then
+                  cam.Start3D(EyePos(), EyeAngles())
+                  cam.IgnoreZ(true)
+                  render.SuppressEngineLighting(true)
+                  p:DrawModel()
+                  cam.IgnoreZ(false)
+                  render.SuppressEngineLighting(false)
+                  cam.End3D()
+                else
+                  cam.Start3D()
+                  render.MaterialOverride(chamsmaterial)
+                  render.SetColorModulation(gay["WH_ENTITY_CHAMS_COLOR"]["r"] / 255,gay["WH_ENTITY_CHAMS_COLOR"]["g"] / 255,gay["WH_ENTITY_CHAMS_COLOR"]["b"] / 255)
+                  em.DrawModel(p)
+                  cam.End3D()
+                end
+              end
+              
+              if gay["WH_ENTITY_NAME"] then
+                local tw, th = surface.GetTextSize(nameent)
+                if gay["WH_ENTITY_NAME_COLORTYPE"]=="Custom"then
+                  draw.SimpleText(nameent, "ChatFont", p:LocalToWorld(p:OBBCenter()):ToScreen().x - tw / 2,p:LocalToWorld(p:OBBCenter()):ToScreen().y - th / 2 , gay["WH_ENTITY_NAME_COLOR"] )
+                else
+                  draw.SimpleText(nameent, "ChatFont", p:LocalToWorld(p:OBBCenter()):ToScreen().x - tw / 2,p:LocalToWorld(p:OBBCenter()):ToScreen().y - th / 2 , gay["ENTITYLISTclr"][nameent.."_Color"] )
+                end
+              end
+              
+              if gay["WH_ENTITY_BOX"] then
+                if gay["WH_ENTITY_BOX_TYPE"] == "3d" then
+                  cam.Start3D()
+                  if gay["WH_ENTITY_BOX_COLORTYPE"]=="Custom"then
+                    render.DrawWireframeBox(p:GetPos(),p:EyeAngles(),p:OBBMins(),p:OBBMaxs(),gay["WH_ENTITY_BOX_COLOR"])
+                  else
+                    render.DrawWireframeBox(p:GetPos(),p:EyeAngles(),p:OBBMins(),p:OBBMaxs(),gay["ENTITYLISTclr"][nameent.."_Color"])
+                  end
+                  cam.End3D()
+                else
+                  if gay["WH_ENTITY_BOX_COLORTYPE"]=="Entity"and gay["ENTITYLISTclr"][nameent.."_Color"]then
+                    surface.SetDrawColor(gay["ENTITYLISTclr"][nameent.."_Color"])
+                  else
+                    surface.SetDrawColor(gay["WH_ENTITY_BOX_COLOR"])
+                  end
+                  local x1, y1, x2, y2 = box2d(p)
+                  surface.DrawLine(x1, y1, math.min(x1 + 500, x2), y1)
+                  surface.DrawLine(x1, y1, x1, math.min(y1 + 500, y2))
+                  surface.DrawLine(x2, y1, math.max(x2 - 500, x1), y1)
+                  surface.DrawLine(x2, y1, x2, math.min(y1 + 500, y2))
+                  surface.DrawLine(x1, y2, math.min(x1 + 500, x2), y2)
+                  surface.DrawLine(x1, y2, x1, math.max(y2 - 500, y1))
+                  surface.DrawLine(x2, y2, math.max(x2 - 500, x1), y2)
+                  surface.DrawLine(x2, y2, x2, math.max(y2 - 500, y1))
+                end
+              end
+            end
+          end
+        end
+        
+      end,function()end)
+      
+      
+    end
+    
+    
+    hook.Add("HUDPaint","]] .. b.hooks["HUDPaint"] .. [[",function()
+      if gay["OBSBYPASS"]then return end
+      hacka.esp()
+    end)
+    
+    
+    
+    hook.Add("player_changename","]] .. b.hooks["player_changename"] .. [[",function(data)
+      zapiclogs("namechange",data.oldname.." changed to "..data.newname)
+    end)
+    
+    hook.Add("player_connect","]] .. b.hooks["player_connect"] .. [[",function(data)
+      zapiclogs("connect",data.name.." "..data.networkid)
+    end)
+    
+    hook.Add("player_disconnect","]] .. b.hooks["player_disconnect"] .. [[",function(data)
+      zapiclogs("disconnect",data.name.." "..data.networkid..". "..data.reason)
+    end)
+    
+    hook.Add("player_say","]] .. b.hooks["player_say"] .. [[",function(player)
+      xpcall(function()
+        zapiclogs("chat",Player(player.userid):Nick()..": "..player.text)
+      end,function()end)
+    end)
+    
+    hook.Add("player_hurt","]] .. b.hooks["player_hurt"] .. [[",function(b)
+      local ply=LocalPlayer()
+      local c="unknown"
+      local d="map"
+      local e="unknown weapon"
+      local s=0
+      for i,j in ipairs(player.GetAll())do 
+        if j:UserID()==b.userid then 
+          c=j:Nick()
+          s=j:Health()
+        end
+        if j:UserID()==b.attacker then 
+          d=j:Nick()
+          if j:GetActiveWeapon()and j:GetActiveWeapon():IsValid()then 
+            e=j:GetActiveWeapon():GetPrintName()
+          end 
+        end 
+      end
+      if gay["HITSOUNDS"]and d==ply:Nick()then
+        surface.PlaySound("buttons/bell1.wav")
+      end
+      if gay["NOIFICATION_DAMAGEDMEBY"]and c==ply:Nick()then
+        hacka.onitify("You damaged by "..d.." with "..e)
+      end
+      zapiclogs("damage",d.." damage "..string.Replace(b.health-s,"-","").." hp "..c.." with "..e)
+    end)
+    
+    
+    hook.Add("entity_killed","]] .. b.hooks["entity_killed"] .. [[",function(qwe)
+      local ply="unknown"
+      local atk="map"
+      local wep="unknown weapon"
+      local retard=game.GetWorld()
+      local killah=game.GetWorld()
+      local inflictor=ents.GetByIndex(qwe.entindex_inflictor)
+      for _,p in ipairs(player.GetAll())do 
+        if p:EntIndex()==qwe.entindex_killed then 
+          ply=p:Nick()
+          retard=p 
+        end
+        if p:EntIndex()==qwe.entindex_attacker then 
+          atk=p:Nick()
+          killah=p
+          if p:GetActiveWeapon()and p:GetActiveWeapon():IsValid()then 
+            wep=p:GetActiveWeapon():GetPrintName() 
+          end 
+        end 
+      end
+      if atk==ply then return end
+      zapiclogs("kill",atk.." killed "..ply.." with "..wep)
+      if ply==LocalPlayer():Nick()then
+        if gay["SPAM_KILLSAY_ENABLED"] then
+          xpcall(function()
+            if  !  gay["SPAM_KILLSAY_OOC"] then
+              RunConsoleCommand("say", gay["SPAM_KILLSAY"][math.random(1, #gay["SPAM_KILLSAY"])])
+            else
+              RunConsoleCommand("say", "/ooc " .. gay["SPAM_KILLSAY"][math.random(1, #gay["SPAM_KILLSAY"])])
+            end
+          end,function()end)
+        end
+        if gay["WH_NOIFICATION_DAMAGEDMEBY"]then
+          hacka.onitify("You killed by "..atk.." with "..wep)
+        end
+      end
+    end)
+    
+    
+    hook.Add("OnEntityCreated","]] .. b.hooks["OnEntityCreated"] .. [[",function(ent)
+      timer.Simple(0.1,function()
+        for _,v in ipairs(player.GetAll())do
+          if v:GetEyeTrace().Entity==ent and ent:GetModel() and  !  string.find(ent:GetModel(),".bsp") then
+            zapiclogs("prop",v:Nick().." spawned ".. ent:GetModel().." ("..tostring(ent:GetPos())..")")
+          end
+        end
+      end)
+    end)
+    
+    hook.Add("PostDraw2DSkyBox","]] .. b.hooks["PostDraw2DSkyBox"] .. [[",function()
+      if panickey then return end
+      if panic then return end
+      if gay["WH_NOSKY"] then
+        render.Clear(gay["WH_NOSKY_COLOR"]["r"],gay["WH_NOSKY_COLOR"]["g"],gay["WH_NOSKY_COLOR"]["b"],0,true,true)
+      end
+    end)
+    
+    hook.Add("RenderScene","]] .. b.hooks["RenderScene"] .. [[",function()
+      if panickey then return end
+      if panic then return end
+      if gay["WH_FULLBRIGHT"] then
+        render.SetLightingMode(1 and 1 or 0)
+      end
+      if gay["OBSBYPASS"]then
+        local e={x=0,y=0,w=ScrW(),h=ScrH(),dopostprocess=true,origin=b,angles=c,fov=d,drawhud=true,drawmonitors=true,drawviewmodel=true}
+        render.RenderView(e)
+        render.CopyTexture(nil,a)
+        cam.Start2D()
+        hook.Run("AltHUDPaint")
+        cam.End2D()
+        render.SetRenderTarget(a)
+        return true 
+      end
+    end)
+    
+    hook.Add("PreDrawEffects","]] .. b.hooks["PreDrawEffects"] .. [[",function()
+      if panickey then return end
+      if panic then return end
+      if gay["WH_FULLBRIGHT"] then
+        render.SetLightingMode(0)
+      end
+    end)
+    
+    
+    hook.Add("Think","]] .. b.hooks["Think"] .. [[",function()
+      local ply=LocalPlayer()
+      if buttoncheckbind(gay["PANICKEY"]) && !hacka.pc then
+        hacka.pc = true
+        panickey= !  panickey
+        timer.Simple( 0.5, function() hacka.pc = false end )
+      end
+      
+      if panickey then return end
+      
+      if buttoncheckbind(KEY_F12) && !hacka.fpanic then
+        hacka.fpanic = true
+        renderpanic1(0.05)
+        timer.Simple( 0.5, function() hacka.fpanic = false end )
+      end
+      
+      if buttoncheckbind(gay["WH_DEBUGCAMERA_KEY"]) && !hacka.fc then
+        hacka.fc = true
+        
+        hacka.noclipenebled=!hacka.noclipenebled
+        lockview=hacka.noclipenebled
+        hacka.setview=true
+        
+        timer.Simple( 0.5, function() hacka.fc = false end )
+      end
+      
+      if buttoncheckbind(gay["WH_THIRDPERSON_KEY"]) && !hacka.th then
+        hacka.th = true
+        
+        hacka.miscthipisidion= !  hacka.miscthipisidion 
+        
+        timer.Simple( 0.5, function() hacka.th = false end )
+      end
+      
+      if buttoncheckbind(gay["MISC_ADDENTITYFRIEND"]) && !hacka.aep then
+        hacka.aep = true
+        
+        local ent=ply:GetEyeTrace().Entity
+        if ent:IsPlayer()then
+          local pl=gay["FRIENDLIST"]
+          if  !  pl[ent:SteamID()] then
+            pl[ent:SteamID()]=true
+            if gay["NOIFICATION_ADDENTITYFRIEND"]and ent:Nick()then hacka.onitify("Add "..ent:Nick().." to friends") end
+          else
+            pl[ent:SteamID()]=false
+            if gay["NOIFICATION_ADDENTITYFRIEND"]and ent:Nick()then hacka.onitify("Removed "..ent:Nick().." of friends") end
+          end
+          zapic("FRIENDLIST",pl)
+        else
+          local ents=gay["ENTITYLIST"]
+          local class=ply:GetEyeTrace().Entity:GetClass()
+          if  !  ents[class] then
+            if class!="worldspawn"then
+              ents[class]=true
+              if gay["NOIFICATION_ADDENTITYFRIEND"]then hacka.onitify("Add "..class.." to list") end
+            end
+          else
+            ents[class]=false
+            if gay["NOIFICATION_ADDENTITYFRIEND"]then hacka.onitify("Removed "..class.." of list") end
+          end
+          zapic("ENTITYLIST",ents)
+        end
+        
+        timer.Simple( 0.5, function() hacka.aep = false end )
+      end
+      
+      if gay["WH_TRANSPARENT_WALLS"]then
+        if buttoncheckbind(gay["WH_TRANSPARENT_WALLS_KEY"]) && !hacka.tk then
+          hacka.tk = true
+          if hacka.tnl then
+            translate(1)
+            hacka.tnl= !  hacka.tnl
+          else
+            hacka.tnl= !  hacka.tnl
+            translate(gay["WH_TRANSPARENT_WALLS_TRA"])
+          end
+          timer.Simple( 0.5, function() hacka.tk = false end )
+        end
+      end
+      
+      
+    end)
+    
+    
+    local function FixMovement(pCmd)
+      local vec = Vector(cm.GetForwardMove(pCmd), cm.GetSideMove(pCmd), 0)
+      local vel = math.sqrt(vec.x*vec.x + vec.y*vec.y)
+      local mang = vm.Angle(vec)
+      local yaw = cm.GetViewAngles(pCmd).y - fa.y + mang.y
+      if (((cm.GetViewAngles(pCmd).p+90)%360) > 180) then
+        yaw = 180 - yaw
+      end
+      yaw = ((yaw + 180)%360)-180
+      pCmd:SetForwardMove(math.cos(math.rad(yaw)) * vel)
+      pCmd:SetSideMove(math.sin(math.rad(yaw)) * vel)
+    end
+    
+    local function Phys()
+      local ply=LocalPlayer()
+      if ply:GetActiveWeapon():IsValid() and ply:GetActiveWeapon():GetClass() == "weapon_physgun" then
+        if input.IsKeyDown(KEY_E)then
+          return true
+        end
+      else
+        return false
+      end
+    end
+    
+    
+    local function NormalizeAngle(ang)
+      ang.x = math.NormalizeAngle(ang.x);
+      ang.p = math.Clamp(ang.p, -89, 89);
+    end
+    
+    local function hitis(b,c)
+      local ply=LocalPlayer()
+      local d={start=ply:GetShootPos(),endpos=c,mask=MASK_SHOT,filter=function(e)
+        return !e:IsPlayer()end}
+        local f=util.TraceLine(d)
+        return !f.Hit 
+      end;
+      local bones={0,16,4,1,5,2,6,3,15,11,7,12,8,13,9}
+      local function GetPos(v)
+        if(gay["AIM_HITBOX"]=="Hitscan")and  !  v:IsNPC() then 
+          for i,j in next,bones do 
+            Hitscan=v:GetHitBoxBone(bones[i],0)
+            if Hitscan!=nil then 
+              HitscanPos=v:GetBonePosition(Hitscan)HitMin,HitMax=v:GetHitBoxBounds(bones[i],0)
+              if hitis(v,HitscanPos+(HitMin+HitMax)/2)then 
+                return HitscanPos+(HitMin+HitMax)/2 
+              end 
+            end 
+          end 
+        end
+        if(gay["AIM_HITBOX"]=="Body") then 
+          return( em.LocalToWorld(v, em.OBBCenter(v)) ); 
+        end
+        local eyes = em.LookupAttachment(v, "eyes");
+        if(!eyes) then return( em.LocalToWorld(v, em.OBBCenter(v)) ); end
+        local pos = em.GetAttachment(v, eyes);
+        if(!pos) then return( em.LocalToWorld(v, em.OBBCenter(v)) ); end
+        return(pos.Pos);
+      end
+      
+      
+      local function FASAutowall(wep, startPos, aimPos, ply)
+        local ply=LocalPlayer()
+        if  !  gay["AIM_AUTOWALL"] then return end
+        local traces = {}
+        local traceResults = {}
+        local dir = (aimPos - startPos):GetNormalized()
+        traces[1] = {start = startPos, filter = LocalPlayer(), mask = trace_normal, endpos = aimPos,}
+        traceResults[1] = util.TraceLine(traces[1])
+        if(NoPenetration[traceResults[1].MatType]) then return false end
+        if( - dir:DotProduct(traceResults[1].HitNormal) <= .26) then return false end
+        traces[2] = {start = traceResults[1].HitPos, endpos = traceResults[1].HitPos + dir * wep.PenStr * (PenMod[traceResults[1].MatType] or 1) * wep.PenMod, filter = LocalPlayer(), mask = trace_walls,}
+        traceResults[2] = util.TraceLine(traces[2])
+        traces[3] = {start = traceResults[2].HitPos, endpos = traceResults[2].HitPos + dir * .1, filter = LocalPlayer(), mask = trace_normal,}
+        traceResults [3] = util.TraceLine(traces[3])
+        traces[4] = {start = traceResults[2].HitPos, endpos = aimPos, filter = LocalPlayer(), mask = MASK_SHOT,}
+        traceResults[4] = util.TraceLine(traces[4])
+        if(traceResults[4].Entity ~= ply) then return false end
+        return( !  traceResults[3].Hit)
+      end
+      
+      local function M9KAutowall(ent)
+        local ply=LocalPlayer()
+        if  !  gay["AIM_AUTOWALL"]then return end
+        if  !  IsValid(ent) and  !  ent:IsPlayer()then return end
+        local penvalues = {["SniperPenetratedRound"] = 20,["Pistol"] = 9,["357"] = 12,["SMG1"] = 14,["AR2"] = 16,["Buckshot"] = 5}
+        local trace = util.TraceLine({mask = MASK_ALL, start = ply:GetShootPos(), endpos = ent:GetBonePosition(ent:LookupBone("ValveBiped.Bip01_Head1")), filter = {ply, ent}})
+        local wall = util.TraceLine({mask = MASK_SHOT, start = ply:GetShootPos(), endpos = ent:GetBonePosition(ent:LookupBone("ValveBiped.Bip01_Head1")), filter = {ply, ent}})
+        local wall2 = util.TraceLine({mask = MASK_SHOT, start = ent:GetBonePosition(ent:LookupBone("ValveBiped.Bip01_Head1")), endpos = ply:GetShootPos(), filter = {ply, ent}})
+        if trace.Fraction == 1 or (IsValid(ply:GetActiveWeapon()) and wall.HitPos:Distance(wall2.HitPos) < penvalues[game.GetAmmoName(ply:GetActiveWeapon():GetPrimaryAmmoType())]) then
+          return true
+        end
+      end
+      
+      local a,b,c;local d={}
+      local function infovnew(f)
+        local ply=LocalPlayer()
+        if  !  f then return end
+        if gay["AIM_FOV"]==0 then
+          return true
+        end
+        local g=fa
+        local h=(f:GetPos()-ply:GetPos()):Angle()
+        local i=math.abs(math.NormalizeAngle(g.y-h.y))
+        local j=math.abs(math.NormalizeAngle(g.ply-h.ply))
+        if i<gay["AIM_FOV"]/3 and j<gay["AIM_FOV"]/3 then
+          return true 
+        end
+        return false 
+      end
+      
+      local aimignore;
+      
+      local function Valid(v)
+        local ply=LocalPlayer()
+        if(!v || !em.IsValid(v) || v == ply || em.Health(v) < 1 || em.IsDormant(v) || pm.Team(v) == 1002|| !infovnew(v)) then return false; end
+        if v:SteamID()then
+          if gay["FRIENDLIST"][v:SteamID()] then return false; end
+        end
+        if v:Team()then
+          if gay["TEAMLIST"][team.GetName(v:Team())] then return false; end
+        end
+        if v:GetUserGroup()then
+          if gay["RANKLIST"][v:GetUserGroup()] then return false; end
+        end
+        local tr = {start = em.EyePos(ply),endpos = GetPos(v),mask = MASK_SHOT,filter = {ply, v},};
+        local wep = ply:GetActiveWeapon()
+        if(util.TraceLine(tr).Fraction == 1) then
+          return true
+        elseif(wep and wep:IsValid() and wep.PenStr) then
+          return FASAutowall(wep, tr.start, tr.endpos, v)
+        elseif (wep and wep:IsValid() and wep.BulletPenetrate) then
+          return M9KAutowall(v)
+        end
+        return false
+      end
+      
+      local function gettarget()
+        dists = {}
+        local x, y = ScrW(), ScrH()
+        local AngA, AngB = 0
+        if gay["AIM_NPC"]then
+          for k, v in next, ents.GetAll() do
+            if(!v:IsNPC()) then continue end
+            if(!infovnew(v))then continue end
+            local EyePos = v:EyePos():ToScreen()
+            dists[#dists + 1] = {math.Dist(x / 2, y / 2, EyePos.x, EyePos.y), v}
+          end
+        end
+        for k, v in next, player.GetAll() do
+          if(v:IsNPC()) then continue end
+          if(!Valid(v)) then continue end
+          local EyePos = v:EyePos():ToScreen()
+          dists[#dists + 1] = {math.Dist(x / 2, y / 2, EyePos.x, EyePos.y), v}
+        end
+        table.sort(dists, function(a, b)
+          return(a[1] < b[1])
+        end)
+        aimtarget = dists[1] && dists[1][2] || nil
+      end
+      
+      hook.Add("EntityFireBullets", tostring(math.random()), function(p, data)
+        local ply=LocalPlayer()
+        aimignore = aimtarget;
+        local w = pm.GetActiveWeapon(ply);
+        local Spread = data.Spread
+        if(!w || !em.IsValid(w) || cones[em.GetClass(w)] == Spread || Spread == nullvec) then return; end
+        cones[em.GetClass(w)] = Spread;
+      end)
+      
+      local function PredictSpread(ucmd, ang)
+        local ply=LocalPlayer()
+        if !IsValid(ply:GetActiveWeapon()or NULL)then return am.Forward(ang); end
+        local w=ply:GetActiveWeapon():GetClass()
+        local cone=ply:GetActiveWeapon().CurCone
+        local base=ply:GetActiveWeapon().Base
+        local selfff=ply:GetActiveWeapon()
+        if(!w or !selfff or !gay["AIM_NOSPREAD"]) then return am.Forward(ang); end
+        if cone then
+          math.randomseed(ucmd:CommandNumber())
+          if gay["AIM_NORECOIL"]then
+            return(ang-ply:GetPunchAngle()-Angle(math.Rand(-cone,cone),math.Rand(-cone,cone),0)*25):Forward()
+          else
+            return(ang-Angle(math.Rand(-cone,cone),math.Rand(-cone,cone),0)*25):Forward()
+          end
+        end
+        if cones[w]then
+          if gay["AIM_NORECOIL"]and base=="tfa_gun_base" then
+            return(hacka.dickfack(ucmd, ang-ply:GetViewPunchAngles(), cones[w]or 0));
+          else
+            return(hacka.dickfack(ucmd, ang, cones[w]or 0));
+          end
+        end
+        return am.Forward(ang);
+      end
+      
+      local function Autofire(ucmd)
+        local ply=LocalPlayer()
+        if(pm.KeyDown(ply, 1)) then
+          cm.SetButtons(ucmd, bit.band( cm.GetButtons(ucmd), _G["bit"]["bn".."ot"]( 1 ) ) );
+        else
+          cm.SetButtons(ucmd, bit.bor( cm.GetButtons(ucmd), 1 ) );
+        end
+      end
+      
+      
+      local function SmoothAim(ang) 
+        local ply=LocalPlayer()
+        if(gay["AIM_SMOOTHING"] > 0) then
+          ang.y = math.NormalizeAngle(ang.y) 
+          ang.p = math.NormalizeAngle(ang.p) 
+          eyeang = ply:EyeAngles() 
+          local smooth = gay["AIM_SMOOTHING"]
+          if((eyeang.y - ang.y) * - 1 > 180 && eyeang.y < 0) then eyeang.y = eyeang.y + 360 end 
+          if((ang.y - eyeang.y) * - 1 > 180 && ang.y < 0) then ang.y = ang.y + 360 end 
+          eyeang.y = eyeang.y + (ang.y - eyeang.y) / smooth eyeang.x = eyeang.x + (ang.x - eyeang.x) / smooth eyeang.r = 0 
+          return eyeang 
+        else 
+          return ang
+        end 
+      end
+      
+      local function aimkeycheck(a)
+        local ply=LocalPlayer()
+        if ply:IsTyping()then return false end
+        if  !  IsValid(ply:GetActiveWeapon())then return false end
+        if ply:GetActiveWeapon():Clip1()==0 or ply:GetActiveWeapon():Clip1()==-1 then return end
+        if input.IsKeyDown(a)or input.IsMouseDown(a)then
+          return true
+        end
+        return false
+      end
+      
+      local function alwayscheck()
+        local ply=LocalPlayer()
+        if ply:IsTyping()then return false end
+        if  !  IsValid(ply:GetActiveWeapon())then return false end
+        if ply:GetActiveWeapon():Clip1()==0 or ply:GetActiveWeapon():Clip1()==-1 then return end
+        return true
+      end
+      
+      local function aimer(ucmd)
+        local ply=LocalPlayer()
+        if(cm.CommandNumber(ucmd) == 0 || !gay["AIM_ENABLED"]) then return; end
+        gettarget();
+        aa = false;
+        if(aimtarget && aimkeycheck(gay["AIM_KEY"]) or aimtarget && gay["AIM_KEY"]==0 && alwayscheck())then
+          aa = true;
+          
+          local pos = GetPos(aimtarget) - em.EyePos(ply);
+          local ang = vm.Angle( PredictSpread(ucmd, vm.Angle(pos)));
+          NormalizeAngle(ang);
+          local ang = SmoothAim(ang)
+          
+          cm.SetViewAngles(ucmd, ang)
+          if(gay["AIM_AUTOFIRE"]) then
+            Autofire(ucmd);
+          end
+          if(gay["AIM_SILENT"]) then
+            FixMovement(ucmd);
+          else
+            fa = SmoothAim(vm.Angle(pos));
+          end
+        end
+      end
+      
+      
+      
+      local function GetClosest()
+        local ply=LocalPlayer()
+        local ddists = {};
+        local closest;
+        for k,v in next, player.GetAll() do
+          if(!Valid(v)) then continue; end
+          ddists[#ddists + 1] = { vm.Distance( em.GetPos(v), em.GetPos(ply) ), v };
+        end
+        table.sort(ddists, function(a, b)
+          return(a[1] < b[1]);
+        end);
+        closest = ddists[1] && ddists[1][2] || nil;
+        if(!closest) then return fa.y; end
+        local pos = em.GetPos(closest);
+        local pos = vm.Angle(pos - em.EyePos(ply));
+        return( pos.y );
+      end
+      
+      local ox=-181;
+      local oy=0;
+      
+      local function RandCoin()
+        local randcoin = math.random(0,1);
+        if(randcoin == 1) then return 1; else return -1; end
+      end
+      
+      local function GetX()
+        local opt = gay["ANTIAIM_X"]
+        if(opt == "Emotion") then
+          local randcoin = gay["ANTIAIM_EMOTION_X"]
+          if( math.random(100) < randcoin ) then
+            ox = RandCoin() * 181;
+          end
+        elseif( opt == "Up" ) then
+          ox = -181;
+        elseif( opt == "Down" ) then
+          ox = 181;
+        elseif(opt == "Jitter") then
+          ox = ox * -1;
+        elseif(opt == "Test") then
+          ox = -180 + math.random(1, 1.99999999999999999999);
+        end
+      end
+      
+      
+      
+      local function GetY()
+        local opt = gay["ANTIAIM_Y"]
+        if(opt == "Emotion") then
+          local randcoin = gay["ANTIAIM_EMOTION_Y"]
+          if( math.random(100) < randcoin ) then
+            oy = fa.y + math.random(-180, 180);
+          end
+        elseif( opt == "Eye Angles" ) then
+          oy = fa.y;
+        elseif( opt == "Sideways" ) then
+          oy = fa.y - 90;
+        elseif(opt == "Jitter") then
+          oy = fa.y + math.random(-90, 90);
+        elseif(opt == "TJitter") then
+          oy = fa.y - 180 + math.random(-90, 90);
+        elseif(opt == "Static") then
+          oy = 0;
+        elseif(opt == "Forward") then
+          oy = fa.y;
+        elseif(opt == "Backwards") then
+          oy = fa.y - 180;
+        elseif(opt == "Test") then
+          oy = GetClosest() + 180.79;
+        end
+      end
+      
+      local function walldetect()
+        local ply=LocalPlayer()
+        local eye = em.EyePos(ply);
+        local tr = util.TraceLine({start = eye,endpos = (eye + (am.Forward(fa) * 10)),mask = MASK_ALL,});
+        if(tr.Hit) then
+          ox = -181;
+          oy = -90;
+        end
+      end
+      
+      local function antiaimer(ucmd)
+        if( (cm.CommandNumber(ucmd) == 0 && !hacka.miscthipisidion) || cm.KeyDown(ucmd, 1) || cm.KeyDown(ucmd, 32) || aa || !gay["ANTIAIM_ENABLED"]) then return; end
+        GetX();
+        GetY();
+        walldetect();
+        local aaang = Angle(ox, oy, 0);
+        cm.SetViewAngles(ucmd, aaang);
+        FixMovement(ucmd, true);
+      end
+      
+      local function meme(ucmd)
+        if(!fa) then fa = cm.GetViewAngles(ucmd); end
+        if  !  Phys()and  !  hacka.noclipenebled then
+          fa = fa + Angle(cm.GetMouseY(ucmd) * .022, cm.GetMouseX(ucmd) * -.022, 0);
+        end
+        NormalizeAngle(fa);
+        if(cm.CommandNumber(ucmd) == 0) then
+          cm.SetViewAngles(ucmd, fa);
+          return;
+        end
+        if(cm.KeyDown(ucmd, 1))then
+          local ang = vm.Angle( PredictSpread(ucmd, fa ) );
+          NormalizeAngle(ang);
+          cm.SetViewAngles(ucmd, ang);
+        end
+      end
+      
+      local function AutoReload(pCmd)
+        local ply=LocalPlayer()
+        local wep = ply:GetActiveWeapon()
+        if (ply:Alive() and ply:Health() > 0 and IsValid(wep)) then
+          if (wep:Clip1() <= 0 and wep:GetMaxClip1() > 0 and CurTime() > wep:GetNextPrimaryFire()) then
+            pCmd:SetButtons(pCmd:GetButtons() + IN_RELOAD)
+          end
+        end
+      end
+      
+      local function fixmov(cmd, rotation)
+        local rot_cos = math.cos(rotation)
+        local rot_sin = math.sin(rotation)
+        local cur_forwardmove = cmd:GetForwardMove()
+        local cur_sidemove = cmd:GetSideMove()
+        cmd:SetForwardMove(((rot_cos * cur_forwardmove) - (rot_sin * cur_sidemove)))
+        cmd:SetSideMove(((rot_sin * cur_forwardmove) + (rot_cos * cur_sidemove)))
+      end
+      
+      local CircleStrafeSpeed = 3
+      
+      hook.Add("CreateMove","]] .. b.hooks["CreateMove"] .. [[",function(ucmd)
+        if panickey then return end
+        
+        
+        if hacka.noclipenebled then
+          local time=gay["WH_DEBUGCAMERA_SPEED"]
+          hacka.vieworigin=hacka.vieworigin+(hacka.viewvelocity*time)
+          hacka.viewvelocity=hacka.viewvelocity*0.95
+          local sensitivity=0.022
+          hacka.viewangle.p=math.Clamp(hacka.viewangle.p+(ucmd:GetMouseY()*sensitivity),-89,89)
+          hacka.viewangle.y=hacka.viewangle.y+(ucmd:GetMouseX()*-1*sensitivity)
+          local add=Vector(0,0,0)
+          local ang=hacka.viewangle
+          if ucmd:KeyDown(IN_FORWARD)then add=add+ang:Forward()end
+          if ucmd:KeyDown(IN_BACK)then add=add-ang:Forward()end
+          if ucmd:KeyDown(IN_MOVERIGHT)then add=add+ang:Right()end
+          if ucmd:KeyDown(IN_MOVELEFT)then add=add-ang:Right()end
+          if ucmd:KeyDown(IN_JUMP)then add=add+ang:Up()end
+          add=add:GetNormal()*time*3000
+          if ucmd:KeyDown(IN_SPEED)then add=add*2 end
+          hacka.viewvelocity=hacka.viewvelocity+add
+          if lockview then lockview=ucmd:GetViewAngles()end
+          if lockview then ucmd:SetViewAngles(lockview)end
+          ucmd:SetForwardMove(0)
+          ucmd:SetSideMove(0)
+          ucmd:SetUpMove(0)
+        end
+        local ply=LocalPlayer()
+        if gay["MISC_BUNNYHOP"] and !ply:GetMoveType()!=MOVETYPE_NOCLIP and ply:GetMoveType()!= MOVETYPE_LADDER and ply:Alive() then
+          if !ply:OnGround()and ucmd:KeyDown(IN_JUMP)then
+            ucmd:SetButtons(bit.band( ucmd:GetButtons(),_G["bit"]["bn".."ot"](IN_JUMP)))
+            if gay["MISC_AUTOSTRAFE"] then
+              if ucmd:GetMouseX()>1 or ucmd:GetMouseX()<-1 then
+                ucmd:SetSideMove( ucmd:GetMouseX() > 1 and 400 or -400 )
+              else
+                ucmd:SetForwardMove(5850/ply:GetVelocity():Length2D())
+                ucmd:SetSideMove((ucmd:CommandNumber()%2==0)and-400 or 400)
+              end
+            elseif ucmd:KeyDown(IN_JUMP)then 
+              ucmd:SetForwardMove(10000)
+            end
+          end
+        end
+        
+        
+        if gay["CIRCLESTRAFE"]then
+          if (buttoncheckbind(gay["CIRCLESTRAFE_KEY"])) then
+            CircleStrafeVal = CircleStrafeVal + CircleStrafeSpeed
+            if ((CircleStrafeVal > 0) and ((CircleStrafeVal / CircleStrafeSpeed) > 361)) then
+              CircleStrafeVal = 0
+            end
+            fixmov(ucmd, math.rad((CircleStrafeVal - engine.TickInterval())))
+          else
+            CircleStrafeVal = 0
+          end
+        end
+        
+        if input.IsKeyDown(KEY_F)and gay["MISC_FLASHSPAM"] then 
+          ucmd:SetImpulse(100)
+        end 
+        
+        
+        if gay["AIM_AUTORELOAD"]then
+          AutoReload(ucmd)
+        end
+        
+        if buttoncheckbind(gay["MISC_AUTOPISTOL"])then
+          if ucmd:TickCount()%2==0 then
+            ucmd:SetButtons(bit.bor(ucmd:GetButtons(),IN_ATTACK))
+          end
+        end
+        
+        
+        
+        meme(ucmd);
+        aimer(ucmd);
+        antiaimer(ucmd);
+        
+        
+        
+      end)
+      
+      
+      hook.Add("PrePlayerDraw","]] .. b.hooks["PrePlayerDraw"] .. [[",function(ply)
+        local plys=LocalPlayer()
+        if gay["RESOLVER"]then
+          if ply == plys then return end
+          local eye = ply:EyeAngles()
+          local pitch = 0
+          local yaw = ( plys:GetPos() - ply:GetPos() ):Angle().y
+          local roll = 0
+          ply:SetPoseParameter( 'aim_pitch', math.NormalizeAngle( pitch ) )
+          ply:SetPoseParameter( 'head_pitch', math.NormalizeAngle( pitch ) )
+          ply:SetPoseParameter( 'body_yaw', 0 )
+          ply:SetPoseParameter( 'aim_yaw', 0 )
+          ply:SetRenderAngles( Angle( 0, math.NormalizeAngle( yaw ) + math.NormalizeAngle( roll ), 0 ) )
+          ply:InvalidateBoneCache()
+        end
+      end)
+      
+      hook.Add("CalcView","]] .. b.hooks["CalcView"] .. [[",function(_,origin,angles)
+        if panickey then return end
+        if panic then return end
+        local ply=LocalPlayer()
+        
+        if gay["MISC_SPECTATE_TARGET"]and gay["MISC_SPECTATE_TARGET"]!=""then
+          local plys=Player(gay["MISC_SPECTATE_TARGET"])
+          if plys and IsValid(plys) then
+            local n={}
+            n.origin=plys:EyePos()or Vector(0,0,0)
+            n.angles=plys:EyeAngles()or Angle(0,0,0)
+            n.fov=origin
+            n.drawviewer=true
+            return n
+          end
+        end
+        
+        if hacka.noclipenebled and gay["WH_DEBUGCAMERA_ENABLED"] then
+          if hacka.setview then
+            hacka.vieworigin=origin
+            hacka.viewangle=angles
+            hacka.setview=false
+          end
+          return{origin=hacka.vieworigin,angles=hacka.viewangle}
+        end
+        
+        local n={}
+        if gay["NOSWAY"]then
+          n.angles=ply:EyeAngles()
+        else
+          n.angles=angles
+        end
+        if gay["WH_FOVVIEW_ENABLED"]then
+          n.fov=gay["WH_FOVVIEW"]
+        end
+        if hacka.miscthipisidion and gay["WH_THIRDPERSON_ENABLED"] then
+          n.angles=fa
+          n.origin=origin + am.Forward(fa) * -gay["WH_THIRDPERSON_DISTANCE"];
+        end
+        n.SetView=false
+        return n
+      end)
+      
+      hook.Add("ShouldDrawLocalPlayer","]] .. f() .. [[",function(n)
+        if panickey then return end
+        if panic then return end
+        if hacka.miscthipisidion and gay["WH_THIRDPERSON_ENABLED"] or hacka.noclipenebled and gay["WH_DEBUGCAMERA_ENABLED"] then 
+          return true 
+        end 
+      end)
+      timer.Simple(0,function()
+        
+        local ahd={}
+        local function gf(c)
+          local d=c:ReadBool()
+          local e=c:ReadChar()
+          local hd=''
+          for f=1,e do 
+            if c:ReadBool()then 
+              local daa=c:ReadString()
+              table.insert(ahd,daa)
+              hd=hd.." "..daa
+            else 
+              table.insert(ahd,Color(c:ReadChar()+128,c:ReadChar()+128,c:ReadChar()+128))
+            end 
+          end
+          if d then 
+            chat.AddText(unpack(ahd))
+            zapiclogs("ulx",hd)
+            ahd={}
+          end 
+        end
+        usermessage.Hook("tsayc",gf)
+        
+      end)
+      
+      
+      
+      
+    end)
+    
+    
