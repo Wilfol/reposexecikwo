@@ -1,5 +1,3 @@
---LLL    
-    
     local gay={}
     local hacka={}
     local fa
@@ -124,7 +122,24 @@ hook.Remove("PostRender","ScreenCapture::PostRender")
         worldpanel:SetPaintedManually( true )
       end
     else
-
+      if gay["MISC_SPECTATORLIST"]and IsValid(hacka.specb) then
+        hacka.specb:Hide()
+      end
+      if gay["WH_MIRROR"]and IsValid(hacka.mirror) then
+        hacka.mirror:Hide()
+      end
+      if gay["WH_RADAR"]and IsValid(hacka.ac) then
+        hacka.ac:Hide()
+      end
+      if gay["WH_INFO"]and IsValid(hacka.info) then
+        hacka.info:Hide()
+      end
+      if gay["MISC_ADMINLIST"]and IsValid(hacka.adminlist) then
+        hacka.adminlist:Hide()
+      end
+      if IsValid(hacka.rt)then
+        hacka.rt:Hide()
+      end
     end
     for k, v in pairs( ents.GetAll() ) do
       if v:GetColor() and v:GetColor().a == 100 and v:GetRenderMode() and v:GetRenderMode() == 4 then 
