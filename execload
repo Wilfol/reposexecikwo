@@ -1,4 +1,7 @@
-    local gay={}
+-----------FEWFWEFEWFWEFWE   
+   
+   
+   local gay={}
     local hacka={}
     local fa
     local aa
@@ -117,7 +120,6 @@ hook.Remove("PostRender","ScreenCapture::PostRender")
     gui.HideGameUI()
     local worldpanel = vgetworldpanel()
     if gay["LUALOADER_ANTISG"]then
-      ]] .. b.antiscreengrab .. [[=true
       if IsValid(worldpanel) then
         worldpanel:SetPaintedManually( true )
       end
